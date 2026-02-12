@@ -25,7 +25,7 @@
             scroll-behavior: smooth;
         }
 
-        /* ---------- VISIBLE GEOMETRIC / TECH PATTERN – FULL SCREEN ---------- */
+        /* ---------- BOLD, VISIBLE GEOMETRIC PATTERN – FULL SCREEN ---------- */
         body::before {
             content: '';
             position: fixed;
@@ -35,57 +35,58 @@
             height: 100vh;
             background-color: #0b0d10;
             background-image: 
-                /* 1. PRIMARY HEXAGON GRID – 60°, white/red, 2px lines, 60px spacing */
+                /* 1. HEXAGON GRID – 60°, white 3px lines (opacity 0.25) */
                 repeating-linear-gradient(60deg, 
-                    rgba(255, 255, 255, 0.08) 0px, 
-                    rgba(255, 255, 255, 0.08) 2px, 
-                    transparent 2px, 
-                    transparent 60px),
+                    rgba(255, 255, 255, 0.25) 0px, 
+                    rgba(255, 255, 255, 0.25) 3px, 
+                    transparent 3px, 
+                    transparent 80px),
                 repeating-linear-gradient(-60deg, 
-                    rgba(230, 57, 70, 0.06) 0px, 
-                    rgba(230, 57, 70, 0.06) 2px, 
-                    transparent 2px, 
-                    transparent 60px),
+                    rgba(230, 57, 70, 0.3) 0px, 
+                    rgba(230, 57, 70, 0.3) 3px, 
+                    transparent 3px, 
+                    transparent 80px),
                 
-                /* 2. DIAGONAL DATA TRACES – 45°, light grey, 2px, larger spacing */
+                /* 2. DIAGONAL DATA TRACES – 45°, light grey 3px lines */
                 repeating-linear-gradient(45deg, 
-                    rgba(200, 210, 220, 0.1) 0px, 
-                    rgba(200, 210, 220, 0.1) 2px, 
-                    transparent 2px, 
-                    transparent 80px),
+                    rgba(220, 230, 240, 0.2) 0px, 
+                    rgba(220, 230, 240, 0.2) 3px, 
+                    transparent 3px, 
+                    transparent 100px),
                 repeating-linear-gradient(-45deg, 
-                    rgba(200, 210, 220, 0.06) 0px, 
-                    rgba(200, 210, 220, 0.06) 2px, 
-                    transparent 2px, 
-                    transparent 80px),
+                    rgba(220, 230, 240, 0.15) 0px, 
+                    rgba(220, 230, 240, 0.15) 3px, 
+                    transparent 3px, 
+                    transparent 100px),
                 
-                /* 3. CIRCUIT NODES – larger, brighter dots */
-                radial-gradient(circle at 15% 25%, rgba(230, 57, 70, 0.2) 2px, transparent 2px),
-                radial-gradient(circle at 72% 48%, rgba(255, 255, 255, 0.15) 2px, transparent 2px),
-                radial-gradient(circle at 83% 70%, rgba(230, 57, 70, 0.18) 3px, transparent 3px),
-                radial-gradient(circle at 34% 85%, rgba(200, 210, 220, 0.12) 2px, transparent 2px),
-                radial-gradient(circle at 91% 22%, rgba(230, 57, 70, 0.15) 3px, transparent 3px),
+                /* 3. CIRCUIT NODES – large, bright dots */
+                radial-gradient(circle at 12% 18%, rgba(230, 57, 70, 0.4) 4px, transparent 4px),
+                radial-gradient(circle at 67% 35%, rgba(255, 255, 255, 0.35) 5px, transparent 5px),
+                radial-gradient(circle at 81% 72%, rgba(230, 57, 70, 0.45) 6px, transparent 6px),
+                radial-gradient(circle at 29% 88%, rgba(200, 210, 220, 0.3) 4px, transparent 4px),
+                radial-gradient(circle at 55% 50%, rgba(230, 57, 70, 0.35) 5px, transparent 5px),
+                radial-gradient(circle at 93% 15%, rgba(255, 255, 255, 0.3) 4px, transparent 4px),
                 
-                /* 4. SOFT RADIAL GLOW – keeps depth */
-                radial-gradient(circle at 20% 30%, rgba(230, 57, 70, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 90% 70%, rgba(160, 160, 160, 0.06) 0%, transparent 60%);
+                /* 4. SOFT RADIAL GLOW – depth */
+                radial-gradient(circle at 20% 30%, rgba(230, 57, 70, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at 90% 70%, rgba(160, 160, 160, 0.1) 0%, transparent 65%);
             
             background-size: 
-                120px 120px, 120px 120px,     /* hex grids */
-                160px 160px, 160px 160px,     /* diagonal traces */
-                200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px,  /* dot positions */
-                100% 100%, 100% 100%;         /* glows */
+                160px 160px, 160px 160px,   /* hex grids */
+                200px 200px, 200px 200px,   /* diagonal traces */
+                300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, /* dots */
+                100% 100%, 100% 100%;       /* glows */
             
             background-repeat: 
                 repeat, repeat, 
                 repeat, repeat, 
-                no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, 
+                no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, 
                 no-repeat, no-repeat;
             
             background-position: 
                 0 0, 0 0, 
                 0 0, 0 0, 
-                15% 25%, 72% 48%, 83% 70%, 34% 85%, 91% 22%, 
+                12% 18%, 67% 35%, 81% 72%, 29% 88%, 55% 50%, 93% 15%, 
                 0 0, 0 0;
             
             pointer-events: none;
@@ -102,7 +103,7 @@
             height: 100vh;
             background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBudW1PY3RhdmVzPSIxIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wMjUiIC8+PC9zdmc+');
             background-repeat: repeat;
-            opacity: 0.15;
+            opacity: 0.2;
             pointer-events: none;
             z-index: -1;
         }
