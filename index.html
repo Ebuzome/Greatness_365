@@ -9,7 +9,7 @@
     <!-- Elegant & professional font pairing -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ---------- RESET & GLOBAL ---------- */
+        /* ---------- RESET & GLOBAL — NO BACKGROUND COLOR ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -20,55 +20,55 @@
             width: 100%;
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
-            background: #0a0c12;  /* fallback, will be covered by geometric div */
+            background: transparent;  /* CRITICAL: let geometric div show through */
             color: #1e1e1e;
             scroll-behavior: smooth;
         }
 
-        /* ---------- FIXED GEOMETRIC BACKGROUND – ALWAYS VISIBLE, FULL COVER ---------- */
+        /* ---------- FIXED GEOMETRIC BACKGROUND – NOW FULLY VISIBLE ---------- */
         .geometric-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #0b0d10;
+            background-color: #0b0d10;  /* dark base – only here, not on body */
             background-image: 
-                /* 1. HEXAGON GRID – 60°, white 3px lines (opacity 0.25) */
+                /* 1. HEXAGON GRID – 60°, white 3px lines – STRONG VISIBILITY */
                 repeating-linear-gradient(60deg, 
-                    rgba(255, 255, 255, 0.25) 0px, 
-                    rgba(255, 255, 255, 0.25) 3px, 
+                    rgba(255, 255, 255, 0.35) 0px, 
+                    rgba(255, 255, 255, 0.35) 3px, 
                     transparent 3px, 
                     transparent 80px),
                 repeating-linear-gradient(-60deg, 
-                    rgba(230, 57, 70, 0.3) 0px, 
-                    rgba(230, 57, 70, 0.3) 3px, 
+                    rgba(230, 57, 70, 0.4) 0px, 
+                    rgba(230, 57, 70, 0.4) 3px, 
                     transparent 3px, 
                     transparent 80px),
                 
-                /* 2. DIAGONAL DATA TRACES – 45°, light grey 3px lines */
+                /* 2. DIAGONAL DATA TRACES – 45°, light grey – BOLD */
                 repeating-linear-gradient(45deg, 
-                    rgba(220, 230, 240, 0.2) 0px, 
-                    rgba(220, 230, 240, 0.2) 3px, 
+                    rgba(220, 230, 240, 0.3) 0px, 
+                    rgba(220, 230, 240, 0.3) 3px, 
                     transparent 3px, 
                     transparent 100px),
                 repeating-linear-gradient(-45deg, 
-                    rgba(220, 230, 240, 0.15) 0px, 
-                    rgba(220, 230, 240, 0.15) 3px, 
+                    rgba(220, 230, 240, 0.25) 0px, 
+                    rgba(220, 230, 240, 0.25) 3px, 
                     transparent 3px, 
                     transparent 100px),
                 
-                /* 3. CIRCUIT NODES – large, bright dots */
-                radial-gradient(circle at 12% 18%, rgba(230, 57, 70, 0.4) 4px, transparent 4px),
-                radial-gradient(circle at 67% 35%, rgba(255, 255, 255, 0.35) 5px, transparent 5px),
-                radial-gradient(circle at 81% 72%, rgba(230, 57, 70, 0.45) 6px, transparent 6px),
-                radial-gradient(circle at 29% 88%, rgba(200, 210, 220, 0.3) 4px, transparent 4px),
-                radial-gradient(circle at 55% 50%, rgba(230, 57, 70, 0.35) 5px, transparent 5px),
-                radial-gradient(circle at 93% 15%, rgba(255, 255, 255, 0.3) 4px, transparent 4px),
+                /* 3. CIRCUIT NODES – LARGE, BRIGHT */
+                radial-gradient(circle at 12% 18%, rgba(230, 57, 70, 0.6) 5px, transparent 5px),
+                radial-gradient(circle at 67% 35%, rgba(255, 255, 255, 0.5) 6px, transparent 6px),
+                radial-gradient(circle at 81% 72%, rgba(230, 57, 70, 0.65) 7px, transparent 7px),
+                radial-gradient(circle at 29% 88%, rgba(200, 210, 220, 0.45) 5px, transparent 5px),
+                radial-gradient(circle at 55% 50%, rgba(230, 57, 70, 0.55) 6px, transparent 6px),
+                radial-gradient(circle at 93% 15%, rgba(255, 255, 255, 0.5) 5px, transparent 5px),
                 
                 /* 4. SOFT RADIAL GLOW – depth */
-                radial-gradient(circle at 20% 30%, rgba(230, 57, 70, 0.12) 0%, transparent 55%),
-                radial-gradient(circle at 90% 70%, rgba(160, 160, 160, 0.1) 0%, transparent 65%);
+                radial-gradient(circle at 20% 30%, rgba(230, 57, 70, 0.2) 0%, transparent 55%),
+                radial-gradient(circle at 90% 70%, rgba(160, 160, 160, 0.15) 0%, transparent 65%);
             
             background-size: 
                 160px 160px, 160px 160px,   /* hex grids */
@@ -106,7 +106,7 @@
             pointer-events: none;
         }
 
-        /* ---------- MAIN WRAPPER – content sits above geometric background ---------- */
+        /* ---------- MAIN WRAPPER – semi-transparent to let pattern glow through ---------- */
         .landing-wrapper {
             position: relative;
             max-width: 1440px;
@@ -115,7 +115,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            z-index: 1;  /* ensures content is above the fixed background */
+            z-index: 1;
         }
 
         /* ---------- HEADER : CHIP + 365 + DROPDOWN NAV ---------- */
@@ -269,9 +269,9 @@
         .access-tile {
             width: 100%;
             max-width: 720px;
-            background: rgba(10, 15, 22, 0.75);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: rgba(10, 15, 22, 0.85);  /* slightly more opaque for legibility */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: 2px solid #e63946;
             border-radius: 48px 48px 48px 12px;
@@ -616,7 +616,7 @@
     </style>
 </head>
 <body>
-    <!-- FIXED GEOMETRIC BACKGROUND – always behind, always visible -->
+    <!-- FIXED GEOMETRIC BACKGROUND – now visible through transparent body -->
     <div class="geometric-bg"></div>
 
     <div class="landing-wrapper">
