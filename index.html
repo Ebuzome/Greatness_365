@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
     <title>365 · Chip & Email Infrastructure</title>
-    <!-- Font Awesome 6 (free chip icon & tooltips) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: elegant sans & special display for 365 -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Elegant & professional font pairing -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* ---------- RESET & GLOBAL ---------- */
         * {
@@ -25,7 +25,13 @@
             scroll-behavior: smooth;
         }
 
-        /* ---------- FULL-SCREEN SPLASH IMAGE ---------- */
+        /* headings, nav, buttons use Poppins – elegance + professionalism */
+        h1, h2, h3, .nav-trigger, .signup-btn, .tile-badge, .input-label, .logo-tag, .footer {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        /* ---------- UNSPLASH SPLASH – BLENDS PERFECTLY ---------- */
         .splash {
             position: fixed;
             top: 0;
@@ -36,19 +42,20 @@
             background-size: cover;
             background-position: center 30%;
             background-repeat: no-repeat;
-            filter: brightness(0.7) saturate(1.2);
+            filter: brightness(0.75) saturate(1.2);
             z-index: -2;
         }
 
+        /* soft overlay – text remains crisp, image never obstructs */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 40%, rgba(10, 12, 18, 0.55) 0%, rgba(5, 7, 12, 0.75) 90%);
+            background: radial-gradient(circle at 30% 40%, rgba(8, 12, 18, 0.5) 0%, rgba(2, 6, 12, 0.8) 90%);
+            backdrop-filter: blur(2px);
             z-index: -1;
-            backdrop-filter: blur(3px);
         }
 
         /* ---------- MAIN WRAPPER ---------- */
@@ -104,19 +111,18 @@
         .digit-3, .digit-5 {
             font-size: 3.2rem;
             font-weight: 800;
-            color: #e63946;        /* rich red */
+            color: #e63946;
             text-shadow: 0 0 8px rgba(230, 57, 70, 0.4);
         }
 
         .digit-6 {
             font-size: 3.2rem;
             font-weight: 800;
-            color: #a0a0a0;        /* premium grey */
+            color: #a0a0a0;
             text-shadow: 0 0 6px rgba(160, 160, 160, 0.3);
             margin: 0 -3px;
         }
 
-        /* small descriptor */
         .logo-tag {
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -129,7 +135,7 @@
             padding-left: 14px;
         }
 
-        /* ---------- DROPDOWN NAV (non-clickable, aesthetic) ---------- */
+        /* ---------- DROPDOWN NAV (non‑clickable, aesthetic) ---------- */
         .nav-menu {
             display: flex;
             gap: 2.2rem;
@@ -161,7 +167,6 @@
             opacity: 0.8;
         }
 
-        /* elegant dropdown — appears on hover, no links */
         .dropdown-content {
             position: absolute;
             top: 140%;
@@ -184,7 +189,6 @@
             transition: opacity 0.25s, visibility 0.25s, transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
             z-index: 100;
             pointer-events: none;
-            letter-spacing: 0.2px;
             border-bottom: 3px solid #e63946;
         }
 
@@ -204,25 +208,24 @@
             text-align: center;
         }
 
-        /* ---------- HERO / LOGIN TILE (center piece) ---------- */
+        /* ---------- HERO / LOGIN TILE – with full Chip+365 logo ---------- */
         .hero-section {
             flex: 1;
             display: flex;
             align-items: center;
-            justify-content: flex-end;  /* push tile to the right for modern asymmetry */
+            justify-content: flex-end;
             padding: 2rem 0 2.5rem;
         }
 
-        /* beautiful glass card */
         .access-tile {
             width: 100%;
-            max-width: 680px;
+            max-width: 720px;
             background: rgba(10, 15, 22, 0.68);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: 2px solid #e63946;
-            border-radius: 48px 48px 48px 12px;   /* organic asymmetry */
+            border-radius: 48px 48px 48px 12px;
             padding: 2.8rem 2.8rem;
             box-shadow: 0 30px 50px -15px rgba(0,0,0,0.7), 0 0 0 1px rgba(230,57,70,0.1) inset;
             transition: box-shadow 0.3s;
@@ -232,26 +235,52 @@
             box-shadow: 0 35px 55px -12px #0a0c10, 0 0 0 1px rgba(230,57,70,0.3) inset;
         }
 
+        /* --- tile header now features the identical Chip+365 logo + "access" --- */
         .tile-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             margin-bottom: 2.3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .tile-header h2 {
-            font-weight: 500;
-            font-size: 1.85rem;
-            color: white;
-            letter-spacing: -0.5px;
+        .tile-logo {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 0.4rem;
         }
 
-        .tile-header h2 i {
+        .tile-logo .chip-icon {
+            font-size: 2.2rem;
+            color: #d4d4d4;
+        }
+
+        .tile-logo .three-six-five {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .tile-logo .digit-3,
+        .tile-logo .digit-5 {
+            font-size: 2.6rem;
             color: #e63946;
-            font-size: 1.7rem;
+        }
+
+        .tile-logo .digit-6 {
+            font-size: 2.6rem;
+            color: #a0a0a0;
+            margin: 0 -3px;
+        }
+
+        .tile-access-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: white;
+            margin-left: 8px;
+            letter-spacing: -0.5px;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            padding-left: 14px;
         }
 
         .tile-badge {
@@ -265,7 +294,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* TWO COLUMNS: USER ID / CHAT ID + SIGN UP FEATURE */
+        /* two columns + signup */
         .columns-area {
             display: flex;
             flex-wrap: wrap;
@@ -284,7 +313,7 @@
             gap: 8px;
             color: rgba(230, 242, 255, 0.8);
             font-weight: 400;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 0.6rem;
@@ -295,7 +324,6 @@
             font-size: 0.9rem;
         }
 
-        /* tooltip on info icon */
         .tooltip-icon {
             position: relative;
             cursor: help;
@@ -334,6 +362,7 @@
             font-weight: 400;
             transition: all 0.2s;
             backdrop-filter: blur(6px);
+            font-family: 'Inter', sans-serif;
         }
 
         .input-field:focus {
@@ -348,7 +377,6 @@
             font-size: 0.95rem;
         }
 
-        /* SIGN UP FEATURE : stylish call to action */
         .signup-column {
             flex: 0 0 auto;
             display: flex;
@@ -373,6 +401,7 @@
             transition: all 0.25s;
             cursor: pointer;
             white-space: nowrap;
+            font-family: 'Poppins', sans-serif;
         }
 
         .signup-btn i {
@@ -390,7 +419,6 @@
             transform: translateX(5px);
         }
 
-        /* access message */
         .access-feedback {
             margin-top: 2rem;
             padding-top: 1rem;
@@ -408,7 +436,6 @@
             color: #e63946;
         }
 
-        /* default credentials hint – subtle */
         .cred-hint {
             margin-top: 0.8rem;
             color: rgba(200,200,220,0.6);
@@ -426,7 +453,7 @@
             font-family: monospace;
         }
 
-        /* ---------- FOOTER with subtle micro-info ---------- */
+        /* ---------- FOOTER ---------- */
         .footer {
             margin-top: 2.5rem;
             padding: 1.8rem 0 0.8rem;
@@ -444,7 +471,12 @@
             margin-right: 6px;
         }
 
-        /* ---------- RESPONSIVE fine-tuning ---------- */
+        .footer .nav-item .dropdown-content {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        /* ---------- RESPONSIVE (meticulous padding) ---------- */
         @media screen and (max-width: 950px) {
             .landing-wrapper {
                 padding: 1.5rem 2rem;
@@ -475,14 +507,10 @@
             .dropdown-content {
                 left: 0;
                 transform: translateX(0);
-                width: 180px;
-            }
-            .nav-item:hover .dropdown-content {
-                transform: translateX(0);
+                width: 200px;
             }
             .access-tile {
                 padding: 2rem 1.8rem;
-                border-radius: 36px 36px 36px 12px;
             }
             .columns-area {
                 flex-direction: column;
@@ -494,9 +522,16 @@
             .signup-btn {
                 justify-content: center;
             }
+            .tile-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
 
         @media screen and (max-width: 480px) {
+            .landing-wrapper {
+                padding: 1rem 1.2rem;
+            }
             .logo-tag {
                 display: none;
             }
@@ -509,35 +544,33 @@
             .access-tile {
                 padding: 1.8rem 1.4rem;
             }
-            .tile-header h2 {
-                font-size: 1.5rem;
+            .tile-logo .digit-3,
+            .tile-logo .digit-5,
+            .tile-logo .digit-6 {
+                font-size: 2.2rem;
+            }
+            .tile-access-text {
+                font-size: 1.4rem;
+                padding-left: 10px;
             }
         }
 
-        /* additional tooltip / not-clickable but beautiful */
-        .fake-link {
-            color: #e6a0a0;
-            border-bottom: 1px dashed #e63946;
-            cursor: default;
-        }
-
-        .footer a {
+        /* non‑clickable aesthetics */
+        .footer a, .fake-link {
             text-decoration: none;
-            color: #b0c4ce;
+            color: inherit;
             border-bottom: 1px dotted rgba(230,57,70,0.5);
             cursor: default;
-        }
-        .footer a:hover {
-            color: #e6c3c3;
         }
     </style>
 </head>
 <body>
+    <!-- Unsplash splash – deep data center atmosphere -->
     <div class="splash"></div>
     <div class="overlay"></div>
 
     <div class="landing-wrapper">
-        <!-- header with logo + chip & 365 and dropdown navs -->
+        <!-- header unchanged (Chip+365 + dropdowns) -->
         <header class="header">
             <div class="logo">
                 <i class="fas fa-microchip chip-icon"></i>
@@ -549,7 +582,6 @@
                 <span class="logo-tag">SMTP · CLOUD</span>
             </div>
             <nav class="nav-menu">
-                <!-- about dropdown -->
                 <div class="nav-item">
                     <span class="nav-trigger"><i class="fas fa-circle-info"></i> About</span>
                     <div class="dropdown-content">
@@ -558,7 +590,6 @@
                         <p style="color:#e6a0a0;"><i class="fas fa-lock"></i> zero logs, full‑disk encryption</p>
                     </div>
                 </div>
-                <!-- services dropdown -->
                 <div class="nav-item">
                     <span class="nav-trigger"><i class="fas fa-cubes"></i> Services</span>
                     <div class="dropdown-content">
@@ -567,7 +598,6 @@
                         <p><i class="fas fa-shield"></i> DKIM/SPF concierge</p>
                     </div>
                 </div>
-                <!-- solutions (just elegant) -->
                 <div class="nav-item">
                     <span class="nav-trigger"><i class="fas fa-diagram-project"></i> Solutions</span>
                     <div class="dropdown-content">
@@ -576,7 +606,6 @@
                         <p><i class="fas fa-chart-line"></i> deliverability suite</p>
                     </div>
                 </div>
-                <!-- discover / insights -->
                 <div class="nav-item">
                     <span class="nav-trigger"><i class="fas fa-compass"></i> Discover</span>
                     <div class="dropdown-content">
@@ -587,17 +616,24 @@
             </nav>
         </header>
 
-        <!-- HERO + login tile with columns: User ID, Chat ID, Sign up -->
+        <!-- HERO tile with FULL Chip+365 logo + 'access' -->
         <div class="hero-section">
             <div class="access-tile">
                 <div class="tile-header">
-                    <h2><i class="fas fa-key"></i> access · 365</h2>
+                    <div class="tile-logo">
+                        <i class="fas fa-microchip chip-icon"></i>
+                        <div class="three-six-five">
+                            <span class="digit-3">3</span>
+                            <span class="digit-6">6</span>
+                            <span class="digit-5">5</span>
+                        </div>
+                        <span class="tile-access-text">access</span>
+                    </div>
                     <span class="tile-badge">BETA</span>
                 </div>
 
-                <!-- Columns: user id / chat id + signup feature -->
+                <!-- columns unchanged -->
                 <div class="columns-area">
-                    <!-- User ID column -->
                     <div class="input-column">
                         <div class="input-label">
                             <i class="fas fa-user-circle"></i> USER ID
@@ -607,7 +643,6 @@
                         </div>
                         <input type="text" class="input-field" id="userId" placeholder="Greatness" value="Greatness">
                     </div>
-                    <!-- Chat ID column -->
                     <div class="input-column">
                         <div class="input-label">
                             <i class="fas fa-comment-dots"></i> CHAT ID
@@ -617,7 +652,6 @@
                         </div>
                         <input type="text" class="input-field" id="chatId" placeholder="Greatness" value="Greatness">
                     </div>
-                    <!-- Sign up feature: beautiful call to action -->
                     <div class="signup-column">
                         <button class="signup-btn" id="accessButton">
                             <span>SIGN UP</span>
@@ -626,13 +660,11 @@
                     </div>
                 </div>
 
-                <!-- feedback message for access denied or success -->
                 <div class="access-feedback" id="feedbackMessage">
                     <i class="fas fa-shield-hal"></i> 
                     <span id="feedbackText">enter credentials & sign up</span>
                 </div>
                 
-                <!-- default credentials hint (elegant) -->
                 <div class="cred-hint">
                     <span><i class="fas fa-lock-open"></i> User ID: Greatness</span>
                     <span><i class="fas fa-lock-open"></i> Chat ID: Greatness</span>
@@ -641,9 +673,9 @@
             </div>
         </div>
 
-        <!-- footer with non-clickable "links" & dropdown-like info (tooltip style) -->
+        <!-- footer with subtle non‑clickable info -->
         <footer class="footer">
-            <div><i class="fas fa-copyright"></i> 365 chip  ·  infrastructure fabric</div>
+            <div><i class="fas fa-copyright"></i> 365 chip · infrastructure fabric</div>
             <div style="display: flex; gap: 1.8rem; flex-wrap: wrap;">
                 <span style="position: relative;" class="nav-item">
                     <span class="nav-trigger" style="font-size:0.9rem; color:#c0c8d0;"><i class="fas fa-shield"></i> Privacy</span>
@@ -658,7 +690,7 @@
         </footer>
     </div>
 
-    <!-- simple JS for credential check -->
+    <!-- JS: strict credential check -->
     <script>
         (function() {
             const userIdInput = document.getElementById('userId');
@@ -687,13 +719,11 @@
                 }
             }
 
-            // event listener for button click
             accessBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 validateAndFeedback();
             });
 
-            // optional: also check on Enter key (any field)
             userIdInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -707,15 +737,11 @@
                 }
             });
 
-            // initial feedback (prefilled with Greatness)
-            // but we set neutral message
+            // neutral start
             feedbackText.innerText = 'enter credentials & sign up';
             feedbackIcon.className = 'fas fa-shield-hal';
             feedbackIcon.style.color = '#e63946';
         })();
     </script>
-
-    <!-- subtle: no actual links are clickable; dropdowns remain aesthetic -->
-    <!-- all interactive non-clickable except the signup button which validates -->
 </body>
 </html>
