@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,172 +20,225 @@
 
         body {
             font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+        }
+
+        /* ---------- DARK MODE (DEFAULT) ---------- */
+        body.dark-mode {
             background: #0a0c12;
             color: #e0e0e0;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
         }
-
-        /* ---------- SIDEBAR – EXACT MATCH WITH LOGOUT ---------- */
-        .sidebar {
-            width: 240px;
-            background: rgba(10, 13, 18, 0.98);
-            backdrop-filter: blur(12px);
-            border-right: 1px solid rgba(230, 57, 70, 0.2);
-            display: flex;
-            flex-direction: column;
-            padding: 2rem 1rem;
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
-            z-index: 10;
+        body.dark-mode .top-nav {
+            background: rgba(12, 17, 24, 0.95);
+            border-bottom: 1px solid rgba(230, 57, 70, 0.2);
         }
-
-        .sidebar-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 2.5rem;
-            padding: 0 0.8rem 1.2rem;
-            border-bottom: 1px solid rgba(230, 57, 70, 0.25);
+        body.dark-mode .stat-card {
+            background: rgba(18, 22, 30, 0.7);
+            border: 1px solid rgba(255,255,255,0.03);
         }
-
-        .sidebar-logo i {
-            font-size: 2rem;
-            color: #d4d4d4;
+        body.dark-mode .map-card,
+        body.dark-mode .table-section {
+            background: rgba(18, 22, 30, 0.7);
+            border: 1px solid rgba(255,255,255,0.03);
         }
-
-        .sidebar-logo span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        .sidebar-logo span .digit-3,
-        .sidebar-logo span .digit-5 {
-            color: #e63946;
-        }
-        .sidebar-logo span .digit-6 {
-            color: #a0a0a0;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.9rem 1.2rem;
-            margin: 0.2rem 0;
-            border-radius: 12px;
+        body.dark-mode th {
             color: #b0b8c0;
-            transition: all 0.2s;
-            cursor: pointer;
-            font-weight: 500;
-            font-family: 'Poppins', sans-serif;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .nav-item i {
-            width: 24px;
-            font-size: 1.2rem;
-            color: #e63946;
-            opacity: 0.8;
+        body.dark-mode td {
+            color: #d0d8e0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
-        .nav-item.active {
-            background: rgba(230, 57, 70, 0.15);
-            color: white;
-        }
-        .nav-item.active i {
-            opacity: 1;
-        }
-        .nav-item:hover:not(.active) {
-            background: rgba(255,255,255,0.05);
+        body.dark-mode .pagination .page {
+            background: rgba(0,0,0,0.3);
+            color: #e0e0e0;
         }
 
-        .logout {
-            margin-top: auto;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 1rem;
+        /* ---------- LIGHT MODE – PERFECT CONTRAST, LEGIBLE ---------- */
+        body.light-mode {
+            background: #f5f7fa;
+            color: #1e2a3a;
+        }
+        body.light-mode .top-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(230, 57, 70, 0.3);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        body.light-mode .nav-link {
+            color: #2c3e50;
+        }
+        body.light-mode .nav-link i {
+            color: #e63946;
+        }
+        body.light-mode .nav-link.logout {
+            color: #e63946;
+        }
+        body.light-mode .stat-card {
+            background: white;
+            border: 1px solid rgba(230, 57, 70, 0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        body.light-mode .stat-card .value {
+            color: #1e2a3a;
+        }
+        body.light-mode .stat-card .label {
+            color: #5a6a7a;
+        }
+        body.light-mode .map-card,
+        body.light-mode .table-section {
+            background: white;
+            border: 1px solid rgba(230, 57, 70, 0.1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+        body.light-mode .map-header h3,
+        body.light-mode .table-header h3 {
+            color: #1e2a3a;
+        }
+        body.light-mode th {
+            color: #5a6a7a;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        body.light-mode td {
+            color: #2c3e50;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        body.light-mode .no-results {
+            color: #7f8c8d;
+        }
+        body.light-mode .pagination {
+            color: #5a6a7a;
+        }
+        body.light-mode .pagination .page {
+            background: rgba(230, 57, 70, 0.1);
+            color: #1e2a3a;
+        }
+        body.light-mode .cookies-card {
+            background: white;
+            border: 1px solid rgba(230, 57, 70, 0.1);
+        }
+        body.light-mode .cookies-header h2,
+        body.light-mode .cookies-stat .value {
+            color: #1e2a3a;
+        }
+        body.light-mode .cookies-stat .label {
+            color: #5a6a7a;
+        }
+
+        /* ---------- TOP NAVIGATION BAR – EXACT LAYOUT ---------- */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2.5rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-decoration: none;
+        }
+        .nav-link i {
+            font-size: 1.1rem;
+            color: #e63946;
+        }
+        .nav-link.active {
+            border-bottom: 2px solid #e63946;
+        }
+        .nav-link.logout {
+            color: #e63946;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            border-radius: 30px;
+            padding: 0.4rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .theme-toggle i {
+            color: #e63946;
+        }
+        body.light-mode .theme-toggle {
+            background: white;
+            border-color: #e63946;
         }
 
         /* ---------- MAIN CONTENT ---------- */
         .main-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 2rem 2rem;
-            position: relative;
-            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2.5rem;
         }
 
-        /* Header with user */
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        .page-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            font-weight: 500;
-            color: white;
-        }
-        .page-title span {
-            color: #e63946;
-        }
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: rgba(255,255,255,0.03);
-            padding: 0.4rem 1rem 0.4rem 1.2rem;
-            border-radius: 40px;
-        }
-        .user-profile i {
-            font-size: 1.6rem;
-            color: #d4d4d4;
-        }
-
-        /* ---------- STATS ROW – SIX ZERO CARDS ---------- */
-        .stats-row {
+        /* ---------- STATS GRID – 3x2 WITH COOKIES LABEL ---------- */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
             margin-bottom: 2rem;
         }
-        .stat-zero-card {
-            background: rgba(18, 22, 30, 0.7);
-            backdrop-filter: blur(8px);
+        .stat-card {
+            padding: 1.5rem 1rem;
             border-radius: 20px;
-            padding: 1.2rem 0.5rem;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.03);
-            border-bottom: 2px solid #e63946;
+            border-bottom: 3px solid #e63946;
+            transition: transform 0.2s;
+            backdrop-filter: blur(8px);
         }
-        .stat-zero-card .value {
-            font-size: 2.2rem;
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        .stat-card .value {
+            font-size: 2.5rem;
             font-weight: 600;
-            color: white;
             font-family: 'Orbitron', sans-serif;
+            line-height: 1.2;
         }
-        .stat-zero-card .label {
-            font-size: 0.8rem;
-            color: #a0a8b0;
-            text-transform: uppercase;
+        .stat-card .label {
+            font-size: 0.9rem;
             letter-spacing: 0.5px;
+            margin-top: 0.3rem;
+        }
+        /* Cookies label positioned exactly as described – bottom right of grid */
+        .stat-card.cookies .label {
+            color: #e63946;
+            font-weight: 500;
         }
 
-        /* ---------- MAP + COOKIES SECTION ---------- */
+        /* ---------- MAP + COOKIES CARD ROW ---------- */
         .map-cookies-row {
             display: grid;
-            grid-template-columns: 1.8fr 1fr;
+            grid-template-columns: 2fr 1fr;
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-
-        /* Map card */
         .map-card {
-            background: rgba(18, 22, 30, 0.7);
-            backdrop-filter: blur(8px);
             border-radius: 24px;
             padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.03);
-            border-bottom: 2px solid #e63946;
+            border-bottom: 3px solid #e63946;
+            backdrop-filter: blur(8px);
         }
         .map-header {
             display: flex;
@@ -197,7 +249,9 @@
         .map-header h3 {
             font-size: 1rem;
             font-weight: 400;
-            color: #d0d8e0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .map-legend {
             display: flex;
@@ -219,19 +273,17 @@
         .legend-color.low { background: #2a9d8f; }
         #world-map {
             width: 100%;
-            height: 200px;
+            height: 220px;
             border-radius: 16px;
             overflow: hidden;
         }
 
         /* Cookies card */
         .cookies-card {
-            background: rgba(18, 22, 30, 0.7);
-            backdrop-filter: blur(8px);
             border-radius: 24px;
             padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.03);
-            border-bottom: 2px solid #e63946;
+            border-bottom: 3px solid #e63946;
+            backdrop-filter: blur(8px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -240,16 +292,15 @@
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         .cookies-header i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #e63946;
         }
         .cookies-header h2 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 500;
-            color: white;
         }
         .cookies-stats {
             display: flex;
@@ -257,23 +308,20 @@
             text-align: center;
         }
         .cookies-stat .value {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 600;
-            color: white;
+            font-family: 'Orbitron', sans-serif;
         }
         .cookies-stat .label {
-            font-size: 0.75rem;
-            color: #a0a8b0;
+            font-size: 0.8rem;
         }
 
-        /* ---------- TABLE SECTION – EXACT COLUMNS ---------- */
+        /* ---------- TABLE SECTION – EXACT COLUMN ORDER ---------- */
         .table-section {
-            background: rgba(18, 22, 30, 0.7);
-            backdrop-filter: blur(8px);
             border-radius: 24px;
             padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.03);
-            border-bottom: 2px solid #e63946;
+            border-bottom: 3px solid #e63946;
+            backdrop-filter: blur(8px);
             margin-bottom: 1.5rem;
         }
         .table-header {
@@ -285,7 +333,9 @@
         .table-header h3 {
             font-size: 1.1rem;
             font-weight: 500;
-            color: #f0f0fa;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .table-header i {
             color: #e63946;
@@ -298,26 +348,23 @@
         th {
             text-align: left;
             padding: 1rem 0.5rem;
-            color: #b0b8c0;
             font-weight: 500;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
             font-family: 'Poppins', sans-serif;
         }
         td {
             padding: 0.8rem 0.5rem;
-            color: #d0d8e0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         .no-results {
             text-align: center;
             padding: 3rem 0;
-            color: #808890;
             font-size: 0.95rem;
         }
         .no-results i {
             color: #e63946;
             margin-right: 0.5rem;
         }
+
+        /* ---------- PAGINATION – 1/1 ---------- */
         .pagination {
             display: flex;
             justify-content: flex-end;
@@ -327,10 +374,8 @@
             font-size: 0.9rem;
         }
         .pagination .page {
-            background: rgba(0,0,0,0.3);
-            padding: 0.3rem 0.9rem;
+            padding: 0.3rem 1rem;
             border-radius: 20px;
-            color: #e0e0e0;
         }
 
         /* Modal (same as before) */
@@ -420,79 +465,54 @@
             z-index: 100;
         }
 
-        @media (max-width: 1200px) {
-            .stats-row {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        @media (max-width: 900px) {
             .map-cookies-row {
                 grid-template-columns: 1fr;
             }
-        }
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 70px;
-                padding: 1rem 0.5rem;
+            .top-nav {
+                padding: 0.8rem 1rem;
             }
-            .sidebar-logo span, .nav-item span {
-                display: none;
+            .nav-left, .nav-right {
+                gap: 1rem;
             }
         }
     </style>
 </head>
-<body>
-    <!-- SIDEBAR with Logout -->
-    <div class="sidebar">
-        <div class="sidebar-logo">
-            <i class="fas fa-microchip"></i>
-            <span>
-                <span class="digit-3">3</span>
-                <span class="digit-6">6</span>
-                <span class="digit-5">5</span>
-            </span>
+<body class="dark-mode">
+    <!-- TOP NAVIGATION BAR – EXACT LAYOUT: Dashboard, Visits, Campaigns, Settings, LogOut -->
+    <div class="top-nav">
+        <div class="nav-left">
+            <div class="nav-link active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</div>
+            <div class="nav-link" data-page="visits"><i class="fas fa-eye"></i> Visits</div>
+            <div class="nav-link" data-page="campaigns"><i class="fas fa-bullhorn"></i> Campaigns</div>
+            <div class="nav-link" data-page="settings"><i class="fas fa-cog"></i> Settings</div>
         </div>
-        <div class="nav-item active" data-page="dashboard">
-            <i class="fas fa-chart-pie"></i> <span>Dashboard</span>
-        </div>
-        <div class="nav-item" data-page="visits">
-            <i class="fas fa-eye"></i> <span>Visits</span>
-        </div>
-        <div class="nav-item" data-page="campaigns">
-            <i class="fas fa-bullhorn"></i> <span>Campaigns</span>
-        </div>
-        <div class="nav-item" data-page="settings">
-            <i class="fas fa-cog"></i> <span>Settings</span>
-        </div>
-        <div class="nav-item logout">
-            <i class="fas fa-sign-out-alt"></i> <span>LogOut</span>
+        <div class="nav-right">
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon" id="themeIcon"></i>
+                <span>Dark</span>
+            </div>
+            <div class="nav-link logout"><i class="fas fa-sign-out-alt"></i> LogOut</div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
     <div class="main-content">
-        <div class="dashboard-header">
-            <div class="page-title">Dashboard <span>365</span></div>
-            <div class="user-profile">
-                <i class="fas fa-user-circle"></i>
-                <span>Greatness</span>
-            </div>
+        <!-- STATS GRID – 3x2 with six zeros, Cookies label on bottom right -->
+        <div class="stats-grid">
+            <div class="stat-card"><div class="value">0</div><div class="label">Visits</div></div>
+            <div class="stat-card"><div class="value">0</div><div class="label">Clicks</div></div>
+            <div class="stat-card"><div class="value">0</div><div class="label">Conversions</div></div>
+            <div class="stat-card"><div class="value">0</div><div class="label">Bounce Rate</div></div>
+            <div class="stat-card"><div class="value">0</div><div class="label">Campaigns</div></div>
+            <div class="stat-card cookies"><div class="value">0</div><div class="label">Cookies</div></div>
         </div>
 
-        <!-- Six zero cards -->
-        <div class="stats-row">
-            <div class="stat-zero-card"><div class="value">0</div><div class="label"></div></div>
-            <div class="stat-zero-card"><div class="value">0</div><div class="label"></div></div>
-            <div class="stat-zero-card"><div class="value">0</div><div class="label"></div></div>
-            <div class="stat-zero-card"><div class="value">0</div><div class="label"></div></div>
-            <div class="stat-zero-card"><div class="value">0</div><div class="label"></div></div>
-            <div class="stat-zero-card"><div class="value">0</div><div class="label"></div></div>
-        </div>
-
-        <!-- Map + Cookies row -->
+        <!-- MAP + COOKIES CARD ROW -->
         <div class="map-cookies-row">
-            <!-- Map card (from previous) -->
+            <!-- Map card (from previous, with legend) -->
             <div class="map-card">
                 <div class="map-header">
-                    <h3><i class="fas fa-globe" style="color: #e63946;"></i> Traffic Origin</h3>
+                    <h3><i class="fas fa-globe-americas" style="color: #e63946;"></i> Traffic Origin</h3>
                     <div class="map-legend">
                         <span class="legend-item"><span class="legend-color high"></span> High</span>
                         <span class="legend-item"><span class="legend-color med"></span> Med</span>
@@ -502,7 +522,7 @@
                 <div id="world-map"></div>
             </div>
 
-            <!-- Cookies card -->
+            <!-- Cookies card with stats -->
             <div class="cookies-card">
                 <div class="cookies-header">
                     <i class="fas fa-cookie-bite"></i>
@@ -525,26 +545,39 @@
             </div>
         </div>
 
-        <!-- Table with all columns -->
+        <!-- TABLE – EXACT 10 COLUMNS: ID, Campaign, Target, User, Pass, Cookies, IP, Device, Data, Date -->
         <div class="table-section">
             <div class="table-header">
-                <h3><i class="fas fa-table" style="margin-right: 8px;"></i> Campaign Data</h3>
+                <h3><i class="fas fa-table"></i> Campaign Data</h3>
                 <i class="fas fa-download"></i>
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th><th>Campaign</th><th>Target</th><th>User</th><th>Pass</th><th>Cookies</th><th>IP</th><th>Device</th><th>Data</th><th>Date</th>
+                        <th>ID</th>
+                        <th>Campaign</th>
+                        <th>Target</th>
+                        <th>User</th>
+                        <th>Pass</th>
+                        <th>Cookies</th>
+                        <th>IP</th>
+                        <th>Device</th>
+                        <th>Data</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td colspan="10" class="no-results"><i class="fas fa-search"></i> No results found!</td></tr>
+                    <tr>
+                        <td colspan="10" class="no-results">
+                            <i class="fas fa-search"></i> No results found!
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="pagination">
-                <span><i class="fas fa-chevron-left"></i></span>
+                <i class="fas fa-chevron-left"></i>
                 <span class="page">1/1</span>
-                <span><i class="fas fa-chevron-right"></i></span>
+                <i class="fas fa-chevron-right"></i>
             </div>
         </div>
     </div>
@@ -578,18 +611,37 @@
 
     <script>
         (function() {
-            // Sidebar navigation (non-functional for demo)
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    navItems.forEach(n => n.classList.remove('active'));
+            // Theme toggle with perfect contrast
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    themeIcon.className = 'fas fa-sun';
+                    themeToggle.querySelector('span').textContent = 'Light';
+                } else {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    themeIcon.className = 'fas fa-moon';
+                    themeToggle.querySelector('span').textContent = 'Dark';
+                }
+            });
+
+            // Navigation (non-functional for demo)
+            const navLinks = document.querySelectorAll('.nav-link:not(.logout)');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
                     this.classList.add('active');
                 });
             });
 
-            // ---------- D3 WORLD MAP (same as before) ----------
+            // ---------- D3 WORLD MAP (exactly as before) ----------
             const width = document.getElementById('world-map').clientWidth;
-            const height = 200;
+            const height = 220;
 
             const svg = d3.select("#world-map")
                 .append("svg")
@@ -598,7 +650,7 @@
                 .style("background", "rgba(0,0,0,0.2)");
 
             const projection = d3.geoMercator()
-                .scale(70)
+                .scale(80)
                 .translate([width / 2, height / 1.5]);
 
             const path = d3.geoPath().projection(projection);
@@ -619,7 +671,6 @@
                     .append("path")
                     .attr("d", path)
                     .attr("fill", d => {
-                        // Simple mock coloring
                         return colorScale(Math.floor(Math.random() * 30000000));
                     })
                     .attr("stroke", "#1e1e1e")
