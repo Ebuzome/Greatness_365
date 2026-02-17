@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greatness · CodeFather panel</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter, Orbitron, Poppins (same as reference) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+        }
+
+        /* ---------- DARK MODE (DEFAULT) – same refined palette ---------- */
+        body.dark-mode {
+            background: #0a0c12;
+            color: #e0e0e0;
+        }
+        body.dark-mode .top-nav {
+            background: rgba(12, 17, 24, 0.95);
+            border-bottom: 1px solid rgba(230, 57, 70, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        body.dark-mode .nav-link {
+            color: #ccc;
+        }
+        body.dark-mode .nav-link i {
+            color: #e63946;
+        }
+        body.dark-mode .nav-link.active {
+            border-bottom: 2px solid #e63946;
+            color: white;
+        }
+        body.dark-mode .instruction-banner {
+            background: rgba(230, 57, 70, 0.1);
+            border-left: 4px solid #e63946;
+            color: #ddd;
+        }
+        body.dark-mode .link-card {
+            background: rgba(18, 22, 30, 0.7);
+            border: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 3px solid #e63946;
+        }
+        body.dark-mode .link-label {
+            color: #e0e0e0;
+        }
+        body.dark-mode .link-display {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #2a2f3a;
+            color: #b0b8c0;
+            font-family: 'Orbitron', monospace;
+        }
+        body.dark-mode .btn-copy {
+            background: rgba(230, 57, 70, 0.1);
+            border: 1px solid #e63946;
+            color: #e63946;
+        }
+        body.dark-mode .btn-open {
+            background: #e63946;
+            border: 1px solid #e63946;
+            color: white;
+        }
+
+        /* ---------- LIGHT MODE – crisp, legible ---------- */
+        body.light-mode {
+            background: #f5f7fa;
+            color: #1e2a3a;
+        }
+        body.light-mode .top-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(230, 57, 70, 0.3);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        body.light-mode .nav-link {
+            color: #2c3e50;
+        }
+        body.light-mode .nav-link i {
+            color: #e63946;
+        }
+        body.light-mode .nav-link.active {
+            border-bottom: 2px solid #e63946;
+            color: #1e2a3a;
+        }
+        body.light-mode .instruction-banner {
+            background: white;
+            border-left: 4px solid #e63946;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            color: #1e2a3a;
+            border: 1px solid rgba(230,57,70,0.15);
+        }
+        body.light-mode .link-card {
+            background: white;
+            border: 1px solid rgba(230, 57, 70, 0.1);
+            border-bottom: 3px solid #e63946;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        body.light-mode .link-label {
+            color: #1e2a3a;
+        }
+        body.light-mode .link-display {
+            background: #f0f2f5;
+            border: 1px solid #ddd;
+            color: #2c3e50;
+            font-family: 'Orbitron', monospace;
+        }
+        body.light-mode .btn-copy {
+            background: rgba(230, 57, 70, 0.08);
+            border: 1px solid #e63946;
+            color: #e63946;
+        }
+        body.light-mode .btn-open {
+            background: #e63946;
+            border: 1px solid #e63946;
+            color: white;
+        }
+
+        /* theme toggle same style */
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            border-radius: 30px;
+            padding: 0.4rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-right: 1rem;
+        }
+        .theme-toggle i {
+            color: #e63946;
+        }
+        body.light-mode .theme-toggle {
+            background: white;
+            border-color: #e63946;
+        }
+
+        /* top navigation – HORIZONTAL (exactly 4 links: Overview, Links, Campaigns, Telegram) */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 2.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link i {
+            font-size: 1.1rem;
+            color: #e63946;
+        }
+        .nav-link.active {
+            border-bottom: 2px solid #e63946;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        /* small logout link (optional, from original but we keep it minimal) */
+        .logout-link {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #e63946;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* main content */
+        .main-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 2.5rem;
+        }
+
+        /* header with #Greatness ##CodeFather and yahoo & aol badge */
+        .brand-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .brand-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            background: linear-gradient(145deg, #e63946, #b0303c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .brand-header h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            font-family: 'Poppins', sans-serif;
+            color: #888;
+        }
+        .target-badge {
+            margin-left: auto;
+            background: #e63946;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* instruction banner – exactly as image */
+        .instruction-banner {
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin: 1.8rem 0 2rem 0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .save-domain-btn {
+            background: #e63946;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .save-domain-btn:hover {
+            background: #c02a38;
+        }
+        body.light-mode .save-domain-btn {
+            color: white;
+        }
+
+        /* link grid – 2x2 exactly like image */
+        .link-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .link-card {
+            border-radius: 28px;
+            padding: 1.5rem 1.5rem 1.8rem 1.5rem;
+            backdrop-filter: blur(8px);
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .link-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .link-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .link-label i {
+            color: #e63946;
+            font-size: 1.2rem;
+        }
+
+        .link-field-row {
+            display: flex;
+            align-items: center;
+            background: transparent;
+            border-radius: 60px;
+            overflow: hidden;
+            margin-bottom: 1.2rem;
+            width: 100%;
+        }
+        .link-display {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px 0 0 60px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-family: 'Orbitron', monospace;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #333;
+            border-right: none;
+        }
+        .btn-copy {
+            padding: 0.8rem 1.5rem;
+            border-radius: 0 60px 60px 0;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            background: transparent;
+            border: 1px solid #e63946;
+            border-left: none;
+            white-space: nowrap;
+        }
+        .btn-copy i {
+            margin-right: 0.3rem;
+        }
+
+        .action-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.5rem;
+        }
+        .btn-open {
+            padding: 0.6rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #e63946;
+            color: white;
+            border: none;
+        }
+        .btn-open i {
+            font-size: 0.9rem;
+        }
+
+        /* placeholder empty fields – exactly as requested (empty) */
+        .link-display.empty {
+            color: #6c7a8a;
+            font-style: italic;
+        }
+
+        /* small extra section for logs (optional) but we keep minimal as image */
+        .additional-tools {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: flex-end;
+        }
+        .pill-icon {
+            background: rgba(230,57,70,0.1);
+            border: 1px solid rgba(230,57,70,0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: default;
+        }
+        .pill-icon i {
+            color: #e63946;
+        }
+
+        /* pagination / footer (just 1/1 from reference) */
+        .footer-meta {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            align-items: center;
+            gap: 1rem;
+        }
+        .page-indicator {
+            padding: 0.3rem 1.2rem;
+            background: rgba(230,57,70,0.1);
+            border-radius: 30px;
+            border: 1px solid rgba(230,57,70,0.2);
+        }
+
+        /* responsive */
+        @media (max-width: 800px) {
+            .link-grid {
+                grid-template-columns: 1fr;
+            }
+            .top-nav {
+                padding: 0.6rem 1rem;
+            }
+            .nav-left {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- HORIZONTAL NAVIGATION: Overview, Links, Campaigns, Telegram -->
+    <div class="top-nav">
+        <div class="nav-left">
+            <div class="nav-link active" data-page="overview"><i class="fas fa-chart-pie"></i> Overview</div>
+            <div class="nav-link" data-page="links"><i class="fas fa-link"></i> Links</div>
+            <div class="nav-link" data-page="campaigns"><i class="fas fa-bullhorn"></i> Campaigns</div>
+            <div class="nav-link" data-page="telegram"><i class="fab fa-telegram"></i> Telegram</div>
+        </div>
+        <div class="nav-right">
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon" id="themeIcon"></i>
+                <span>Dark</span>
+            </div>
+            <div class="logout-link"><i class="fas fa-sign-out-alt"></i> LogOut</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Brand header: #Greatness ##CodeFather + yahoo & aol badge (exact) -->
+        <div class="brand-header">
+            <h1>#Greatness</h1>
+            <h2>##CodeFather</h2>
+            <div class="target-badge"><i class="fab fa-yahoo"></i> <i class="fab fa-aol"></i> yahoo & aol</div>
+        </div>
+
+        <!-- Instruction banner exactly as image -->
+        <div class="instruction-banner">
+            <span><i class="fas fa-info-circle" style="color: #e63946; margin-right: 0.5rem;"></i> Choose your preferred domain for change domain links and click "Save Domain".</span>
+            <button class="save-domain-btn"><i class="fas fa-save"></i> Save Domain</button>
+        </div>
+
+        <!-- 2x2 GRID of link cards – all fields EMPTY as requested -->
+        <div class="link-grid">
+            <!-- Yahoo Auto Grab Link -->
+            <div class="link-card">
+                <div class="link-label"><i class="fab fa-yahoo"></i> Yahoo Auto Grab Link</div>
+                <div class="link-field-row">
+                    <span class="link-display empty"></span>
+                    <button class="btn-copy"><i class="far fa-copy"></i> Copy</button>
+                </div>
+                <div class="action-row">
+                    <button class="btn-open"><i class="fas fa-external-link-alt"></i> Open</button>
+                </div>
+            </div>
+
+            <!-- Yahoo Normal Link -->
+            <div class="link-card">
+                <div class="link-label"><i class="fab fa-yahoo"></i> Yahoo Normal Link</div>
+                <div class="link-field-row">
+                    <span class="link-display empty"></span>
+                    <button class="btn-copy"><i class="far fa-copy"></i> Copy</button>
+                </div>
+                <div class="action-row">
+                    <button class="btn-open"><i class="fas fa-external-link-alt"></i> Open</button>
+                </div>
+            </div>
+
+            <!-- Aol Auto Grab Link -->
+            <div class="link-card">
+                <div class="link-label"><i class="fab fa-aol"></i> Aol Auto Grab Link</div>
+                <div class="link-field-row">
+                    <span class="link-display empty"></span>
+                    <button class="btn-copy"><i class="far fa-copy"></i> Copy</button>
+                </div>
+                <div class="action-row">
+                    <button class="btn-open"><i class="fas fa-external-link-alt"></i> Open</button>
+                </div>
+            </div>
+
+            <!-- Aol Normal Link -->
+            <div class="link-card">
+                <div class="link-label"><i class="fab fa-aol"></i> Aol Normal Link</div>
+                <div class="link-field-row">
+                    <span class="link-display empty"></span>
+                    <button class="btn-copy"><i class="far fa-copy"></i> Copy</button>
+                </div>
+                <div class="action-row">
+                    <button class="btn-open"><i class="fas fa-external-link-alt"></i> Open</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- extra tools row (from image: QR, attachment, etc) but we keep minimal — including some icons to mirror the image's sidebar tools (optional) -->
+        <div class="additional-tools">
+            <span class="pill-icon"><i class="fas fa-qrcode"></i> QR</span>
+            <span class="pill-icon"><i class="fas fa-paperclip"></i> Attachment</span>
+            <span class="pill-icon"><i class="fab fa-telegram"></i> Telegram</span>
+            <span class="pill-icon"><i class="fas fa-life-ring"></i> Support</span>
+            <span class="pill-icon"><i class="fas fa-cog"></i> Settings</span>
+        </div>
+
+        <!-- footer 1/1 (exactly as original image) -->
+        <div class="footer-meta">
+            <i class="fas fa-chevron-left" style="opacity: 0.5;"></i>
+            <span class="page-indicator">1/1</span>
+            <i class="fas fa-chevron-right" style="opacity: 0.5;"></i>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Theme toggle (dark/light) with perfect contrast
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    themeIcon.className = 'fas fa-sun';
+                    themeToggle.querySelector('span').textContent = 'Light';
+                } else {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    themeIcon.className = 'fas fa-moon';
+                    themeToggle.querySelector('span').textContent = 'Dark';
+                }
+            });
+
+            // simple nav active switching (non-logout)
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // dummy functionality for copy/open buttons (demo feedback)
+            const copyBtns = document.querySelectorAll('.btn-copy');
+            copyBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const oldText = this.innerText;
+                    this.innerText = ' Copied!';
+                    this.style.opacity = '0.8';
+                    setTimeout(() => {
+                        this.innerText = oldText;
+                        this.style.opacity = '1';
+                    }, 1000);
+                });
+            });
+
+            const openBtns = document.querySelectorAll('.btn-open');
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    alert('[Demo] Open link triggered — no actual link configured.');
+                });
+            });
+
+            // Save Domain button demo
+            document.querySelector('.save-domain-btn').addEventListener('click', () => {
+                alert('Domain preference saved (demo).');
+            });
+
+            // logout demo
+            document.querySelector('.logout-link').addEventListener('click', () => {
+                alert('Logged out (demo).');
+            });
+        })();
+    </script>
+</body>
+</html>
