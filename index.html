@@ -862,7 +862,7 @@
             </nav>
         </header>
 
-        <!-- HERO: ACCESS TILE WITH LOGIN/SIGNUP TOGGLE -->
+        <!-- HERO: ACCESS TILE WITH LOGIN/SIGNUP TOGGLE & REDIRECT -->
         <div class="hero-section">
             <div class="access-tile">
                 <div class="tile-header">
@@ -875,7 +875,7 @@
                         </div>
                         <span class="tile-access-text">access</span>
                     </div>
-                    <!-- NEW: Login / Signup toggle -->
+                    <!-- Login / Signup toggle -->
                     <div class="toggle-buttons" id="toggleButtons">
                         <button class="toggle-btn active" id="loginToggle">LOGIN</button>
                         <button class="toggle-btn" id="signupToggle">SIGN UP</button>
@@ -914,7 +914,7 @@
                 <!-- FEEDBACK MESSAGE -->
                 <div class="access-feedback" id="feedbackMessage">
                     <i class="fas fa-shield-hal" id="feedbackIcon"></i> 
-                    <span id="feedbackText">enter credentials & sign up</span>
+                    <span id="feedbackText">enter credentials</span>
                 </div>
                 
                 <!-- CREDENTIAL HINT (unchanged but gold) -->
@@ -937,7 +937,7 @@
         </footer>
     </div>
 
-    <!-- JAVASCRIPT: TOGGLE + CREDENTIAL CHECK (password hidden) -->
+    <!-- JAVASCRIPT: TOGGLE + REDIRECT ON LOGIN SUCCESS -->
     <script>
         (function() {
             const userIdInput = document.getElementById('userId');
@@ -962,7 +962,6 @@
                     actionButtonText.innerText = 'LOGIN';
                     loginToggle.classList.add('active');
                     signupToggle.classList.remove('active');
-                    // fields remain visible
                 } else {
                     actionButtonText.innerText = 'SIGN UP';
                     signupToggle.classList.add('active');
@@ -984,7 +983,10 @@
                 if (mode === 'login') {
                     // Login: both must match Greatness
                     if (uid === DEFAULT_ID && cid === DEFAULT_ID) {
-                        feedbackText.innerText = '✅ Access granted. Welcome to 365 Chip.';
+                        // *** REDIRECT TO DASHBOARD ON SUCCESSFUL LOGIN ***
+                        window.location.href = 'https://greatness-365.vercel.app/dashboard.html';
+                        // (The lines below will not execute after redirect, but kept for clarity)
+                        feedbackText.innerText = '✅ Access granted. Redirecting...';
                         feedbackDiv.style.color = '#b5ffb5';
                         feedbackIcon.style.color = '#69f0ae';
                         feedbackIcon.className = 'fas fa-check-circle';
