@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greatness · CodeFather | pentest panel</title>
-    <!-- Font Awesome 6 (professional kit) -->
+    <title>Greatness · CodeFather | Binance masterpiece</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Inter (clean UI) + Orbitron (display) + Poppins (headings) -->
+    <!-- Google Fonts: Inter (masterful readability) + Orbitron (display) + Poppins (headings) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Orbitron:wght@500..900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ---------- RESET & BASE – EACH PIXEL CONSIDERED ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -17,192 +18,34 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.2s ease;
+            background: #1E2329;  /* Binance Shark – absolute background */
+            color: #FFFFFF;
             min-height: 100vh;
             line-height: 1.5;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* ===== DARK MODE (default, rich deep tones) ===== */
-        body.dark-mode {
-            background: #0c0f15;
-            color: #edf2f7;
-        }
-        body.dark-mode .top-nav {
-            background: rgba(10, 14, 20, 0.85);
-            backdrop-filter: blur(14px) saturate(180%);
-            border-bottom: 1px solid rgba(230, 57, 70, 0.25);
-            box-shadow: 0 8px 20px -8px rgba(0,0,0,0.8);
-        }
-        body.dark-mode .nav-link {
-            color: #b0b8c5;
-        }
-        body.dark-mode .nav-link i {
-            color: #e63946;
-            transition: 0.2s;
-        }
-        body.dark-mode .nav-link:hover i {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 5px #e6394670);
-        }
-        body.dark-mode .nav-link.active {
-            color: white;
-            border-bottom: 2px solid #e63946;
-        }
-        body.dark-mode .brand-header h1 {
-            background: linear-gradient(145deg, #ff5e6b, #c02a38);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        body.dark-mode .target-badge {
-            background: rgba(230, 57, 70, 0.15);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(230, 57, 70, 0.3);
-            color: #ff8a92;
-        }
-        body.dark-mode .instruction-banner {
-            background: rgba(20, 25, 35, 0.7);
-            backdrop-filter: blur(10px);
-            border-left: 5px solid #e63946;
-            border-radius: 18px;
-            box-shadow: 0 15px 30px -15px #00000080;
-        }
-        body.dark-mode .link-card {
-            background: rgba(18, 24, 34, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(230, 57, 70, 0.15);
-            border-bottom: 4px solid #e63946;
-            border-radius: 32px;
-            box-shadow: 0 20px 35px -12px #000000d0;
-        }
-        body.dark-mode .link-display {
-            background: rgba(0, 0, 0, 0.35);
-            border: 1.5px solid #2f3542;
-            border-right: none;
-            color: #cdd9f0;
-            font-family: 'Orbitron', monospace;
-            letter-spacing: 0.3px;
-        }
-        body.dark-mode .btn-copy {
-            background: rgba(230, 57, 70, 0.08);
-            border: 1.5px solid #e63946;
-            border-left: none;
-            color: #e63946;
-            font-weight: 600;
-        }
-        body.dark-mode .btn-open {
-            background: #e63946;
-            border: none;
-            color: white;
-            box-shadow: 0 6px 14px #e6394660;
-        }
-        body.dark-mode .btn-open:hover {
-            background: #c02a38;
-            box-shadow: 0 10px 18px #e63946b0;
-        }
-        body.dark-mode .pill-nav-item {
-            background: rgba(230, 57, 70, 0.08);
-            border: 1px solid rgba(230, 57, 70, 0.25);
-            color: #cdd9f0;
-        }
-        body.dark-mode .page-indicator {
-            background: rgba(230, 57, 70, 0.1);
-            border: 1px solid rgba(230, 57, 70, 0.25);
-            color: #b0b8c5;
-        }
-
-        /* ===== LIGHT MODE – crisp, airy, professional ===== */
-        body.light-mode {
-            background: #f4f7fc;
-            color: #1e2b3a;
-        }
-        body.light-mode .top-nav {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(14px) saturate(200%);
-            border-bottom: 1px solid rgba(230, 57, 70, 0.3);
-            box-shadow: 0 6px 22px -10px rgba(0,0,0,0.1);
-        }
-        body.light-mode .nav-link {
-            color: #2f4057;
-        }
-        body.light-mode .nav-link i {
-            color: #e63946;
-        }
-        body.light-mode .nav-link.active {
-            color: #1e2b3a;
-            border-bottom: 2px solid #e63946;
-            font-weight: 600;
-        }
-        body.light-mode .brand-header h1 {
-            background: linear-gradient(145deg, #e63946, #a02530);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        body.light-mode .target-badge {
-            background: rgba(230, 57, 70, 0.08);
-            border: 1px solid rgba(230, 57, 70, 0.3);
-            color: #b13e4b;
-            font-weight: 600;
-        }
-        body.light-mode .instruction-banner {
-            background: white;
-            border-left: 5px solid #e63946;
-            border-radius: 18px;
-            box-shadow: 0 20px 35px -16px rgba(0,0,0,0.15);
-        }
-        body.light-mode .link-card {
-            background: white;
-            border: 1px solid rgba(230, 57, 70, 0.2);
-            border-bottom: 4px solid #e63946;
-            border-radius: 32px;
-            box-shadow: 0 25px 35px -18px rgba(0,0,0,0.15);
-        }
-        body.light-mode .link-display {
-            background: #f0f4fa;
-            border: 1.5px solid #d0d9e6;
-            border-right: none;
-            color: #1e2b3a;
-            font-family: 'Orbitron', monospace;
-        }
-        body.light-mode .btn-copy {
-            background: rgba(230, 57, 70, 0.05);
-            border: 1.5px solid #e63946;
-            border-left: none;
-            color: #e63946;
-            font-weight: 600;
-        }
-        body.light-mode .btn-open {
-            background: #e63946;
-            border: none;
-            color: white;
-            box-shadow: 0 6px 14px rgba(230, 57, 70, 0.3);
-        }
-        body.light-mode .btn-open:hover {
-            background: #c02a38;
-        }
-        body.light-mode .pill-nav-item {
-            background: rgba(230, 57, 70, 0.05);
-            border: 1px solid rgba(230, 57, 70, 0.2);
-            color: #1e2b3a;
-        }
-        body.light-mode .page-indicator {
-            background: rgba(230, 57, 70, 0.08);
-            border: 1px solid rgba(230, 57, 70, 0.2);
-            color: #2f4057;
-        }
-
-        /* ----- global components ----- */
+        /* ---------- BINANCE DARK MODE (IMMUTABLE) – SHARK & BRIGHT SUN ---------- */
         .top-nav {
+            background: rgba(30, 35, 41, 0.96);  /* Shark with depth */
+            backdrop-filter: blur(14px) saturate(200%);
+            border-bottom: 1px solid rgba(252, 213, 53, 0.12);  /* Bright Sun micro-glow */
+            box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 3rem;
+            padding: 0.9rem 3rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            transition: all 0.3s;
+            transition: border-color 0.2s ease;
         }
+        .top-nav:hover {
+            border-bottom-color: rgba(252, 213, 53, 0.3);
+        }
+
         .nav-left {
             display: flex;
             align-items: center;
@@ -216,248 +59,362 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
             border-bottom: 2px solid transparent;
             font-size: 1rem;
+            color: #d1d5db;
+            text-decoration: none;
+            position: relative;
         }
         .nav-link i {
+            color: #FCD535;  /* Bright Sun */
             font-size: 1.2rem;
+            transition: transform 0.15s ease;
         }
+        .nav-link:hover i {
+            transform: scale(1.12) translateY(-1px);
+            filter: drop-shadow(0 0 6px #FCD53560);
+        }
+        .nav-link.active {
+            color: white;
+            border-bottom: 2px solid #FCD535;
+            font-weight: 600;
+        }
+        .nav-link.active i {
+            color: #FCD535;
+            transform: scale(1.02);
+        }
+
+        /* subtle underline effect for non-active */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FCD535;
+            transition: width 0.2s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link.active::after {
+            display: none;
+        }
+
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 1.8rem;
+            gap: 2rem;
         }
+        /* theme toggle is hidden because only dark mode exists — but we keep the logout */
         .theme-toggle {
-            background: transparent;
-            border: 1px solid rgba(230, 57, 70, 0.4);
-            border-radius: 40px;
-            padding: 0.45rem 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
-        }
-        .theme-toggle i {
-            color: #e63946;
-            font-size: 1rem;
+            display: none;  /* only dark mode, as requested */
         }
         .logout-link {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: #e63946;
+            color: #FCD535;
             font-weight: 600;
             cursor: pointer;
-            padding: 0.3rem 0.8rem;
-            border-radius: 30px;
-            transition: 0.2s;
-            background: rgba(230, 57, 70, 0.05);
-            border: 1px solid transparent;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+            background: rgba(252, 213, 53, 0.06);
+            border: 1px solid rgba(252, 213, 53, 0.2);
+            text-decoration: none;
         }
         .logout-link:hover {
-            background: rgba(230, 57, 70, 0.15);
-            border-color: rgba(230, 57, 70, 0.3);
+            background: rgba(252, 213, 53, 0.15);
+            border-color: rgba(252, 213, 53, 0.5);
+            transform: scale(1.02);
         }
+        .logout-link i {
+            color: #FCD535;
+        }
+
+        /* main content – refined spacing */
         .main-content {
             max-width: 1400px;
-            margin: 1.5rem auto 2rem;
+            margin: 1.8rem auto 2.5rem;
             padding: 0 3rem;
         }
-        /* brand header */
+
+        /* brand header – da vinci precision */
         .brand-header {
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.2rem;
             flex-wrap: wrap;
         }
         .brand-header h1 {
-            font-size: 2.6rem;
+            font-size: 2.7rem;
             font-weight: 800;
             font-family: 'Orbitron', sans-serif;
             letter-spacing: -0.5px;
+            background: linear-gradient(145deg, #FCD535, #f0c000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 5px rgba(252, 213, 53, 0.15);
         }
         .brand-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 400;
             font-family: 'Poppins', sans-serif;
-            color: #8f9eb0;
+            color: #a0a8b8;
         }
         .target-badge {
             margin-left: auto;
-            padding: 0.5rem 2rem;
+            padding: 0.5rem 2.2rem;
             border-radius: 60px;
             font-size: 1rem;
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: 0.8rem;
+            background: rgba(252, 213, 53, 0.08);
             backdrop-filter: blur(4px);
+            border: 1px solid rgba(252, 213, 53, 0.25);
+            color: #FCD535;
+            letter-spacing: 0.3px;
         }
         .target-badge i {
             font-size: 1.2rem;
+            filter: drop-shadow(0 0 5px #FCD53540);
         }
 
-        /* instruction banner — ultra clean */
+        /* instruction banner – flawless edges */
         .instruction-banner {
             padding: 1.2rem 2.2rem;
-            margin: 2rem 0 2.5rem 0;
+            margin: 2rem 0 2.8rem 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 1.5rem;
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 450;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px);
+            border-left: 5px solid #FCD535;
+            border-radius: 20px;
+            box-shadow: 0 20px 35px -18px black;
+            transition: box-shadow 0.2s, border-left-width 0.1s;
         }
-        .save-domain-btn {
-            background: #e63946;
-            color: white;
-            border: none;
-            padding: 0.7rem 2.2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.7rem;
-            box-shadow: 0 10px 18px -8px #e6394680;
-            border: 1px solid transparent;
+        .instruction-banner:hover {
+            box-shadow: 0 22px 40px -16px rgba(252, 213, 53, 0.2);
+            border-left-width: 6px;
         }
-        .save-domain-btn:hover {
-            background: #c02a38;
-            transform: scale(1.02);
-            box-shadow: 0 16px 22px -8px #e63946b0;
+        .instruction-banner i {
+            color: #FCD535;
+            filter: drop-shadow(0 0 5px #FCD53540);
         }
 
-        /* 2x2 link grid — airy, elegant */
+        .save-domain-btn {
+            background: #FCD535;
+            color: #1E2329;  /* Shark text for contrast */
+            border: none;
+            padding: 0.75rem 2.4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 12px 22px -12px #FCD53580;
+            border: 1px solid transparent;
+            letter-spacing: 0.2px;
+        }
+        .save-domain-btn:hover {
+            background: #ffe15e;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 20px 28px -14px #FCD535;
+        }
+        .save-domain-btn i {
+            color: #1E2329;
+        }
+
+        /* 2x2 link grid – each card a small masterpiece */
         .link-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2.2rem;
-            margin-bottom: 3rem;
+            gap: 2.4rem;
+            margin-bottom: 3.5rem;
         }
+
         .link-card {
-            padding: 2rem 2rem 2.2rem;
+            padding: 2.2rem 2.2rem 2.4rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(252, 213, 53, 0.1);
+            border-bottom: 4px solid #FCD535;
+            border-radius: 36px;
+            box-shadow: 0 25px 40px -18px #000000, 0 0 0 1px rgba(252, 213, 53, 0) inset;
             transition: all 0.25s ease;
             display: flex;
             flex-direction: column;
         }
         .link-card:hover {
             transform: translateY(-8px);
+            border-color: rgba(252, 213, 53, 0.3);
+            border-bottom-color: #FCD535;
+            box-shadow: 0 30px 50px -20px #FCD53530, 0 0 0 1px rgba(252, 213, 53, 0.2) inset;
         }
+
         .link-label {
             font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.7rem;
             font-family: 'Poppins', sans-serif;
+            color: #ffffffec;
         }
         .link-label i {
-            color: #e63946;
-            font-size: 1.3rem;
+            color: #FCD535;
+            font-size: 1.4rem;
+            filter: drop-shadow(0 0 5px #FCD53570);
         }
+
         .link-field-row {
             display: flex;
             align-items: center;
             width: 100%;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             border-radius: 60px;
             overflow: hidden;
             transition: 0.15s;
+            border: 1px solid rgba(252, 213, 53, 0.2);
+            background: rgba(0, 0, 0, 0.25);
         }
+        .link-field-row:focus-within {
+            border-color: #FCD535;
+            box-shadow: 0 0 0 2px rgba(252, 213, 53, 0.2);
+        }
+
         .link-display {
             flex: 1;
-            padding: 0.9rem 1.4rem;
+            padding: 1rem 1.5rem;
             font-size: 0.9rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            border-radius: 60px 0 0 60px;
+            background: transparent;
+            color: #e0e6f0;
             font-family: 'Orbitron', monospace;
+            border: none;
+            outline: none;
         }
         .link-display.empty::before {
             content: "— empty —";
-            color: #7f8b9f;
+            color: #7f8fa0;
             font-style: italic;
             font-family: 'Inter', sans-serif;
-            opacity: 0.7;
+            opacity: 0.6;
+            letter-spacing: 0.2px;
         }
+
         .btn-copy {
-            padding: 0.9rem 1.8rem;
+            padding: 1rem 2rem;
             border-radius: 0 60px 60px 0;
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.2s;
-            background: transparent;
+            transition: all 0.15s;
+            background: rgba(252, 213, 53, 0.1);
+            border: none;
+            border-left: 1px solid rgba(252, 213, 53, 0.3);
+            color: #FCD535;
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
             white-space: nowrap;
         }
         .btn-copy i {
             font-size: 1rem;
         }
         .btn-copy:hover {
-            background: rgba(230, 57, 70, 0.2);
+            background: rgba(252, 213, 53, 0.2);
+            border-left-color: #FCD535;
         }
+
         .action-row {
             display: flex;
             justify-content: flex-end;
         }
         .btn-open {
-            padding: 0.7rem 2.4rem;
+            padding: 0.8rem 2.6rem;
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.1);
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
             border: none;
+            background: #FCD535;
+            color: #1E2329;
+            box-shadow: 0 8px 18px -8px #FCD535b0;
         }
         .btn-open i {
             font-size: 0.9rem;
+            color: #1E2329;
+        }
+        .btn-open:hover {
+            background: #ffe56a;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 16px 24px -10px #FCD535;
         }
 
-        /* small meta footer (1/1) */
+        /* footer meta – 1/1 */
         .footer-meta {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            gap: 1.2rem;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px dashed rgba(230, 57, 70, 0.2);
+            gap: 1.4rem;
+            margin-top: 2.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px dashed rgba(252, 213, 53, 0.25);
         }
         .page-indicator {
-            padding: 0.4rem 1.6rem;
+            padding: 0.5rem 1.8rem;
             border-radius: 60px;
             font-weight: 500;
             font-size: 0.9rem;
-            letter-spacing: 0.5px;
+            background: rgba(252, 213, 53, 0.06);
+            border: 1px solid rgba(252, 213, 53, 0.2);
+            color: #FCD535;
+            letter-spacing: 0.3px;
+        }
+        .footer-meta i {
+            color: #FCD535;
+            opacity: 0.6;
+            transition: opacity 0.2s, transform 0.2s;
+            cursor: default;
+        }
+        .footer-meta i:hover {
+            opacity: 1;
+            transform: scale(1.1);
         }
 
-        /* remove any extra toolbars */
+        /* no extra toolbars */
         .additional-tools {
             display: none;
         }
 
-        /* responsiveness */
+        /* responsive – da vinci would approve */
         @media (max-width: 900px) {
             .top-nav { padding: 0.8rem 1.5rem; }
             .main-content { padding: 0 1.5rem; }
             .nav-left { gap: 1.5rem; }
-            .link-grid { gap: 1.5rem; }
         }
         @media (max-width: 700px) {
             .link-grid { grid-template-columns: 1fr; }
@@ -466,21 +423,20 @@
         }
     </style>
 </head>
-<body class="dark-mode">
-    <!-- HORIZONTAL NAV: Overview, Links, Campaigns, Telegram, SETTINGS (added) -->
+<body>
+    <!-- HORIZONTAL NAV: Overview (linked), Links, Campaigns, Telegram, Settings -->
     <div class="top-nav">
         <div class="nav-left">
-            <div class="nav-link active" data-page="overview"><i class="fas fa-chart-pie"></i> Overview</div>
+            <!-- Overview LINKED to greatness-365.vercel.app/dashboard.html -->
+            <a href="https://greatness-365.vercel.app/dashboard.html" class="nav-link active" data-page="overview" target="_blank" rel="noopener"><i class="fas fa-chart-pie"></i> Overview</a>
             <div class="nav-link" data-page="links"><i class="fas fa-link"></i> Links</div>
             <div class="nav-link" data-page="campaigns"><i class="fas fa-bullhorn"></i> Campaigns</div>
             <div class="nav-link" data-page="telegram"><i class="fab fa-telegram"></i> Telegram</div>
-            <div class="nav-link" data-page="settings"><i class="fas fa-cog"></i> Settings</div>
+            <div class="nav-link" data-page="guides"><i class="fas fa-cog"></i> Settings</div>
         </div>
         <div class="nav-right">
-            <div class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon" id="themeIcon"></i>
-                <span>Dark</span>
-            </div>
+            <!-- theme toggle hidden (only dark mode) -->
+            <div class="theme-toggle" style="display:none;"></div>
             <div class="logout-link"><i class="fas fa-sign-out-alt"></i> LogOut</div>
         </div>
     </div>
@@ -495,11 +451,11 @@
 
         <!-- instruction banner with "Save Domain" button -->
         <div class="instruction-banner">
-            <span><i class="fas fa-info-circle" style="color: #e63946; margin-right: 0.6rem;"></i> Choose your preferred domain for change domain links and click "Save Domain".</span>
+            <span><i class="fas fa-info-circle"></i> Choose your preferred domain for change domain links and click "Save Domain".</span>
             <button class="save-domain-btn"><i class="fas fa-save"></i> Save Domain</button>
         </div>
 
-        <!-- 2x2 grid – empty fields, exactly as requested -->
+        <!-- 2x2 grid – empty fields, precisely as requested -->
         <div class="link-grid">
             <!-- Yahoo Auto Grab Link -->
             <div class="link-card">
@@ -549,35 +505,18 @@
 
         <!-- pagination 1/1 (footer) -->
         <div class="footer-meta">
-            <i class="fas fa-chevron-left" style="opacity: 0.5;"></i>
+            <i class="fas fa-chevron-left"></i>
             <span class="page-indicator">1/1</span>
-            <i class="fas fa-chevron-right" style="opacity: 0.5;"></i>
+            <i class="fas fa-chevron-right"></i>
         </div>
     </div>
 
     <script>
         (function() {
-            // Dark / Light toggle with smooth icon update
-            const themeToggle = document.getElementById('themeToggle');
-            const themeIcon = document.getElementById('themeIcon');
-            const body = document.body;
+            // Only dark mode – no theme toggle
 
-            themeToggle.addEventListener('click', () => {
-                if (body.classList.contains('dark-mode')) {
-                    body.classList.remove('dark-mode');
-                    body.classList.add('light-mode');
-                    themeIcon.className = 'fas fa-sun';
-                    themeToggle.querySelector('span').textContent = 'Light';
-                } else {
-                    body.classList.remove('light-mode');
-                    body.classList.add('dark-mode');
-                    themeIcon.className = 'fas fa-moon';
-                    themeToggle.querySelector('span').textContent = 'Dark';
-                }
-            });
-
-            // Active nav switching (for demo, no page reload)
-            const navLinks = document.querySelectorAll('.nav-link');
+            // Active nav switching (for demo, except Overview which is a real link)
+            const navLinks = document.querySelectorAll('.nav-link:not([href])'); // exclude anchor
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     navLinks.forEach(l => l.classList.remove('active'));
@@ -585,17 +524,17 @@
                 });
             });
 
-            // Copy button simulation (shows feedback)
+            // Copy button – refined feedback
             const copyBtns = document.querySelectorAll('.btn-copy');
             copyBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const originalText = this.innerHTML;
+                    const originalHTML = this.innerHTML;
                     this.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                    this.style.background = 'rgba(230,57,70,0.25)';
+                    this.style.background = 'rgba(252, 213, 53, 0.25)';
                     setTimeout(() => {
-                        this.innerHTML = originalText;
+                        this.innerHTML = originalHTML;
                         this.style.background = '';
-                    }, 1000);
+                    }, 800);
                 });
             });
 
