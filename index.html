@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>365 · Chip & Email Infrastructure</title>
-    <!-- Font Awesome 6 (chip icon, tooltips, etc) -->
+    <title>365 · Chip & Email Infrastructure | Binance</title>
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts: Inter (body), Orbitron (digits), Poppins (headings) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ---------- GLOBAL RESET – ULTRA‑PRECISE ---------- */
+        /* ---------- GLOBAL RESET – BINANCE SHARK BASE ---------- */
         * {
             margin: 0;
             padding: 0;
@@ -26,26 +26,28 @@
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
             background: transparent;
-            color: #1e1e1e;
+            color: #ffffff;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
         }
 
-        /* ---------- VARIABLES – DESIGN TOKENS ---------- */
+        /* ---------- VARIABLES – BINANCE PALETTE (SOFT GOLD #F0B90B) ---------- */
         :root {
-            --color-red: #e63946;
-            --color-red-soft: rgba(230, 57, 70, 0.6);
+            --color-gold: #F0B90B;        /* softer Binance gold */
+            --color-gold-soft: rgba(240, 185, 11, 0.6);
+            --color-shark: #1E2329;        /* primary background */
+            --color-shark-light: #2A2F38;
             --color-grey: #a0a0a0;
             --color-grey-light: #d4d4d4;
             --color-bg-dark: #0a0c12;
-            --color-bg-tile: rgba(12, 17, 24, 0.78);
+            --color-bg-tile: rgba(30, 35, 41, 0.78);  /* shark with opacity */
             --color-text-light: rgba(230, 242, 255, 0.8);
             --color-text-soft: rgba(210, 220, 240, 0.7);
-            --border-glow: rgba(230, 57, 70, 0.2);
-            --shadow-heavy: 0 30px 50px -15px rgba(0,0,0,0.6);
-            --shadow-lift: 0 35px 55px -12px rgba(0,0,0,0.7);
+            --border-glow: rgba(240, 185, 11, 0.2);
+            --shadow-heavy: 0 30px 50px -15px rgba(0,0,0,0.7);
+            --shadow-lift: 0 35px 55px -12px rgba(0,0,0,0.8);
             --spacer-xs: 0.4rem;
             --spacer-sm: 0.8rem;
             --spacer-md: 1.2rem;
@@ -59,7 +61,7 @@
             --transition-default: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
         }
 
-        /* ---------- FLOATING MICROCHIP SVG PARTICLES – WELL STRUCTURED ---------- */
+        /* ---------- FLOATING MICROCHIP SVG PARTICLES – GOLD ACCENTS ---------- */
         .floating-chips {
             position: fixed;
             top: 0;
@@ -76,180 +78,106 @@
             width: 120px;
             height: 120px;
             opacity: 0.07;
-            filter: drop-shadow(0 0 10px rgba(230, 57, 70, 0.1));
+            filter: drop-shadow(0 0 10px rgba(240, 185, 11, 0.1));
             animation: floatParticle 20s infinite linear;
         }
 
-        /* Chip SVG paths – precise, geometric, tech */
         .chip-particle svg {
             width: 100%;
             height: 100%;
             fill: none;
-            stroke: rgba(230, 57, 70, 0.4);
+            stroke: rgba(240, 185, 11, 0.4);  /* gold strokes */
             stroke-width: 0.8;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
         /* Different positions and animations for variety */
-        .chip-particle:nth-child(1) {
-            top: 15%;
-            left: 5%;
-            width: 140px;
-            height: 140px;
-            opacity: 0.06;
-            animation: floatParticle 25s infinite reverse;
-        }
-
-        .chip-particle:nth-child(2) {
-            top: 70%;
-            left: 85%;
-            width: 180px;
-            height: 180px;
-            opacity: 0.05;
-            animation: floatParticle 30s infinite;
-        }
-
-        .chip-particle:nth-child(3) {
-            top: 45%;
-            left: 15%;
-            width: 100px;
-            height: 100px;
-            opacity: 0.08;
-            animation: floatParticle 22s infinite reverse;
-        }
-
-        .chip-particle:nth-child(4) {
-            top: 80%;
-            left: 20%;
-            width: 160px;
-            height: 160px;
-            opacity: 0.05;
-            animation: floatParticle 28s infinite;
-        }
-
-        .chip-particle:nth-child(5) {
-            top: 25%;
-            left: 75%;
-            width: 130px;
-            height: 130px;
-            opacity: 0.07;
-            animation: floatParticle 24s infinite reverse;
-        }
-
-        .chip-particle:nth-child(6) {
-            top: 55%;
-            left: 60%;
-            width: 110px;
-            height: 110px;
-            opacity: 0.06;
-            animation: floatParticle 26s infinite;
-        }
-
-        .chip-particle:nth-child(7) {
-            top: 10%;
-            left: 45%;
-            width: 150px;
-            height: 150px;
-            opacity: 0.05;
-            animation: floatParticle 32s infinite reverse;
-        }
-
-        .chip-particle:nth-child(8) {
-            top: 65%;
-            left: 40%;
-            width: 120px;
-            height: 120px;
-            opacity: 0.07;
-            animation: floatParticle 27s infinite;
-        }
+        .chip-particle:nth-child(1) { top: 15%; left: 5%; width: 140px; height: 140px; opacity: 0.06; animation: floatParticle 25s infinite reverse; }
+        .chip-particle:nth-child(2) { top: 70%; left: 85%; width: 180px; height: 180px; opacity: 0.05; animation: floatParticle 30s infinite; }
+        .chip-particle:nth-child(3) { top: 45%; left: 15%; width: 100px; height: 100px; opacity: 0.08; animation: floatParticle 22s infinite reverse; }
+        .chip-particle:nth-child(4) { top: 80%; left: 20%; width: 160px; height: 160px; opacity: 0.05; animation: floatParticle 28s infinite; }
+        .chip-particle:nth-child(5) { top: 25%; left: 75%; width: 130px; height: 130px; opacity: 0.07; animation: floatParticle 24s infinite reverse; }
+        .chip-particle:nth-child(6) { top: 55%; left: 60%; width: 110px; height: 110px; opacity: 0.06; animation: floatParticle 26s infinite; }
+        .chip-particle:nth-child(7) { top: 10%; left: 45%; width: 150px; height: 150px; opacity: 0.05; animation: floatParticle 32s infinite reverse; }
+        .chip-particle:nth-child(8) { top: 65%; left: 40%; width: 120px; height: 120px; opacity: 0.07; animation: floatParticle 27s infinite; }
 
         @keyframes floatParticle {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(30px, -20px) rotate(5deg);
-            }
-            50% {
-                transform: translate(-20px, 40px) rotate(-3deg);
-            }
-            75% {
-                transform: translate(25px, -30px) rotate(7deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -20px) rotate(5deg); }
+            50% { transform: translate(-20px, 40px) rotate(-3deg); }
+            75% { transform: translate(25px, -30px) rotate(7deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* ---------- FIXED GEOMETRIC BACKGROUND – VISIBLE ZIGZAGS ---------- */
+        /* ---------- GEOMETRIC BACKGROUND – BINANCE GOLD + SHARK ---------- */
         .geometric-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: var(--color-bg-dark);
+            background-color: var(--color-shark);  /* #1E2329 base */
             background-image: 
-                /* 1. HEXAGON GRID (60° ZIGZAG) */
+                /* 1. HEXAGON GRID (gold tones) */
                 repeating-linear-gradient(60deg, 
-                    rgba(255, 255, 255, 0.13) 0px, 
-                    rgba(255, 255, 255, 0.13) 1px, 
+                    rgba(240, 185, 11, 0.13) 0px, 
+                    rgba(240, 185, 11, 0.13) 1px, 
                     transparent 1px, 
                     transparent 60px),
                 repeating-linear-gradient(-60deg, 
-                    rgba(230, 57, 70, 0.1) 0px, 
-                    rgba(230, 57, 70, 0.1) 1px, 
+                    rgba(240, 185, 11, 0.1) 0px, 
+                    rgba(240, 185, 11, 0.1) 1px, 
                     transparent 1px, 
                     transparent 60px),
                 
-                /* 2. DIAGONAL ZIGZAG TRACES */
+                /* 2. DIAGONAL ZIGZAG TRACES (soft gold) */
                 repeating-linear-gradient(45deg, 
-                    rgba(220, 230, 240, 0.12) 0px, 
-                    rgba(220, 230, 240, 0.12) 1px, 
+                    rgba(220, 230, 240, 0.08) 0px, 
+                    rgba(220, 230, 240, 0.08) 1px, 
                     transparent 1px, 
                     transparent 80px),
                 repeating-linear-gradient(-45deg, 
-                    rgba(220, 230, 240, 0.09) 0px, 
-                    rgba(220, 230, 240, 0.09) 1px, 
+                    rgba(220, 230, 240, 0.06) 0px, 
+                    rgba(220, 230, 240, 0.06) 1px, 
                     transparent 1px, 
                     transparent 80px),
                 
-                /* 3. HORIZONTAL MICRO‑STROKES */
+                /* 3. HORIZONTAL MICRO‑STROKES (gold) */
                 repeating-linear-gradient(0deg, 
-                    rgba(230, 57, 70, 0.07) 0px, 
-                    rgba(230, 57, 70, 0.07) 1px, 
+                    rgba(240, 185, 11, 0.07) 0px, 
+                    rgba(240, 185, 11, 0.07) 1px, 
                     transparent 1px, 
                     transparent 24px),
                 
-                /* 4. VERTICAL MICRO‑STROKES */
+                /* 4. VERTICAL MICRO‑STROKES (white-gold) */
                 repeating-linear-gradient(90deg, 
-                    rgba(160, 170, 180, 0.06) 0px, 
-                    rgba(160, 170, 180, 0.06) 1px, 
+                    rgba(255, 255, 255, 0.05) 0px, 
+                    rgba(255, 255, 255, 0.05) 1px, 
                     transparent 1px, 
                     transparent 32px),
                 
-                /* 5. DOT GRID */
+                /* 5. DOT GRID (gold specks) */
                 repeating-linear-gradient(45deg, 
-                    rgba(255, 255, 255, 0.04) 0px, 
-                    rgba(255, 255, 255, 0.04) 1px, 
+                    rgba(240, 185, 11, 0.04) 0px, 
+                    rgba(240, 185, 11, 0.04) 1px, 
                     transparent 1px, 
                     transparent 16px),
                 
-                /* 6. CIRCUIT NODES */
-                radial-gradient(circle at 15% 22%, rgba(230, 57, 70, 0.18) 1.5px, transparent 1.5px),
-                radial-gradient(circle at 72% 45%, rgba(255, 255, 255, 0.15) 2px, transparent 2px),
-                radial-gradient(circle at 83% 68%, rgba(230, 57, 70, 0.16) 2px, transparent 2px),
-                radial-gradient(circle at 31% 82%, rgba(200, 210, 220, 0.13) 1.5px, transparent 1.5px),
-                radial-gradient(circle at 58% 28%, rgba(230, 57, 70, 0.15) 2px, transparent 2px),
+                /* 6. CIRCUIT NODES (gold dots) */
+                radial-gradient(circle at 15% 22%, rgba(240, 185, 11, 0.18) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 72% 45%, rgba(240, 185, 11, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 83% 68%, rgba(240, 185, 11, 0.16) 2px, transparent 2px),
+                radial-gradient(circle at 31% 82%, rgba(240, 185, 11, 0.13) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 58% 28%, rgba(240, 185, 11, 0.15) 2px, transparent 2px),
                 radial-gradient(circle at 91% 55%, rgba(255, 255, 255, 0.13) 1.5px, transparent 1.5px),
-                radial-gradient(circle at 44% 15%, rgba(160, 170, 180, 0.11) 2px, transparent 2px),
-                radial-gradient(circle at 12% 67%, rgba(230, 57, 70, 0.14) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 44% 15%, rgba(240, 185, 11, 0.11) 2px, transparent 2px),
+                radial-gradient(circle at 12% 67%, rgba(240, 185, 11, 0.14) 1.5px, transparent 1.5px),
                 radial-gradient(circle at 76% 88%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
-                radial-gradient(circle at 33% 43%, rgba(230, 57, 70, 0.15) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 33% 43%, rgba(240, 185, 11, 0.15) 1.5px, transparent 1.5px),
                 
-                /* 7. SOFT RADIAL GLOW */
-                radial-gradient(circle at 20% 30%, rgba(230, 57, 70, 0.08) 0%, transparent 60%),
+                /* 7. SOFT RADIAL GLOW (gold tones) */
+                radial-gradient(circle at 20% 30%, rgba(240, 185, 11, 0.08) 0%, transparent 60%),
                 radial-gradient(circle at 80% 70%, rgba(120, 130, 140, 0.06) 0%, transparent 65%),
                 radial-gradient(circle at 50% 50%, rgba(180, 180, 190, 0.04) 0%, transparent 70%);
             
@@ -285,7 +213,7 @@
             will-change: transform;
         }
 
-        /* ---------- NOISE OVERLAY ---------- */
+        /* Noise overlay unchanged (light) */
         .geometric-bg::after {
             content: '';
             position: absolute;
@@ -312,7 +240,7 @@
             z-index: 3;
         }
 
-        /* ---------- HEADER – CHIP + 365 + DROPDOWN NAV ---------- */
+        /* ---------- HEADER – CHIP + 365 + DROPDOWN NAV (GOLD ACCENTS) ---------- */
         .header {
             display: flex;
             justify-content: space-between;
@@ -320,11 +248,10 @@
             flex-wrap: wrap;
             gap: clamp(1rem, 3vw, 2.5rem);
             padding: 0.4rem 0 1.2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(240, 185, 11, 0.15);
             backdrop-filter: blur(4px);
         }
 
-        /* ----- CHIP & 365 – ISOLATED PULSE EFFECT (FIXED) ----- */
         .logo {
             display: flex;
             align-items: center;
@@ -334,8 +261,8 @@
 
         .chip-icon {
             font-size: clamp(2rem, 8vw, 2.8rem);
-            color: var(--color-grey-light);
-            filter: drop-shadow(0 6px 10px rgba(220, 60, 60, 0.2));
+            color: var(--color-gold);
+            filter: drop-shadow(0 6px 10px rgba(240, 185, 11, 0.2));
             transition: transform 0.2s ease;
             animation: chipPulse 4s infinite ease-in-out;
             transform-origin: center;
@@ -343,18 +270,9 @@
         }
 
         @keyframes chipPulse {
-            0% {
-                filter: drop-shadow(0 6px 10px rgba(230, 57, 70, 0.2));
-                opacity: 1;
-            }
-            50% {
-                filter: drop-shadow(0 6px 18px rgba(230, 57, 70, 0.45));
-                opacity: 0.95;
-            }
-            100% {
-                filter: drop-shadow(0 6px 10px rgba(230, 57, 70, 0.2));
-                opacity: 1;
-            }
+            0% { filter: drop-shadow(0 6px 10px rgba(240, 185, 11, 0.2)); opacity: 1; }
+            50% { filter: drop-shadow(0 6px 18px rgba(240, 185, 11, 0.45)); opacity: 0.95; }
+            100% { filter: drop-shadow(0 6px 10px rgba(240, 185, 11, 0.2)); opacity: 1; }
         }
 
         .chip-icon:hover {
@@ -374,8 +292,8 @@
         .digit-3, .digit-5 {
             font-size: clamp(2.4rem, 9vw, 3.4rem);
             font-weight: 800;
-            color: var(--color-red);
-            text-shadow: 0 0 10px rgba(230, 57, 70, 0.25);
+            color: var(--color-gold);
+            text-shadow: 0 0 10px rgba(240, 185, 11, 0.25);
             line-height: 1;
         }
 
@@ -393,15 +311,15 @@
             text-transform: uppercase;
             letter-spacing: 0.2em;
             font-weight: 400;
-            color: rgba(230, 230, 245, 0.55);
+            color: rgba(240, 185, 11, 0.55);
             margin-left: 12px;
             padding-top: 6px;
-            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(240, 185, 11, 0.25);
             padding-left: 14px;
             white-space: nowrap;
         }
 
-        /* ---------- DROPDOWN NAV – NON‑CLICKABLE, ELEGANT ---------- */
+        /* ---------- DROPDOWN NAV – NON‑CLICKABLE, GOLD ACCENTS ---------- */
         .nav-menu {
             display: flex;
             gap: clamp(1.2rem, 3vw, 2.2rem);
@@ -432,7 +350,7 @@
 
         .nav-trigger i {
             font-size: 0.9rem;
-            color: var(--color-red);
+            color: var(--color-gold);
             opacity: 0.7;
         }
 
@@ -441,10 +359,9 @@
             top: 140%;
             left: 50%;
             transform: translateX(-50%) translateY(10px);
-            background: rgba(18, 22, 30, 0.85);
+            background: rgba(30, 35, 41, 0.85);  /* shark */
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(230, 57, 70, 0.2);
+            border: 1px solid rgba(240, 185, 11, 0.2);
             border-radius: var(--radius-dropdown);
             padding: 1.4rem 1.8rem;
             width: 240px;
@@ -458,7 +375,7 @@
             transition: opacity 0.3s, visibility 0.3s, transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
             z-index: 100;
             pointer-events: none;
-            border-bottom: 3px solid var(--color-red);
+            border-bottom: 3px solid var(--color-gold);
             text-align: left;
         }
 
@@ -477,30 +394,26 @@
             padding: clamp(1.5rem, 5vh, 2.5rem) 0;
         }
 
-        /* ---------- ACCESS TILE – CLEAN, NO SHEEN ---------- */
+        /* ---------- ACCESS TILE – BINANCE GOLD BORDERS ---------- */
         .access-tile {
             width: 100%;
             max-width: 760px;
             background: var(--color-bg-tile);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-bottom: 2px solid var(--color-red);
+            border: 1px solid rgba(240, 185, 11, 0.12);
+            border-bottom: 2px solid var(--color-gold);
             border-radius: var(--radius-tile);
             padding: clamp(1.8rem, 6vw, 3rem);
-            box-shadow: var(--shadow-heavy), 0 0 0 1px rgba(230,57,70,0.1) inset;
+            box-shadow: var(--shadow-heavy), 0 0 0 1px rgba(240,185,11,0.1) inset;
             transition: box-shadow 0.4s, border-color 0.3s;
             position: relative;
         }
 
-        /* REMOVED: Animated gradient border (sheen) - causing problems */
-        /* Clean, elegant hover effect instead */
         .access-tile:hover {
-            box-shadow: var(--shadow-lift), 0 0 0 1px rgba(230,57,70,0.2) inset;
+            box-shadow: var(--shadow-lift), 0 0 0 1px rgba(240,185,11,0.2) inset;
             border-bottom-width: 2px;
         }
 
-        /* Subtle inner glow - no animation, no sheen */
         .access-tile::after {
             content: '';
             position: absolute;
@@ -509,7 +422,7 @@
             right: 0;
             bottom: 0;
             border-radius: inherit;
-            box-shadow: inset 0 0 20px rgba(230, 57, 70, 0.05);
+            box-shadow: inset 0 0 20px rgba(240, 185, 11, 0.05);
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.4s;
@@ -519,7 +432,7 @@
             opacity: 1;
         }
 
-        /* tile header – logo + 'access' */
+        /* tile header – with LOGIN/SIGNUP toggle */
         .tile-header {
             display: flex;
             justify-content: space-between;
@@ -537,7 +450,7 @@
 
         .tile-logo .chip-icon {
             font-size: clamp(1.8rem, 6vw, 2.4rem);
-            color: var(--color-grey-light);
+            color: var(--color-gold);
             animation: chipPulse 4s infinite ease-in-out;
             transform-origin: center;
             display: inline-block;
@@ -550,7 +463,7 @@
         .tile-logo .digit-3,
         .tile-logo .digit-5 {
             font-size: clamp(2rem, 7vw, 2.8rem);
-            color: var(--color-red);
+            color: var(--color-gold);
         }
 
         .tile-logo .digit-6 {
@@ -566,16 +479,45 @@
             color: white;
             margin-left: 8px;
             letter-spacing: -0.02em;
-            border-left: 1px solid rgba(255,255,255,0.15);
+            border-left: 1px solid rgba(240,185,11,0.25);
             padding-left: 16px;
         }
 
+        /* LOGIN / SIGNUP TOGGLE BUTTONS */
+        .toggle-buttons {
+            display: flex;
+            gap: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.4rem;
+            border-radius: 50px;
+            border: 1px solid rgba(240,185,11,0.2);
+        }
+        .toggle-btn {
+            padding: 0.4rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: transparent;
+            border: none;
+            color: #aaa;
+            font-family: 'Poppins', sans-serif;
+        }
+        .toggle-btn.active {
+            background: var(--color-gold);
+            color: #1E2329;
+        }
+        .toggle-btn:not(.active):hover {
+            color: white;
+        }
+
         .tile-badge {
-            background: rgba(230,57,70,0.14);
+            background: rgba(240,185,11,0.14);
             padding: 0.35rem 1.2rem;
             border-radius: var(--radius-badge);
-            border: 1px solid rgba(230,57,70,0.35);
-            color: #ffd6d6;
+            border: 1px solid rgba(240,185,11,0.35);
+            color: #ffe7b3;
             font-size: 0.8rem;
             font-weight: 500;
             letter-spacing: 0.5px;
@@ -610,7 +552,7 @@
         }
 
         .input-label i {
-            color: var(--color-red);
+            color: var(--color-gold);
             font-size: 0.9rem;
         }
 
@@ -636,7 +578,7 @@
             font-size: 0.75rem;
             font-weight: 400;
             white-space: nowrap;
-            border: 1px solid var(--color-red);
+            border: 1px solid var(--color-gold);
             box-shadow: 0 10px 18px -6px rgba(0,0,0,0.5);
             z-index: 30;
             letter-spacing: 0.3px;
@@ -649,7 +591,7 @@
         .input-field {
             width: 100%;
             background: rgba(0, 0, 0, 0.25);
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(240, 185, 11, 0.15);
             border-radius: var(--radius-input);
             padding: 0.9rem 1.4rem;
             font-size: 1.05rem;
@@ -662,10 +604,10 @@
         }
 
         .input-field:focus {
-            border-color: var(--color-red);
+            border-color: var(--color-gold);
             outline: none;
             background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 0 4px rgba(230,57,70,0.1), inset 0 2px 5px rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 4px rgba(240,185,11,0.1), inset 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .input-field::placeholder {
@@ -674,7 +616,7 @@
             font-weight: 300;
         }
 
-        /* ---------- SIGNUP BUTTON ---------- */
+        /* ---------- SIGNUP BUTTON (now dynamic) ---------- */
         .signup-column {
             flex: 0 0 auto;
             display: flex;
@@ -683,19 +625,19 @@
         }
 
         .signup-btn {
-            background: linear-gradient(145deg, var(--color-red), #b71c1c);
+            background: linear-gradient(145deg, var(--color-gold), #c79c0a);
             border: none;
             border-radius: 38px;
             padding: 0.9rem 2.5rem;
             font-size: 1.1rem;
             font-weight: 600;
-            color: white;
+            color: #1E2329;
             display: flex;
             align-items: center;
             gap: 12px;
             letter-spacing: 0.8px;
-            box-shadow: 0 14px 24px -8px rgba(50,0,0,0.6);
-            border: 1px solid rgba(255, 200, 200, 0.3);
+            box-shadow: 0 14px 24px -8px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 215, 0, 0.3);
             transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
             cursor: pointer;
             white-space: nowrap;
@@ -726,8 +668,8 @@
         }
 
         .signup-btn:hover {
-            background: linear-gradient(145deg, #c62e3c, #a11414);
-            box-shadow: 0 18px 28px -6px #3a0606;
+            background: linear-gradient(145deg, #ffd966, #d4a017);
+            box-shadow: 0 18px 28px -6px #3a2e06;
             transform: scale(1.02);
         }
 
@@ -739,8 +681,8 @@
         .access-feedback {
             margin-top: 2rem;
             padding-top: 1.2rem;
-            border-top: 1px solid rgba(255,255,255,0.07);
-            color: #ffb3b3;
+            border-top: 1px solid rgba(240,185,11,0.15);
+            color: #ffdb9d;
             font-size: 0.98rem;
             display: flex;
             align-items: center;
@@ -751,12 +693,12 @@
 
         .access-feedback i {
             font-size: 1.2rem;
-            color: var(--color-red);
+            color: var(--color-gold);
         }
 
         .cred-hint {
             margin-top: 1rem;
-            color: rgba(200,200,220,0.5);
+            color: rgba(240,185,11,0.5);
             font-size: 0.78rem;
             display: flex;
             gap: 16px;
@@ -764,10 +706,10 @@
         }
 
         .cred-hint span {
-            background: rgba(230,57,70,0.07);
+            background: rgba(240,185,11,0.07);
             padding: 0.25rem 1.1rem;
             border-radius: 30px;
-            border: 0.5px solid rgba(230,57,70,0.2);
+            border: 0.5px solid rgba(240,185,11,0.2);
             font-family: 'SF Mono', 'Fira Code', monospace;
             backdrop-filter: blur(4px);
         }
@@ -782,12 +724,12 @@
             gap: 1.5rem;
             color: var(--color-text-soft);
             font-size: 0.82rem;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(240,185,11,0.1);
             font-family: 'Poppins', sans-serif;
         }
 
         .footer i {
-            color: var(--color-red);
+            color: var(--color-gold);
             margin-right: 6px;
         }
 
@@ -810,7 +752,7 @@
             padding: 0.35rem 1rem;
             border-radius: 30px;
             backdrop-filter: blur(4px);
-            border: 0.5px solid rgba(255, 255, 255, 0.1);
+            border: 0.5px solid rgba(240,185,11,0.2);
         }
 
         .status-dot {
@@ -834,249 +776,74 @@
             letter-spacing: 0.3px;
         }
 
-        /* ---------- RESPONSIVE – METICULOUS BREAKPOINTS ---------- */
+        /* ---------- RESPONSIVE (unchanged) ---------- */
         @media screen and (max-width: 950px) {
-            .landing-wrapper {
-                padding: 1.5rem 2rem;
-            }
-            .hero-section {
-                justify-content: center;
-            }
-            .access-tile {
-                max-width: 700px;
-            }
+            .landing-wrapper { padding: 1.5rem 2rem; }
+            .hero-section { justify-content: center; }
+            .access-tile { max-width: 700px; }
         }
-
         @media screen and (max-width: 750px) {
-            .landing-wrapper {
-                padding: 1.2rem 1.5rem;
-            }
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .nav-menu {
-                width: 100%;
-                justify-content: space-between;
-                gap: 0.6rem;
-            }
-            .nav-item {
-                flex: 1 0 auto;
-                text-align: center;
-            }
-            .dropdown-content {
-                left: 50%;
-                transform: translateX(-50%) translateY(10px);
-                width: 200px;
-            }
-            .nav-item:hover .dropdown-content {
-                transform: translateX(-50%) translateY(0);
-            }
-            .access-tile {
-                padding: 2rem 1.8rem;
-            }
-            .columns-area {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .signup-column {
-                align-items: stretch;
-            }
-            .signup-btn {
-                justify-content: center;
-            }
-            .tile-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .footer {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .chip-particle {
-                opacity: 0.04;
-            }
+            .landing-wrapper { padding: 1.2rem 1.5rem; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .nav-menu { width: 100%; justify-content: space-between; gap: 0.6rem; }
+            .nav-item { flex: 1 0 auto; text-align: center; }
+            .dropdown-content { left: 50%; transform: translateX(-50%) translateY(10px); width: 200px; }
+            .nav-item:hover .dropdown-content { transform: translateX(-50%) translateY(0); }
+            .access-tile { padding: 2rem 1.8rem; }
+            .columns-area { flex-direction: column; align-items: stretch; }
+            .signup-column { align-items: stretch; }
+            .signup-btn { justify-content: center; }
+            .tile-header { flex-direction: column; align-items: flex-start; }
+            .footer { flex-direction: column; align-items: flex-start; }
+            .chip-particle { opacity: 0.04; }
         }
-
         @media screen and (max-width: 480px) {
-            .landing-wrapper {
-                padding: 1rem 1.2rem;
-            }
-            .logo-tag {
-                display: none;
-            }
-            .digit-3, .digit-6, .digit-5 {
-                font-size: 2.2rem;
-            }
-            .chip-icon {
-                font-size: 2rem;
-            }
-            .access-tile {
-                padding: 1.6rem 1.2rem;
-                border-radius: 36px 36px 36px 12px;
-            }
-            .tile-logo .digit-3,
-            .tile-logo .digit-5,
-            .tile-logo .digit-6 {
-                font-size: 2rem;
-            }
-            .tile-access-text {
-                font-size: 1.3rem;
-                padding-left: 10px;
-            }
-            .tile-badge {
-                padding: 0.25rem 0.9rem;
-                font-size: 0.75rem;
-            }
-            .input-field {
-                padding: 0.8rem 1.2rem;
-            }
-            .signup-btn {
-                padding: 0.8rem 1.8rem;
-                font-size: 1rem;
-            }
-            .cred-hint span {
-                padding: 0.2rem 0.8rem;
-            }
-            .chip-particle {
-                width: 80px !important;
-                height: 80px !important;
-            }
+            .landing-wrapper { padding: 1rem 1.2rem; }
+            .logo-tag { display: none; }
+            .digit-3, .digit-6, .digit-5 { font-size: 2.2rem; }
+            .chip-icon { font-size: 2rem; }
+            .access-tile { padding: 1.6rem 1.2rem; border-radius: 36px 36px 36px 12px; }
+            .tile-logo .digit-3, .tile-logo .digit-5, .tile-logo .digit-6 { font-size: 2rem; }
+            .tile-access-text { font-size: 1.3rem; padding-left: 10px; }
+            .tile-badge { padding: 0.25rem 0.9rem; font-size: 0.75rem; }
+            .input-field { padding: 0.8rem 1.2rem; }
+            .signup-btn { padding: 0.8rem 1.8rem; font-size: 1rem; }
+            .cred-hint span { padding: 0.2rem 0.8rem; }
+            .chip-particle { width: 80px !important; height: 80px !important; }
         }
 
-        /* ---------- NON‑CLICKABLE AESTHETICS ---------- */
+        /* Non-clickable aesthetics */
         .footer a, .fake-link {
             text-decoration: none;
             color: inherit;
-            border-bottom: 1px dotted rgba(230,57,70,0.35);
+            border-bottom: 1px dotted rgba(240,185,11,0.35);
             cursor: default;
         }
 
-        /* ---------- CUSTOM SCROLLBAR ---------- */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(10, 12, 18, 0.5);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(230, 57, 70, 0.3);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(230, 57, 70, 0.5);
-        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(30, 35, 41, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(240, 185, 11, 0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(240, 185, 11, 0.5); }
     </style>
 </head>
 <body>
-    <!-- FLOATING MICROCHIP SVG PARTICLES – WELL STRUCTURED, CLEAN -->
+    <!-- FLOATING MICROCHIP SVG PARTICLES – GOLD ACCENTS (unchanged) -->
     <div class="floating-chips">
-        <div class="chip-particle">
-            <svg viewBox="0 0 100 100">
-                <rect x="20" y="20" width="60" height="60" rx="8" stroke="currentColor" fill="none" stroke-width="0.8"/>
-                <path d="M35 20 L35 80" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M65 20 L65 80" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M20 35 L80 35" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M20 65 L80 65" stroke="currentColor" stroke-width="0.6"/>
-                <circle cx="30" cy="30" r="2" fill="rgba(230,57,70,0.4)"/>
-                <circle cx="70" cy="30" r="2" fill="rgba(230,57,70,0.4)"/>
-                <circle cx="30" cy="70" r="2" fill="rgba(230,57,70,0.4)"/>
-                <circle cx="70" cy="70" r="2" fill="rgba(230,57,70,0.4)"/>
-            </svg>
-        </div>
-        <div class="chip-particle">
-            <svg viewBox="0 0 100 100">
-                <rect x="15" y="15" width="70" height="70" rx="12" stroke="currentColor" fill="none" stroke-width="0.9"/>
-                <path d="M30 15 L30 85" stroke="currentColor" stroke-width="0.7"/>
-                <path d="M70 15 L70 85" stroke="currentColor" stroke-width="0.7"/>
-                <path d="M15 30 L85 30" stroke="currentColor" stroke-width="0.7"/>
-                <path d="M15 70 L85 70" stroke="currentColor" stroke-width="0.7"/>
-                <circle cx="40" cy="40" r="2.5" fill="rgba(255,255,255,0.3)"/>
-                <circle cx="60" cy="60" r="2.5" fill="rgba(255,255,255,0.3)"/>
-                <circle cx="40" cy="60" r="2" fill="rgba(230,57,70,0.3)"/>
-                <circle cx="60" cy="40" r="2" fill="rgba(230,57,70,0.3)"/>
-            </svg>
-        </div>
-        <div class="chip-particle">
-            <svg viewBox="0 0 100 100">
-                <rect x="25" y="25" width="50" height="50" rx="6" stroke="currentColor" fill="none" stroke-width="0.7"/>
-                <path d="M35 25 L35 75" stroke="currentColor" stroke-width="0.5"/>
-                <path d="M65 25 L65 75" stroke="currentColor" stroke-width="0.5"/>
-                <path d="M25 35 L75 35" stroke="currentColor" stroke-width="0.5"/>
-                <path d="M25 65 L75 65" stroke="currentColor" stroke-width="0.5"/>
-                <circle cx="45" cy="45" r="2" fill="rgba(230,57,70,0.35)"/>
-                <circle cx="55" cy="55" r="2" fill="rgba(230,57,70,0.35)"/>
-            </svg>
-        </div>
-        <div class="chip-particle">
-            <svg viewBox="0 0 100 100">
-                <rect x="18" y="18" width="64" height="64" rx="10" stroke="currentColor" fill="none" stroke-width="0.8"/>
-                <path d="M32 18 L32 82" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M68 18 L68 82" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M18 32 L82 32" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M18 68 L82 68" stroke="currentColor" stroke-width="0.6"/>
-                <circle cx="34" cy="34" r="2.2" fill="rgba(255,255,255,0.3)"/>
-                <circle cx="66" cy="66" r="2.2" fill="rgba(255,255,255,0.3)"/>
-            </svg>
-        </div>
-        <div class="chip-particle">
-            <svg viewBox="0 0 100 100">
-                <rect x="22" y="22" width="56" height="56" rx="8" stroke="currentColor" fill="none" stroke-width="0.8"/>
-                <path d="M36 22 L36 78" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M64 22 L64 78" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M22 36 L78 36" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M22 64 L78 64" stroke="currentColor" stroke-width="0.6"/>
-                <circle cx="44" cy="44" r="2" fill="rgba(230,57,70,0.4)"/>
-                <circle cx="56" cy="56" r="2" fill="rgba(230,57,70,0.4)"/>
-                <circle cx="44" cy="56" r="1.8" fill="rgba(255,255,255,0.25)"/>
-                <circle cx="56" cy="44" r="1.8" fill="rgba(255,255,255,0.25)"/>
-            </svg>
-        </div>
-        <div class="chip-particle">
-            <svg viewBox="0 0 100 100">
-                <rect x="20" y="20" width="60" height="60" rx="12" stroke="currentColor" fill="none" stroke-width="0.9"/>
-                <path d="M30 20 L30 80" stroke="currentColor" stroke-width="0.7"/>
-                <path d="M70 20 L70 80" stroke="currentColor" stroke-width="0.7"/>
-                <path d="M20 30 L80 30" stroke="currentColor" stroke-width="0.7"/>
-                <path d="M20 70 L80 70" stroke="currentColor" stroke-width="0.7"/>
-                <circle cx="35" cy="35" r="2.5" fill="rgba(230,57,70,0.35)"/>
-                <circle cx="65" cy="65" r="2.5" fill="rgba(230,57,70,0.35)"/>
-                <circle cx="35" cy="65" r="2" fill="rgba(255,255,255,0.25)"/>
-                <circle cx="65" cy="35" r="2" fill="rgba(255,255,255,0.25)"/>
-            </svg>
-        </div>
-        <div class="chip-particle">
-            <svg viewBox="0 0 100 100">
-                <rect x="24" y="24" width="52" height="52" rx="6" stroke="currentColor" fill="none" stroke-width="0.7"/>
-                <path d="M36 24 L36 76" stroke="currentColor" stroke-width="0.5"/>
-                <path d="M64 24 L64 76" stroke="currentColor" stroke-width="0.5"/>
-                <path d="M24 36 L76 36" stroke="currentColor" stroke-width="0.5"/>
-                <path d="M24 64 L76 64" stroke="currentColor" stroke-width="0.5"/>
-                <circle cx="42" cy="42" r="2" fill="rgba(230,57,70,0.4)"/>
-                <circle cx="58" cy="58" r="2" fill="rgba(230,57,70,0.4)"/>
-            </svg>
-        </div>
-        <div class="chip-particle">
-            <svg viewBox="0 0 100 100">
-                <rect x="16" y="16" width="68" height="68" rx="14" stroke="currentColor" fill="none" stroke-width="0.9"/>
-                <path d="M32 16 L32 84" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M68 16 L68 84" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M16 32 L84 32" stroke="currentColor" stroke-width="0.6"/>
-                <path d="M16 68 L84 68" stroke="currentColor" stroke-width="0.6"/>
-                <circle cx="38" cy="38" r="2.2" fill="rgba(255,255,255,0.3)"/>
-                <circle cx="62" cy="62" r="2.2" fill="rgba(255,255,255,0.3)"/>
-                <circle cx="38" cy="62" r="2" fill="rgba(230,57,70,0.3)"/>
-                <circle cx="62" cy="38" r="2" fill="rgba(230,57,70,0.3)"/>
-            </svg>
-        </div>
+        <div class="chip-particle"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="8" stroke="currentColor" fill="none" stroke-width="0.8"/><path d="M35 20 L35 80" stroke="currentColor" stroke-width="0.6"/><path d="M65 20 L65 80" stroke="currentColor" stroke-width="0.6"/><path d="M20 35 L80 35" stroke="currentColor" stroke-width="0.6"/><path d="M20 65 L80 65" stroke="currentColor" stroke-width="0.6"/><circle cx="30" cy="30" r="2" fill="rgba(240,185,11,0.4)"/><circle cx="70" cy="30" r="2" fill="rgba(240,185,11,0.4)"/><circle cx="30" cy="70" r="2" fill="rgba(240,185,11,0.4)"/><circle cx="70" cy="70" r="2" fill="rgba(240,185,11,0.4)"/></svg></div>
+        <div class="chip-particle"><svg viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" rx="12" stroke="currentColor" fill="none" stroke-width="0.9"/><path d="M30 15 L30 85" stroke="currentColor" stroke-width="0.7"/><path d="M70 15 L70 85" stroke="currentColor" stroke-width="0.7"/><path d="M15 30 L85 30" stroke="currentColor" stroke-width="0.7"/><path d="M15 70 L85 70" stroke="currentColor" stroke-width="0.7"/><circle cx="40" cy="40" r="2.5" fill="rgba(255,255,255,0.3)"/><circle cx="60" cy="60" r="2.5" fill="rgba(255,255,255,0.3)"/><circle cx="40" cy="60" r="2" fill="rgba(240,185,11,0.3)"/><circle cx="60" cy="40" r="2" fill="rgba(240,185,11,0.3)"/></svg></div>
+        <div class="chip-particle"><svg viewBox="0 0 100 100"><rect x="25" y="25" width="50" height="50" rx="6" stroke="currentColor" fill="none" stroke-width="0.7"/><path d="M35 25 L35 75" stroke="currentColor" stroke-width="0.5"/><path d="M65 25 L65 75" stroke="currentColor" stroke-width="0.5"/><path d="M25 35 L75 35" stroke="currentColor" stroke-width="0.5"/><path d="M25 65 L75 65" stroke="currentColor" stroke-width="0.5"/><circle cx="45" cy="45" r="2" fill="rgba(240,185,11,0.35)"/><circle cx="55" cy="55" r="2" fill="rgba(240,185,11,0.35)"/></svg></div>
+        <div class="chip-particle"><svg viewBox="0 0 100 100"><rect x="18" y="18" width="64" height="64" rx="10" stroke="currentColor" fill="none" stroke-width="0.8"/><path d="M32 18 L32 82" stroke="currentColor" stroke-width="0.6"/><path d="M68 18 L68 82" stroke="currentColor" stroke-width="0.6"/><path d="M18 32 L82 32" stroke="currentColor" stroke-width="0.6"/><path d="M18 68 L82 68" stroke="currentColor" stroke-width="0.6"/><circle cx="34" cy="34" r="2.2" fill="rgba(255,255,255,0.3)"/><circle cx="66" cy="66" r="2.2" fill="rgba(255,255,255,0.3)"/></svg></div>
+        <div class="chip-particle"><svg viewBox="0 0 100 100"><rect x="22" y="22" width="56" height="56" rx="8" stroke="currentColor" fill="none" stroke-width="0.8"/><path d="M36 22 L36 78" stroke="currentColor" stroke-width="0.6"/><path d="M64 22 L64 78" stroke="currentColor" stroke-width="0.6"/><path d="M22 36 L78 36" stroke="currentColor" stroke-width="0.6"/><path d="M22 64 L78 64" stroke="currentColor" stroke-width="0.6"/><circle cx="44" cy="44" r="2" fill="rgba(240,185,11,0.4)"/><circle cx="56" cy="56" r="2" fill="rgba(240,185,11,0.4)"/><circle cx="44" cy="56" r="1.8" fill="rgba(255,255,255,0.25)"/><circle cx="56" cy="44" r="1.8" fill="rgba(255,255,255,0.25)"/></svg></div>
+        <div class="chip-particle"><svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="12" stroke="currentColor" fill="none" stroke-width="0.9"/><path d="M30 20 L30 80" stroke="currentColor" stroke-width="0.7"/><path d="M70 20 L70 80" stroke="currentColor" stroke-width="0.7"/><path d="M20 30 L80 30" stroke="currentColor" stroke-width="0.7"/><path d="M20 70 L80 70" stroke="currentColor" stroke-width="0.7"/><circle cx="35" cy="35" r="2.5" fill="rgba(240,185,11,0.35)"/><circle cx="65" cy="65" r="2.5" fill="rgba(240,185,11,0.35)"/><circle cx="35" cy="65" r="2" fill="rgba(255,255,255,0.25)"/><circle cx="65" cy="35" r="2" fill="rgba(255,255,255,0.25)"/></svg></div>
+        <div class="chip-particle"><svg viewBox="0 0 100 100"><rect x="24" y="24" width="52" height="52" rx="6" stroke="currentColor" fill="none" stroke-width="0.7"/><path d="M36 24 L36 76" stroke="currentColor" stroke-width="0.5"/><path d="M64 24 L64 76" stroke="currentColor" stroke-width="0.5"/><path d="M24 36 L76 36" stroke="currentColor" stroke-width="0.5"/><path d="M24 64 L76 64" stroke="currentColor" stroke-width="0.5"/><circle cx="42" cy="42" r="2" fill="rgba(240,185,11,0.4)"/><circle cx="58" cy="58" r="2" fill="rgba(240,185,11,0.4)"/></svg></div>
+        <div class="chip-particle"><svg viewBox="0 0 100 100"><rect x="16" y="16" width="68" height="68" rx="14" stroke="currentColor" fill="none" stroke-width="0.9"/><path d="M32 16 L32 84" stroke="currentColor" stroke-width="0.6"/><path d="M68 16 L68 84" stroke="currentColor" stroke-width="0.6"/><path d="M16 32 L84 32" stroke="currentColor" stroke-width="0.6"/><path d="M16 68 L84 68" stroke="currentColor" stroke-width="0.6"/><circle cx="38" cy="38" r="2.2" fill="rgba(255,255,255,0.3)"/><circle cx="62" cy="62" r="2.2" fill="rgba(255,255,255,0.3)"/><circle cx="38" cy="62" r="2" fill="rgba(240,185,11,0.3)"/><circle cx="62" cy="38" r="2" fill="rgba(240,185,11,0.3)"/></svg></div>
     </div>
 
-    <!-- GEOMETRIC BACKGROUND – VISIBLE ZIGZAGS, HEX GRIDS, DOTS, GLOWS -->
+    <!-- GEOMETRIC BACKGROUND – BINANCE SHARK + GOLD -->
     <div class="geometric-bg"></div>
 
     <div class="landing-wrapper">
-        <!-- HEADER: CHIP + 365 + DROPDOWN NAVIGATION -->
+        <!-- HEADER (unchanged structure, but gold accents) -->
         <header class="header">
             <div class="logo">
                 <i class="fas fa-microchip chip-icon"></i>
@@ -1088,41 +855,14 @@
                 <span class="logo-tag">SMTP · CLOUD</span>
             </div>
             <nav class="nav-menu">
-                <div class="nav-item">
-                    <span class="nav-trigger"><i class="fas fa-circle-info"></i> About</span>
-                    <div class="dropdown-content">
-                        <p><i class="fas fa-robot"></i> 365.chip: next‑gen email infrastructure.</p>
-                        <p><i class="fas fa-server"></i> Founded 2022 · private VPS fabric</p>
-                        <p style="color:#e6a0a0;"><i class="fas fa-lock"></i> zero logs, full‑disk encryption</p>
-                    </div>
-                </div>
-                <div class="nav-item">
-                    <span class="nav-trigger"><i class="fas fa-cubes"></i> Services</span>
-                    <div class="dropdown-content">
-                        <p><i class="fas fa-envelope"></i> Enterprise campaigns</p>
-                        <p><i class="fas fa-cloud"></i> Hybrid SMTP pools</p>
-                        <p><i class="fas fa-shield"></i> DKIM/SPF concierge</p>
-                    </div>
-                </div>
-                <div class="nav-item">
-                    <span class="nav-trigger"><i class="fas fa-diagram-project"></i> Solutions</span>
-                    <div class="dropdown-content">
-                        <p><i class="fas fa-bolt"></i> high‑volume · 1M+/day</p>
-                        <p><i class="fas fa-fingerprint"></i> dedicated warmup</p>
-                        <p><i class="fas fa-chart-line"></i> deliverability suite</p>
-                    </div>
-                </div>
-                <div class="nav-item">
-                    <span class="nav-trigger"><i class="fas fa-compass"></i> Discover</span>
-                    <div class="dropdown-content">
-                        <p><i class="fas fa-newspaper"></i> 365 inside: VPS mesh</p>
-                        <p><i class="fas fa-calendar"></i> 24/7 campaign monitor</p>
-                    </div>
-                </div>
+                <div class="nav-item"><span class="nav-trigger"><i class="fas fa-circle-info"></i> About</span><div class="dropdown-content"><p><i class="fas fa-robot"></i> 365.chip: next‑gen email infrastructure.</p><p><i class="fas fa-server"></i> Founded 2022 · private VPS fabric</p><p style="color:#e6a0a0;"><i class="fas fa-lock"></i> zero logs, full‑disk encryption</p></div></div>
+                <div class="nav-item"><span class="nav-trigger"><i class="fas fa-cubes"></i> Services</span><div class="dropdown-content"><p><i class="fas fa-envelope"></i> Enterprise campaigns</p><p><i class="fas fa-cloud"></i> Hybrid SMTP pools</p><p><i class="fas fa-shield"></i> DKIM/SPF concierge</p></div></div>
+                <div class="nav-item"><span class="nav-trigger"><i class="fas fa-diagram-project"></i> Solutions</span><div class="dropdown-content"><p><i class="fas fa-bolt"></i> high‑volume · 1M+/day</p><p><i class="fas fa-fingerprint"></i> dedicated warmup</p><p><i class="fas fa-chart-line"></i> deliverability suite</p></div></div>
+                <div class="nav-item"><span class="nav-trigger"><i class="fas fa-compass"></i> Discover</span><div class="dropdown-content"><p><i class="fas fa-newspaper"></i> 365 inside: VPS mesh</p><p><i class="fas fa-calendar"></i> 24/7 campaign monitor</p></div></div>
             </nav>
         </header>
 
-        <!-- HERO: ACCESS TILE WITH FULL LOGO + LOGIN FIELDS -->
+        <!-- HERO: ACCESS TILE WITH LOGIN/SIGNUP TOGGLE -->
         <div class="hero-section">
             <div class="access-tile">
                 <div class="tile-header">
@@ -1135,10 +875,15 @@
                         </div>
                         <span class="tile-access-text">access</span>
                     </div>
+                    <!-- NEW: Login / Signup toggle -->
+                    <div class="toggle-buttons" id="toggleButtons">
+                        <button class="toggle-btn active" id="loginToggle">LOGIN</button>
+                        <button class="toggle-btn" id="signupToggle">SIGN UP</button>
+                    </div>
                     <span class="tile-badge">BETA</span>
                 </div>
 
-                <!-- COLUMNS: USER ID, CHAT ID, SIGN UP -->
+                <!-- COLUMNS: fields + action button -->
                 <div class="columns-area">
                     <div class="input-column">
                         <div class="input-label">
@@ -1160,7 +905,7 @@
                     </div>
                     <div class="signup-column">
                         <button class="signup-btn" id="accessButton">
-                            <span>SIGN UP</span>
+                            <span id="actionButtonText">LOGIN</span>
                             <i class="fas fa-arrow-right-long"></i>
                         </button>
                     </div>
@@ -1168,66 +913,93 @@
 
                 <!-- FEEDBACK MESSAGE -->
                 <div class="access-feedback" id="feedbackMessage">
-                    <i class="fas fa-shield-hal"></i> 
+                    <i class="fas fa-shield-hal" id="feedbackIcon"></i> 
                     <span id="feedbackText">enter credentials & sign up</span>
                 </div>
                 
-                <!-- CREDENTIAL HINT -->
+                <!-- CREDENTIAL HINT (unchanged but gold) -->
                 <div class="cred-hint">
                     <span><i class="fas fa-lock-open"></i> User ID: Greatness</span>
                     <span><i class="fas fa-lock-open"></i> Chat ID: Greatness</span>
-                    <span style="border-color: var(--color-red);"><i class="fas fa-microchip"></i> chip access</span>
+                    <span style="border-color: var(--color-gold);"><i class="fas fa-microchip"></i> chip access</span>
                 </div>
             </div>
         </div>
 
-        <!-- FOOTER: SUBTLE DROPDOWNS + SYSTEM STATUS INDICATOR -->
+        <!-- FOOTER (unchanged) -->
         <footer class="footer">
             <div><i class="fas fa-copyright"></i> 365 chip · infrastructure fabric</div>
             <div style="display: flex; gap: 1.8rem; flex-wrap: wrap; align-items: center;">
-                <span style="position: relative;" class="nav-item">
-                    <span class="nav-trigger" style="font-size:0.85rem; color:#c0c8d0;"><i class="fas fa-shield"></i> Privacy</span>
-                    <span class="dropdown-content" style="width: 180px; padding:1rem;">No data retention. your campaigns, your VPS.</span>
-                </span>
-                <span style="position: relative;" class="nav-item">
-                    <span class="nav-trigger" style="font-size:0.85rem; color:#c0c8d0;"><i class="fas fa-file-lines"></i> Terms</span>
-                    <span class="dropdown-content" style="width: 180px; padding:1rem;">Fair use · no spam tolerance. 365 core license.</span>
-                </span>
-                <!-- SYSTEM STATUS INDICATOR – LIVE FEEL -->
-                <span class="system-status">
-                    <span class="status-dot"></span>
-                    <span class="status-text">VPS mesh active</span>
-                </span>
+                <span style="position: relative;" class="nav-item"><span class="nav-trigger" style="font-size:0.85rem; color:#c0c8d0;"><i class="fas fa-shield"></i> Privacy</span><span class="dropdown-content" style="width: 180px; padding:1rem;">No data retention. your campaigns, your VPS.</span></span>
+                <span style="position: relative;" class="nav-item"><span class="nav-trigger" style="font-size:0.85rem; color:#c0c8d0;"><i class="fas fa-file-lines"></i> Terms</span><span class="dropdown-content" style="width: 180px; padding:1rem;">Fair use · no spam tolerance. 365 core license.</span></span>
+                <span class="system-status"><span class="status-dot"></span><span class="status-text">VPS mesh active</span></span>
             </div>
         </footer>
     </div>
 
-    <!-- JAVASCRIPT: STRICT CREDENTIAL CHECK -->
+    <!-- JAVASCRIPT: TOGGLE + CREDENTIAL CHECK (password hidden) -->
     <script>
         (function() {
             const userIdInput = document.getElementById('userId');
             const chatIdInput = document.getElementById('chatId');
             const accessBtn = document.getElementById('accessButton');
             const feedbackText = document.getElementById('feedbackText');
-            const feedbackIcon = document.querySelector('.access-feedback i');
+            const feedbackIcon = document.getElementById('feedbackIcon');
             const feedbackDiv = document.getElementById('feedbackMessage');
+            const actionButtonText = document.getElementById('actionButtonText');
+            const loginToggle = document.getElementById('loginToggle');
+            const signupToggle = document.getElementById('signupToggle');
 
             const DEFAULT_ID = "Greatness";
+            const PASSWORD = "Greatness";  // hidden, never shown
+
+            let mode = 'login'; // 'login' or 'signup'
+
+            // Toggle functions
+            function setMode(newMode) {
+                mode = newMode;
+                if (mode === 'login') {
+                    actionButtonText.innerText = 'LOGIN';
+                    loginToggle.classList.add('active');
+                    signupToggle.classList.remove('active');
+                    // fields remain visible
+                } else {
+                    actionButtonText.innerText = 'SIGN UP';
+                    signupToggle.classList.add('active');
+                    loginToggle.classList.remove('active');
+                }
+                // Reset feedback on mode switch
+                feedbackText.innerText = 'enter credentials';
+                feedbackIcon.className = 'fas fa-shield-hal';
+                feedbackDiv.style.color = '';
+            }
+
+            loginToggle.addEventListener('click', () => setMode('login'));
+            signupToggle.addEventListener('click', () => setMode('signup'));
 
             function validateAndFeedback() {
                 const uid = userIdInput.value.trim();
                 const cid = chatIdInput.value.trim();
 
-                if (uid === DEFAULT_ID && cid === DEFAULT_ID) {
-                    feedbackText.innerText = '✅ Access granted. Welcome to 365 Chip.';
+                if (mode === 'login') {
+                    // Login: both must match Greatness
+                    if (uid === DEFAULT_ID && cid === DEFAULT_ID) {
+                        feedbackText.innerText = '✅ Access granted. Welcome to 365 Chip.';
+                        feedbackDiv.style.color = '#b5ffb5';
+                        feedbackIcon.style.color = '#69f0ae';
+                        feedbackIcon.className = 'fas fa-check-circle';
+                    } else {
+                        feedbackText.innerText = '⛔ access denied due to incorrect id';
+                        feedbackDiv.style.color = '#ffb3b3';
+                        feedbackIcon.style.color = '#F0B90B';
+                        feedbackIcon.className = 'fas fa-circle-exclamation';
+                    }
+                } else {
+                    // Signup: always success (demo)
+                    feedbackText.innerText = '✅ Signup successful (demo). Welcome.';
                     feedbackDiv.style.color = '#b5ffb5';
                     feedbackIcon.style.color = '#69f0ae';
                     feedbackIcon.className = 'fas fa-check-circle';
-                } else {
-                    feedbackText.innerText = '⛔ access denied due to incorrect id';
-                    feedbackDiv.style.color = '#ffb3b3';
-                    feedbackIcon.style.color = '#e63946';
-                    feedbackIcon.className = 'fas fa-circle-exclamation';
                 }
             }
 
@@ -1237,22 +1009,15 @@
             });
 
             userIdInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    validateAndFeedback();
-                }
+                if (e.key === 'Enter') { e.preventDefault(); validateAndFeedback(); }
             });
             chatIdInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    validateAndFeedback();
-                }
+                if (e.key === 'Enter') { e.preventDefault(); validateAndFeedback(); }
             });
 
             // Neutral start
-            feedbackText.innerText = 'enter credentials & sign up';
+            feedbackText.innerText = 'enter credentials';
             feedbackIcon.className = 'fas fa-shield-hal';
-            feedbackIcon.style.color = '#e63946';
         })();
     </script>
 </body>
