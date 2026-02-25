@@ -26,6 +26,214 @@
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ---------- GEOMETRIC BACKGROUND (FROM INDEX.HTML, ADAPTED) ---------- */
+        .geometric-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #1E2329;  /* shark base */
+            background-image: 
+                /* 1. HEXAGON GRID (gold tones) */
+                repeating-linear-gradient(60deg, 
+                    rgba(240, 185, 11, 0.13) 0px, 
+                    rgba(240, 185, 11, 0.13) 1px, 
+                    transparent 1px, 
+                    transparent 60px),
+                repeating-linear-gradient(-60deg, 
+                    rgba(240, 185, 11, 0.1) 0px, 
+                    rgba(240, 185, 11, 0.1) 1px, 
+                    transparent 1px, 
+                    transparent 60px),
+                
+                /* 2. DIAGONAL ZIGZAG TRACES (soft gold) */
+                repeating-linear-gradient(45deg, 
+                    rgba(220, 230, 240, 0.08) 0px, 
+                    rgba(220, 230, 240, 0.08) 1px, 
+                    transparent 1px, 
+                    transparent 80px),
+                repeating-linear-gradient(-45deg, 
+                    rgba(220, 230, 240, 0.06) 0px, 
+                    rgba(220, 230, 240, 0.06) 1px, 
+                    transparent 1px, 
+                    transparent 80px),
+                
+                /* 3. HORIZONTAL MICRO‑STROKES (gold) */
+                repeating-linear-gradient(0deg, 
+                    rgba(240, 185, 11, 0.07) 0px, 
+                    rgba(240, 185, 11, 0.07) 1px, 
+                    transparent 1px, 
+                    transparent 24px),
+                
+                /* 4. VERTICAL MICRO‑STROKES (white-gold) */
+                repeating-linear-gradient(90deg, 
+                    rgba(255, 255, 255, 0.05) 0px, 
+                    rgba(255, 255, 255, 0.05) 1px, 
+                    transparent 1px, 
+                    transparent 32px),
+                
+                /* 5. DOT GRID (gold specks) */
+                repeating-linear-gradient(45deg, 
+                    rgba(240, 185, 11, 0.04) 0px, 
+                    rgba(240, 185, 11, 0.04) 1px, 
+                    transparent 1px, 
+                    transparent 16px),
+                
+                /* 6. CIRCUIT NODES (gold dots) */
+                radial-gradient(circle at 15% 22%, rgba(240, 185, 11, 0.18) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 72% 45%, rgba(240, 185, 11, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 83% 68%, rgba(240, 185, 11, 0.16) 2px, transparent 2px),
+                radial-gradient(circle at 31% 82%, rgba(240, 185, 11, 0.13) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 58% 28%, rgba(240, 185, 11, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 91% 55%, rgba(255, 255, 255, 0.13) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 44% 15%, rgba(240, 185, 11, 0.11) 2px, transparent 2px),
+                radial-gradient(circle at 12% 67%, rgba(240, 185, 11, 0.14) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 76% 88%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 33% 43%, rgba(240, 185, 11, 0.15) 1.5px, transparent 1.5px),
+                
+                /* 7. SOFT RADIAL GLOW (gold tones) */
+                radial-gradient(circle at 20% 30%, rgba(240, 185, 11, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(120, 130, 140, 0.06) 0%, transparent 65%),
+                radial-gradient(circle at 50% 50%, rgba(180, 180, 190, 0.04) 0%, transparent 70%);
+            
+            background-size: 
+                120px 120px, 120px 120px,
+                160px 160px, 160px 160px,
+                48px 48px,
+                64px 64px,
+                32px 32px,
+                400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px,
+                100% 100%, 100% 100%, 100% 100%;
+            
+            background-repeat: 
+                repeat, repeat,
+                repeat, repeat,
+                repeat,
+                repeat,
+                repeat,
+                no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
+                no-repeat, no-repeat, no-repeat;
+            
+            background-position: 
+                0 0, 0 0,
+                0 0, 0 0,
+                0 0,
+                0 0,
+                0 0,
+                15% 22%, 72% 45%, 83% 68%, 31% 82%, 58% 28%, 91% 55%, 44% 15%, 12% 67%, 76% 88%, 33% 43%,
+                0 0, 0 0, 0 0;
+            
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+            opacity: 0.9; /* slightly reduced to keep content readable */
+        }
+
+        /* Noise overlay */
+        .geometric-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBudW1PY3RhdmVzPSIxIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wMTUiIC8+PC9zdmc+');
+            background-repeat: repeat;
+            opacity: 0.2;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* ---------- ELECTRIC OVERLAY – FLOWING LIGHT RAYS ---------- */
+        .electric-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Light rays – moving diagonal gradients */
+        .light-ray {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent 0px,
+                transparent 40px,
+                rgba(240, 185, 11, 0.08) 40px,
+                rgba(255, 215, 0, 0.15) 41px,
+                transparent 41px,
+                transparent 80px
+            );
+            background-size: 200% 200%;
+            animation: flowRays 18s linear infinite;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+
+        .light-ray.secondary {
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent 0px,
+                transparent 60px,
+                rgba(240, 185, 11, 0.06) 60px,
+                rgba(240, 200, 80, 0.12) 61px,
+                transparent 61px,
+                transparent 120px
+            );
+            animation: flowRays 24s linear infinite reverse;
+            opacity: 0.5;
+        }
+
+        @keyframes flowRays {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(10%, 10%) rotate(2deg); }
+        }
+
+        /* Sparkling particles – like electricity arcing */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #F0B90B;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px rgba(240, 185, 11, 0.6);
+            opacity: 0;
+            animation: sparkle 4s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 30%; left: 70%; animation-delay: 1.2s; width: 3px; height: 3px; }
+        .particle:nth-child(3) { top: 55%; left: 45%; animation-delay: 2.5s; }
+        .particle:nth-child(4) { top: 75%; left: 15%; animation-delay: 0.7s; width: 4px; height: 4px; }
+        .particle:nth-child(5) { top: 85%; left: 80%; animation-delay: 1.8s; }
+        .particle:nth-child(6) { top: 45%; left: 90%; animation-delay: 3.2s; width: 3px; height: 3px; }
+        .particle:nth-child(7) { top: 10%; left: 55%; animation-delay: 2.1s; }
+        .particle:nth-child(8) { top: 65%; left: 30%; animation-delay: 0.3s; }
+        .particle:nth-child(9) { top: 22%; left: 85%; animation-delay: 1.5s; width: 4px; height: 4px; }
+        .particle:nth-child(10) { top: 92%; left: 25%; animation-delay: 2.8s; }
+        .particle:nth-child(11) { top: 40%; left: 12%; animation-delay: 0.9s; }
+        .particle:nth-child(12) { top: 68%; left: 68%; animation-delay: 3.5s; }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0.5) translateY(0); }
+            20% { opacity: 1; transform: scale(1.2) translateY(-5px); }
+            40% { opacity: 0.8; transform: scale(1) translateY(5px); }
+            60% { opacity: 1; transform: scale(1.5) translateY(-3px); }
+            80% { opacity: 0.5; transform: scale(0.8) translateY(3px); }
+            100% { opacity: 0; transform: scale(0.2) translateY(0); }
         }
 
         /* ---------- BINANCE DARK MODE (ONLY) – REFINED GOLD #F0B90B ---------- */
@@ -36,7 +244,7 @@
             padding: 0.9rem 2.5rem;
             background: rgba(30, 35, 41, 0.96);
             backdrop-filter: blur(14px) saturate(200%);
-            border-bottom: 1px solid rgba(240, 185, 11, 0.15);  /* softer gold */
+            border-bottom: 1px solid rgba(240, 185, 11, 0.15);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -65,9 +273,10 @@
             color: #d1d5db;
             text-decoration: none;
             position: relative;
+            z-index: 10; /* above overlays */
         }
         .nav-link i {
-            color: #F0B90B;  /* softer Binance gold */
+            color: #F0B90B;
             font-size: 1.2rem;
             transition: transform 0.15s ease, filter 0.15s;
         }
@@ -83,7 +292,6 @@
         .nav-link.active i {
             color: #F0B90B;
         }
-        /* subtle hover underline */
         .nav-link::after {
             content: '';
             position: absolute;
@@ -107,7 +315,7 @@
             gap: 2rem;
         }
         .theme-toggle {
-            display: none;  /* only dark mode */
+            display: none;
         }
         .logout-link {
             display: flex;
@@ -122,6 +330,7 @@
             background: rgba(240, 185, 11, 0.06);
             border: 1px solid rgba(240, 185, 11, 0.2);
             text-decoration: none;
+            z-index: 10;
         }
         .logout-link:hover {
             background: rgba(240, 185, 11, 0.15);
@@ -132,11 +341,13 @@
             color: #F0B90B;
         }
 
-        /* ---------- MAIN CONTENT – POLISHED LAYOUT ---------- */
+        /* ---------- MAIN CONTENT – POLISHED LAYOUT (HIGHER Z-INDEX) ---------- */
         .main-content {
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem 2.5rem;
+            position: relative;
+            z-index: 10;
         }
 
         /* STATS GRID – 3x2 with cookies accent */
@@ -183,7 +394,7 @@
         /* ---------- MAP + COOKIES CARD ROW – EXPANDED MAP AREA ---------- */
         .map-cookies-row {
             display: grid;
-            grid-template-columns: 2.4fr 1fr;  /* map gets more space */
+            grid-template-columns: 2.4fr 1fr;
             gap: 1.8rem;
             margin-bottom: 2rem;
         }
@@ -231,12 +442,12 @@
             height: 10px;
             border-radius: 3px;
         }
-        .legend-color.high { background: #F0B90B; }        /* gold */
-        .legend-color.med { background: #f4a261; }        /* warm */
-        .legend-color.low { background: #2a9d8f; }         /* teal */
+        .legend-color.high { background: #F0B90B; }
+        .legend-color.med { background: #f4a261; }
+        .legend-color.low { background: #2a9d8f; }
         #world-map {
             width: 100%;
-            height: 260px;  /* slightly taller for better presence */
+            height: 260px;
             border-radius: 18px;
             overflow: hidden;
             transition: filter 0.2s;
@@ -386,7 +597,7 @@
             transform: scale(1.1);
         }
 
-        /* Modal (unchanged, but with gold accent) */
+        /* Modal (unchanged, with gold accent) */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -491,15 +702,27 @@
     </style>
 </head>
 <body>
-    <!-- TOP NAVIGATION – Dashboard, Visits, Campaigns, Guides (was Settings), Links (NEW) -->
+    <!-- GEOMETRIC BACKGROUND (FROM INDEX) -->
+    <div class="geometric-bg"></div>
+
+    <!-- ELECTRIC OVERLAY – FLOWING LIGHT RAYS & SPARKLES -->
+    <div class="electric-overlay">
+        <div class="light-ray"></div>
+        <div class="light-ray secondary"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <!-- TOP NAVIGATION – Dashboard, Visits, Campaigns, Guides, Links -->
     <div class="top-nav">
         <div class="nav-left">
             <div class="nav-link active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</div>
             <div class="nav-link" data-page="visits"><i class="fas fa-eye"></i> Visits</div>
             <div class="nav-link" data-page="campaigns"><i class="fas fa-bullhorn"></i> Campaigns</div>
-            <!-- NEW: Links pointing to greatness-365.vercel.app/links.html -->
+            <!-- Links pointing to greatness-365.vercel.app/links.html -->
             <a href="https://greatness-365.vercel.app/links.html" class="nav-link" target="_blank" rel="noopener"><i class="fas fa-link"></i> Links</a>
-            <!-- Settings changed to Guides -->
+            <!-- Guides (formerly Settings) -->
             <div class="nav-link" data-page="guides"><i class="fas fa-compass"></i> Guides</div>
         </div>
         <div class="nav-right">
@@ -519,7 +742,7 @@
             <div class="stat-card cookies"><div class="value">0</div><div class="label">Cookies</div></div>
         </div>
 
-        <!-- MAP + COOKIES CARD ROW – map now wider -->
+        <!-- MAP + COOKIES CARD ROW – map wider -->
         <div class="map-cookies-row">
             <div class="map-card">
                 <div class="map-header">
@@ -546,7 +769,7 @@
             </div>
         </div>
 
-        <!-- TABLE – 10 columns, no changes -->
+        <!-- TABLE – 10 columns -->
         <div class="table-section">
             <div class="table-header">
                 <h3><i class="fas fa-table"></i> Campaign Data</h3>
@@ -570,7 +793,7 @@
         </div>
     </div>
 
-    <!-- Modal (identical) -->
+    <!-- Modal for region details -->
     <div class="modal-overlay" id="regionModal">
         <div class="modal-content">
             <h2><i class="fas fa-map-marker-alt"></i> Region Details</h2>
@@ -600,7 +823,7 @@
 
             // D3 WORLD MAP – slightly taller (260px)
             const width = document.getElementById('world-map').clientWidth;
-            const height = 260;  // increased for better presence
+            const height = 260;
 
             const svg = d3.select("#world-map")
                 .append("svg")
@@ -609,7 +832,7 @@
                 .style("background", "rgba(0,0,0,0.25)");
 
             const projection = d3.geoMercator()
-                .scale(85)  // slightly larger scale to fill
+                .scale(85)
                 .translate([width / 2, height / 1.5]);
 
             const path = d3.geoPath().projection(projection);
