@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greatness · CodeFather | Telegram Support</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter, Orbitron, Poppins, plus Carpenter's Daughter style (Bradley Hand / Caveat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Orbitron:wght@500..900&family=Poppins:wght@400;500;600;700&family=Caveat:wght@400..700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- RESET & BASE – BINANCE SHARK ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1E2329;
+            color: #FFFFFF;
+            min-height: 100vh;
+            line-height: 1.5;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ---------- GEOMETRIC BACKGROUND (UNIFIED) ---------- */
+        .geometric-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #1E2329;
+            background-image: 
+                repeating-linear-gradient(60deg, rgba(252, 213, 53, 0.13) 0px, rgba(252, 213, 53, 0.13) 1px, transparent 1px, transparent 60px),
+                repeating-linear-gradient(-60deg, rgba(252, 213, 53, 0.1) 0px, rgba(252, 213, 53, 0.1) 1px, transparent 1px, transparent 60px),
+                repeating-linear-gradient(45deg, rgba(220, 230, 240, 0.08) 0px, rgba(220, 230, 240, 0.08) 1px, transparent 1px, transparent 80px),
+                repeating-linear-gradient(-45deg, rgba(220, 230, 240, 0.06) 0px, rgba(220, 230, 240, 0.06) 1px, transparent 1px, transparent 80px),
+                repeating-linear-gradient(0deg, rgba(252, 213, 53, 0.07) 0px, rgba(252, 213, 53, 0.07) 1px, transparent 1px, transparent 24px),
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 32px),
+                repeating-linear-gradient(45deg, rgba(252, 213, 53, 0.04) 0px, rgba(252, 213, 53, 0.04) 1px, transparent 1px, transparent 16px),
+                radial-gradient(circle at 15% 22%, rgba(252, 213, 53, 0.18) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 72% 45%, rgba(252, 213, 53, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 83% 68%, rgba(252, 213, 53, 0.16) 2px, transparent 2px),
+                radial-gradient(circle at 31% 82%, rgba(252, 213, 53, 0.13) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 58% 28%, rgba(252, 213, 53, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 91% 55%, rgba(255, 255, 255, 0.13) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 44% 15%, rgba(252, 213, 53, 0.11) 2px, transparent 2px),
+                radial-gradient(circle at 12% 67%, rgba(252, 213, 53, 0.14) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 76% 88%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 33% 43%, rgba(252, 213, 53, 0.15) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 20% 30%, rgba(252, 213, 53, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(120, 130, 140, 0.06) 0%, transparent 65%),
+                radial-gradient(circle at 50% 50%, rgba(180, 180, 190, 0.04) 0%, transparent 70%);
+            
+            background-size: 
+                120px 120px, 120px 120px,
+                160px 160px, 160px 160px,
+                48px 48px,
+                64px 64px,
+                32px 32px,
+                400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px,
+                100% 100%, 100% 100%, 100% 100%;
+            
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+        }
+        .geometric-bg::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBudW1PY3RhdmVzPSIxIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wMTUiIC8+PC9zdmc+');
+            opacity: 0.2;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* ---------- ELECTRIC OVERLAY (FLOWING LIGHT) ---------- */
+        .electric-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .light-ray {
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: repeating-linear-gradient(45deg, transparent 0px, transparent 40px, rgba(252,213,53,0.08) 40px, rgba(252,213,53,0.15) 41px, transparent 41px, transparent 80px);
+            background-size: 200% 200%;
+            animation: flowRays 18s linear infinite;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+        .light-ray.secondary {
+            background: repeating-linear-gradient(-45deg, transparent 0px, transparent 60px, rgba(252,213,53,0.06) 60px, rgba(252,213,53,0.12) 61px, transparent 61px, transparent 120px);
+            animation: flowRays 24s linear infinite reverse;
+            opacity: 0.5;
+        }
+        @keyframes flowRays {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(10%, 10%) rotate(2deg); }
+        }
+        .particle {
+            position: absolute;
+            width: 2px; height: 2px;
+            background: #FCD535;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px rgba(252,213,53,0.6);
+            opacity: 0;
+            animation: sparkle 4s infinite ease-in-out;
+        }
+        .particle:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 30%; left: 70%; animation-delay: 1.2s; width: 3px; height: 3px; }
+        .particle:nth-child(3) { top: 55%; left: 45%; animation-delay: 2.5s; }
+        .particle:nth-child(4) { top: 75%; left: 15%; animation-delay: 0.7s; width: 4px; height: 4px; }
+        .particle:nth-child(5) { top: 85%; left: 80%; animation-delay: 1.8s; }
+        .particle:nth-child(6) { top: 45%; left: 90%; animation-delay: 3.2s; width: 3px; height: 3px; }
+        .particle:nth-child(7) { top: 10%; left: 55%; animation-delay: 2.1s; }
+        .particle:nth-child(8) { top: 65%; left: 30%; animation-delay: 0.3s; }
+        .particle:nth-child(9) { top: 22%; left: 85%; animation-delay: 1.5s; width: 4px; height: 4px; }
+        .particle:nth-child(10) { top: 92%; left: 25%; animation-delay: 2.8s; }
+        .particle:nth-child(11) { top: 40%; left: 12%; animation-delay: 0.9s; }
+        .particle:nth-child(12) { top: 68%; left: 68%; animation-delay: 3.5s; }
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0.5) translateY(0); }
+            20% { opacity: 1; transform: scale(1.2) translateY(-5px); }
+            40% { opacity: 0.8; transform: scale(1) translateY(5px); }
+            60% { opacity: 1; transform: scale(1.5) translateY(-3px); }
+            80% { opacity: 0.5; transform: scale(0.8) translateY(3px); }
+            100% { opacity: 0; transform: scale(0.2) translateY(0); }
+        }
+
+        /* ---------- TOP NAV (UNIFIED) ---------- */
+        .top-nav {
+            background: rgba(30, 35, 41, 0.96);
+            backdrop-filter: blur(14px) saturate(200%);
+            border-bottom: 1px solid rgba(252, 213, 53, 0.12);
+            box-shadow: 0 10px 24px -12px rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: border-color 0.2s;
+        }
+        .top-nav:hover { border-bottom-color: rgba(252,213,53,0.3); }
+        .nav-left { display: flex; align-items: center; gap: 2.8rem; }
+        .nav-link {
+            display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0;
+            font-family: 'Poppins', sans-serif; font-weight: 500; cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2,0,0,1);
+            border-bottom: 2px solid transparent; font-size: 1rem; color: #d1d5db;
+            text-decoration: none; position: relative; z-index: 10;
+        }
+        .nav-link i { color: #FCD535; font-size: 1.2rem; transition: transform 0.15s; }
+        .nav-link:hover i { transform: scale(1.12) translateY(-1px); filter: drop-shadow(0 0 6px #FCD53560); }
+        .nav-link.active { color: white; border-bottom: 2px solid #FCD535; font-weight: 600; }
+        .nav-link.active i { color: #FCD535; transform: scale(1.02); }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -2px; left: 0;
+            width: 0; height: 2px; background: #FCD535; transition: width 0.2s;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active::after { display: none; }
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .theme-toggle { display: none; }
+        .logout-link {
+            display: flex; align-items: center; gap: 0.5rem; color: #FCD535; font-weight: 600;
+            cursor: pointer; padding: 0.4rem 1.2rem; border-radius: 40px; transition: all 0.2s;
+            background: rgba(252,213,53,0.06); border: 1px solid rgba(252,213,53,0.2); text-decoration: none; z-index: 10;
+        }
+        .logout-link:hover { background: rgba(252,213,53,0.15); border-color: rgba(252,213,53,0.5); transform: scale(1.02); }
+        .logout-link i { color: #FCD535; }
+
+        /* ---------- MAIN CONTENT ---------- */
+        .main-content {
+            max-width: 1400px; margin: 1.8rem auto 2.5rem; padding: 0 3rem;
+            position: relative; z-index: 10;
+        }
+
+        /* brand header (smaller) */
+        .brand-header {
+            display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.2rem; flex-wrap: wrap;
+        }
+        .brand-header h1 {
+            font-size: 2.2rem; font-weight: 800; font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(145deg, #FCD535, #f0c000); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .brand-header h2 { font-size: 1.3rem; font-weight: 400; font-family: 'Poppins', sans-serif; color: #a0a8b8; }
+        .target-badge {
+            margin-left: auto; padding: 0.4rem 1.8rem; border-radius: 60px; font-size: 0.9rem;
+            background: rgba(252,213,53,0.08); backdrop-filter: blur(4px);
+            border: 1px solid rgba(252,213,53,0.25); color: #FCD535; display: flex; align-items: center; gap: 0.6rem;
+        }
+
+        /* ---------- JOTTER/CLIPBOARD BANNER (CARPENTER'S DAUGHTER STYLE) ---------- */
+        .notice-banner {
+            margin: 2.5rem 0 3rem;
+            display: flex;
+            justify-content: center;
+        }
+        .jotter {
+            background: #fff9e6;  /* aged paper */
+            padding: 2rem 3rem;
+            border-radius: 4px 20px 20px 20px;  /* torn paper effect */
+            box-shadow: 
+                0 10px 20px -10px rgba(0,0,0,0.5),
+                0 0 0 1px #f0dbb0,
+                8px 8px 0 0 rgba(0,0,0,0.2),    /* clipboard shadow */
+                inset 0 0 20px rgba(0,0,0,0.05);
+            transform: rotate(-0.5deg);
+            max-width: 700px;
+            width: 100%;
+            border-left: 4px solid #FCD535;
+            position: relative;
+            font-family: 'Caveat', 'Shadows Into Light', cursive;
+            color: #2c3e50;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+        /* paper clip / pin effect */
+        .jotter::before {
+            content: '📋';
+            position: absolute;
+            top: -12px; right: 30px;
+            font-size: 2rem;
+            filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.2));
+            transform: rotate(10deg);
+        }
+        .jotter::after {
+            content: '';
+            position: absolute;
+            top: 10px; left: 20px;
+            width: 40px; height: 40px;
+            background: rgba(252,213,53,0.1);
+            border-radius: 50%;
+            filter: blur(8px);
+            z-index: -1;
+        }
+        .jotter i {
+            color: #FCD535;
+            margin-right: 8px;
+            font-size: 1.5rem;
+            vertical-align: middle;
+        }
+        .jotter strong {
+            color: #1E2329;
+            font-weight: 700;
+        }
+
+        /* ---------- TELEGRAM SECTIONS (2 CARDS) ---------- */
+        .telegram-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.4rem;
+            margin: 3rem 0 4rem;
+        }
+        .tg-card {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(252, 213, 53, 0.1);
+            border-bottom: 4px solid #FCD535;
+            border-radius: 36px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s;
+            box-shadow: 0 25px 40px -18px #000000;
+        }
+        .tg-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 50px -20px #FCD53530, 0 0 0 1px rgba(252,213,53,0.2) inset;
+        }
+        .tg-icon {
+            font-size: 3.5rem;
+            color: #FCD535;
+            margin-bottom: 1.2rem;
+            filter: drop-shadow(0 0 12px rgba(252,213,53,0.3));
+        }
+        .tg-card h3 {
+            font-size: 1.8rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .tg-card p {
+            color: #b0b8c0;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        .tg-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: #FCD535;
+            color: #1E2329;
+            padding: 0.9rem 2.4rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 10px 20px -8px #FCD53580;
+            border: 1px solid transparent;
+        }
+        .tg-btn i {
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+        .tg-btn:hover {
+            background: #ffe56a;
+            transform: scale(1.02);
+            box-shadow: 0 16px 24px -10px #FCD535;
+        }
+        .tg-btn:hover i {
+            transform: translateX(4px);
+        }
+
+        /* ---------- DISCLAIMER BANNER ---------- */
+        .disclaimer {
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(252, 213, 53, 0.2);
+            border-left: 5px solid #FCD535;
+            border-radius: 20px;
+            padding: 1.5rem 2.5rem;
+            margin: 3rem 0 2rem;
+            font-size: 1rem;
+            color: #ffdb9d;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .disclaimer i {
+            font-size: 2rem;
+            color: #FCD535;
+        }
+        .disclaimer strong {
+            color: #FCD535;
+            font-weight: 600;
+        }
+        .disclaimer span {
+            flex: 1;
+        }
+
+        /* footer meta (1/1 for consistency) */
+        .footer-meta {
+            display: flex; justify-content: flex-end; align-items: center; gap: 1.4rem;
+            margin-top: 2.2rem; padding-top: 1.2rem; border-top: 1px dashed rgba(252,213,53,0.25);
+        }
+        .page-indicator {
+            padding: 0.5rem 1.8rem; border-radius: 60px; font-weight: 500; font-size: 0.9rem;
+            background: rgba(252,213,53,0.06); border: 1px solid rgba(252,213,53,0.2); color: #FCD535;
+        }
+        .footer-meta i { color: #FCD535; opacity: 0.6; transition: 0.2s; cursor: default; }
+        .footer-meta i:hover { opacity: 1; transform: scale(1.1); }
+
+        /* responsive */
+        @media (max-width: 900px) {
+            .top-nav { padding: 0.8rem 1.5rem; }
+            .main-content { padding: 0 1.5rem; }
+            .nav-left { gap: 1.5rem; }
+            .telegram-sections { grid-template-columns: 1fr; }
+            .jotter { font-size: 1.1rem; padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- GEOMETRIC BACKGROUND + ELECTRIC OVERLAY -->
+    <div class="geometric-bg"></div>
+    <div class="electric-overlay">
+        <div class="light-ray"></div>
+        <div class="light-ray secondary"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <!-- TOP NAVIGATION (Telegram linked to current page) -->
+    <div class="top-nav">
+        <div class="nav-left">
+            <a href="https://greatness-365.vercel.app/dashboard.html" class="nav-link" target="_blank" rel="noopener"><i class="fas fa-chart-pie"></i> Overview</a>
+            <a href="https://greatness-365.vercel.app/links.html" class="nav-link" target="_blank" rel="noopener"><i class="fas fa-link"></i> Links</a>
+            <div class="nav-link" data-page="campaigns"><i class="fas fa-bullhorn"></i> Campaigns</div>
+            <!-- Telegram is active and points to greatness-365.vercel.app/telegram.html -->
+            <a href="https://greatness-365.vercel.app/telegram.html" class="nav-link active" target="_blank" rel="noopener"><i class="fab fa-telegram"></i> Telegram</a>
+            <div class="nav-link" data-page="guides"><i class="fas fa-cog"></i> Guides</div>
+        </div>
+        <div class="nav-right">
+            <div class="theme-toggle" style="display:none;"></div>
+            <div class="logout-link"><i class="fas fa-sign-out-alt"></i> LogOut</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Minimal brand header (smaller) -->
+        <div class="brand-header">
+            <h1>#Greatness</h1>
+            <h2>##CodeFather</h2>
+            <div class="target-badge"><i class="fab fa-telegram"></i> telegram support</div>
+        </div>
+
+        <!-- JOTTER/CLIPBOARD BANNER (Carpenter's Daughter style) -->
+        <div class="notice-banner">
+            <div class="jotter">
+                <i class="fas fa-pencil-alt"></i> If there's a change in channel, this will always lead to our current platform.
+            </div>
+        </div>
+
+        <!-- TWO TELEGRAM SECTIONS -->
+        <div class="telegram-sections">
+            <!-- Channel card -->
+            <div class="tg-card">
+                <div class="tg-icon"><i class="fab fa-telegram-plane"></i></div>
+                <h3>Join our Channel</h3>
+                <p>Get updates, release notes, and community announcements.</p>
+                <a href="#" class="tg-btn" id="channelBtn"><i class="fab fa-telegram"></i> Go to Channel <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <!-- Support card -->
+            <div class="tg-card">
+                <div class="tg-icon"><i class="fas fa-headset"></i></div>
+                <h3>Contact Support</h3>
+                <p>Directly message the developer for assistance or feedback.</p>
+                <a href="#" class="tg-btn" id="supportBtn"><i class="fab fa-telegram"></i> Message Support <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- DISCLAIMER (penetration testers only) -->
+        <div class="disclaimer">
+            <i class="fas fa-shield-alt"></i>
+            <span><strong>Important:</strong> This tool is intended for <strong>competent penetration testers</strong> and educational purposes regarding authorized security assessments. It is not for amateurs or unauthorized use.</span>
+        </div>
+
+        <!-- footer 1/1 (consistency) -->
+        <div class="footer-meta">
+            <i class="fas fa-chevron-left"></i>
+            <span class="page-indicator">1/1</span>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // active nav for local items (non-anchor)
+            const navLinks = document.querySelectorAll('.nav-link:not([href])');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // demo button actions
+            document.getElementById('channelBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('[Demo] Redirect to Telegram channel – replace # with actual link.');
+            });
+            document.getElementById('supportBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('[Demo] Open support chat – replace # with actual Telegram contact.');
+            });
+
+            // Logout demo
+            document.querySelector('.logout-link').addEventListener('click', () => {
+                alert('Logged out (demo).');
+            });
+        })();
+    </script>
+</body>
+</html>
