@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>ÆTHOS · capital intake</title>
+    <!-- Tailwind + inter font -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <!-- phosphor icons (light weight) -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <!-- framer-motion like animation? we'll do custom css + micro-interactions -->
+    <style>
+        * { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body {
+            background: #fafafa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* ambient moving gradient — barely perceptible breathing */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 40% 50%, rgba(0,0,0,0.01) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.015) 0%, transparent 60%);
+            animation: breathe 12s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes breathe {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.2); }
+        }
+        /* floating grid layer */
+        .grid-layer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* main card style */
+        .premium-card {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 30px 60px -30px rgba(0,0,0,0.25), 0 0 0 1px rgba(0,0,0,0.02) inset;
+            transition: box-shadow 0.3s;
+            z-index: 10;
+            position: relative;
+        }
+        .premium-card:hover {
+            box-shadow: 0 40px 70px -35px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.04) inset;
+        }
+        /* progress bar thin */
+        .progress-track {
+            height: 2px;
+            background: #e5e5e5;
+        }
+        .progress-fill {
+            height: 2px;
+            background: #111;
+            transition: width 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+            width: 0%;
+        }
+        /* step indicators */
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background: #e5e5e5;
+            transition: all 0.3s;
+        }
+        .step-dot.active {
+            background: #111;
+            width: 28px;
+        }
+        .step-dot.completed {
+            background: #111;
+        }
+        /* radio cards */
+        .radio-card {
+            border: 1px solid #eaeaea;
+            background: white;
+            padding: 1.25rem;
+            border-radius: 0;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.00);
+        }
+        .radio-card:hover {
+            border-color: #111;
+            background: #fefefe;
+            box-shadow: 0 10px 20px -15px rgba(0,0,0,0.2);
+            transform: scale(1.01) translateY(-2px);
+        }
+        .radio-card.selected {
+            border-color: #111;
+            background: #fbfbfb;
+            box-shadow: inset 0 0 0 1px #111, 0 10px 20px -18px black;
+        }
+        /* custom radio */
+        .custom-radio {
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 1.5px solid #aaa;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+        .radio-card.selected .custom-radio {
+            border-color: #111;
+            border-width: 2px;
+        }
+        .radio-card.selected .custom-radio::after {
+            content: '';
+            width: 0.6rem;
+            height: 0.6rem;
+            background: #111;
+            border-radius: 50%;
+            animation: pop 0.2s;
+        }
+        @keyframes pop {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        /* input minimal */
+        .minimal-input {
+            border: none;
+            border-bottom: 1px solid #ddd;
+            border-radius: 0;
+            padding: 0.75rem 0.5rem 0.5rem 0;
+            width: 100%;
+            background: transparent;
+            font-size: 1.25rem;
+            transition: border 0.2s, padding 0.2s;
+        }
+        .minimal-input:focus {
+            outline: none;
+            border-bottom-color: #111;
+            padding-left: 0.25rem;
+        }
+        .minimal-input ~ label {
+            transition: all 0.2s;
+            color: #999;
+            font-size: 0.8rem;
+            letter-spacing: 0.03em;
+        }
+        .minimal-input:focus ~ label,
+        .minimal-input:not(:placeholder-shown) ~ label {
+            transform: translateY(-1.2rem);
+            font-size: 0.7rem;
+            color: #111;
+        }
+        /* toggle pill */
+        .toggle-pill {
+            display: flex;
+            border: 1px solid #ddd;
+            background: white;
+        }
+        .pill-option {
+            flex: 1;
+            text-align: center;
+            padding: 0.8rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #666;
+        }
+        .pill-option.active {
+            background: #111;
+            color: white;
+            border-color: #111;
+        }
+        /* animations */
+        .fade-up {
+            animation: fadeUp 0.5s cubic-bezier(0.15,0.85,0.35,1) forwards;
+        }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(8px); filter: blur(2px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+        .stagger-child > * {
+            opacity: 0;
+            animation: fadeUp 0.4s forwards;
+        }
+        .stagger-child > *:nth-child(1) { animation-delay: 0.05s; }
+        .stagger-child > *:nth-child(2) { animation-delay: 0.1s; }
+        .stagger-child > *:nth-child(3) { animation-delay: 0.15s; }
+        .stagger-child > *:nth-child(4) { animation-delay: 0.2s; }
+        /* magnetic button (subtle scale) */
+        .btn-primary {
+            background: #111;
+            color: white;
+            padding: 1rem;
+            width: 100%;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            border: none;
+            transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+        .btn-primary:hover {
+            background: #222;
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px -10px #111;
+        }
+        /* lock icon drawing */
+        .lock-icon {
+            width: 1.2rem;
+            height: 1.2rem;
+            stroke: #444;
+            stroke-width: 1.8;
+            fill: none;
+            stroke-dasharray: 30;
+            stroke-dashoffset: 30;
+            animation: draw 1.2s forwards 0.3s;
+        }
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+        /* floating summary card */
+        .summary-ghost {
+            background: white;
+            border: 1px solid #ececec;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        /* no credit hit badge */
+        .badge-soft {
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(4px);
+            border: 0.5px solid #ccc;
+            font-size: 0.7rem;
+            letter-spacing: 0.03em;
+        }
+        /* hide/show steps */
+        .step-container {
+            display: none;
+        }
+        .step-container.active-step {
+            display: block;
+        }
+        /* currency "$" animation */
+        .dollar-prefix {
+            position: relative;
+        }
+        .dollar-prefix::before {
+            content: '$';
+            position: absolute;
+            left: 0;
+            top: 0.8rem;
+            color: #888;
+            transition: opacity 0.2s;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="grid-layer"></div>
+
+    <!-- main card -->
+    <div class="w-full max-w-2xl premium-card rounded-none md:rounded-sm p-6 md:p-10">
+        <!-- progress bar + steps indicator -->
+        <div class="mb-10">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[0.7rem] uppercase tracking-[0.2em] text-gray-400">step <span id="currentStepDisplay">1</span>/4</span>
+                <span class="text-[0.65rem] uppercase tracking-wider text-gray-400 bg-white/60 px-2 py-1 badge-soft">🔒 soft inquiry · no hit</span>
+            </div>
+            <div class="progress-track w-full bg-gray-100">
+                <div class="progress-fill" id="progressFill" style="width: 25%;"></div>
+            </div>
+            <div class="flex justify-between mt-2 px-1">
+                <span class="step-dot completed" id="stepDot1"></span>
+                <span class="step-dot" id="stepDot2"></span>
+                <span class="step-dot" id="stepDot3"></span>
+                <span class="step-dot" id="stepDot4"></span>
+            </div>
+        </div>
+
+        <!-- dynamic steps container -->
+        <div id="step1" class="step-container active-step">
+            <!-- page 1: credit filter -->
+            <div class="stagger-child">
+                <h1 class="text-4xl font-light tracking-tight text-black mb-2">Let's find your best funding path.</h1>
+                <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-8">step 1 — credit profile</p>
+                <p class="text-sm text-gray-600 mb-6">To accurately match you with our capital-raising strategies, we first need your current credit profile.</p>
+                
+                <div class="space-y-3">
+                    <!-- credit options -->
+                    <div class="radio-card" data-score="740">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <span class="custom-radio"></span>
+                                <span class="font-medium text-base">740+ <span class="text-gray-400 font-normal">(Excellent)</span></span>
+                            </div>
+                            <span class="text-xs text-gray-400">0% APR business capital</span>
+                        </div>
+                    </div>
+                    <div class="radio-card" data-score="680">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <span class="custom-radio"></span>
+                                <span class="font-medium text-base">680–739 <span class="text-gray-400">(Good)</span></span>
+                            </div>
+                            <span class="text-xs text-gray-400">equity & credit options</span>
+                        </div>
+                    </div>
+                    <div class="radio-card" data-score="620">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <span class="custom-radio"></span>
+                                <span class="font-medium text-base">620–679 <span class="text-gray-400">(Fair)</span></span>
+                            </div>
+                            <span class="text-xs text-gray-400">asset-based / restructuring</span>
+                        </div>
+                    </div>
+                    <div class="radio-card" data-score="below">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <span class="custom-radio"></span>
+                                <span class="font-medium text-base">Below 620 <span class="text-gray-400">(Challenged)</span></span>
+                            </div>
+                            <span class="text-xs text-gray-400">debt recovery & building</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- micro line (score visual) - subtle bar -->
+                <div class="mt-8 h-1 w-full bg-gray-100 relative">
+                    <div class="absolute top-0 left-0 h-1 bg-black transition-all" id="scoreBar" style="width: 0%;"></div>
+                </div>
+                <div class="flex justify-between text-[0.6rem] text-gray-300 mt-1">
+                    <span>500</span><span>600</span><span>700</span><span>800+</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="step2" class="step-container">
+            <!-- page 2: primary goal -->
+            <div class="stagger-child">
+                <h1 class="text-4xl font-light tracking-tight text-black mb-2">What is your primary goal today?</h1>
+                <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-8">step 2 — motivation</p>
+
+                <div class="space-y-3">
+                    <div class="radio-card" data-goal="creditCard">
+                        <div class="flex items-center gap-4">
+                            <span class="custom-radio"></span>
+                            <div><span class="font-medium">Credit Card Debt Recovery</span><br><span class="text-xs text-gray-400">protect score while clearing high-interest</span></div>
+                        </div>
+                        <i class="ph ph-credit-card absolute right-5 top-5 text-gray-300"></i>
+                    </div>
+                    <div class="radio-card" data-goal="homeowner">
+                        <div class="flex items-center gap-4">
+                            <span class="custom-radio"></span>
+                            <div><span class="font-medium">Homeowner Equity Release</span><br><span class="text-xs text-gray-400">tap home value, no new monthly payments</span></div>
+                        </div>
+                        <i class="ph ph-house absolute right-5 top-5 text-gray-300"></i>
+                    </div>
+                    <div class="radio-card" data-goal="business">
+                        <div class="flex items-center gap-4">
+                            <span class="custom-radio"></span>
+                            <div><span class="font-medium">Business Growth Capital</span><br><span class="text-xs text-gray-400">funding for LLC or venture</span></div>
+                        </div>
+                        <i class="ph ph-briefcase absolute right-5 top-5 text-gray-300"></i>
+                    </div>
+                    <div class="radio-card" data-goal="consolidation">
+                        <div class="flex items-center gap-4">
+                            <span class="custom-radio"></span>
+                            <div><span class="font-medium">General Debt Consolidation</span><br><span class="text-xs text-gray-400">combine loans into low-interest plan</span></div>
+                        </div>
+                        <i class="ph ph-scales absolute right-5 top-5 text-gray-300"></i>
+                    </div>
+                </div>
+                <p class="text-[0.65rem] text-gray-300 mt-6 tracking-wide flex items-center gap-1"><i class="ph ph-check-circle"></i> most popular: debt recovery</p>
+            </div>
+        </div>
+
+        <div id="step3" class="step-container">
+            <!-- page 3: deep dive -->
+            <div class="stagger-child">
+                <h1 class="text-4xl font-light tracking-tight text-black mb-2">Just a few more details...</h1>
+                <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-8">step 3 — financial fingerprint</p>
+
+                <div class="space-y-8">
+                    <!-- debt amount -->
+                    <div class="relative">
+                        <input type="text" id="debt" class="minimal-input dollar-prefix text-right text-xl" placeholder=" " value="45,000">
+                        <label for="debt" class="absolute left-0 -top-2 text-gray-400 text-xs tracking-wide">Total debt (USD)</label>
+                        <span class="absolute left-0 top-3 text-gray-400 text-lg">$</span>
+                    </div>
+                    <!-- homeowner toggle -->
+                    <div>
+                        <p class="text-sm text-gray-500 mb-2">Are you a homeowner?</p>
+                        <div class="toggle-pill w-48">
+                            <span class="pill-option active" id="homeYes">Yes</span>
+                            <span class="pill-option" id="homeNo">No</span>
+                        </div>
+                    </div>
+                    <!-- monthly income -->
+                    <div class="relative">
+                        <input type="text" id="income" class="minimal-input dollar-prefix text-right text-xl" placeholder=" " value="8,200">
+                        <label for="income" class="absolute left-0 -top-2 text-gray-400 text-xs tracking-wide">Monthly income (estimate)</label>
+                        <span class="absolute left-0 top-3 text-gray-400 text-lg">$</span>
+                    </div>
+                    <!-- live dti ratio -->
+                    <div class="h-1 w-full bg-gray-100">
+                        <div class="h-1 bg-black" style="width: 38%"></div>
+                    </div>
+                    <p class="text-[0.65rem] text-gray-400 flex justify-between"><span>debt/income • 38%</span><span>healthy</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="step4" class="step-container">
+            <!-- page 4: confirmation -->
+            <div class="stagger-child">
+                <h1 class="text-4xl font-light tracking-tight text-black mb-2">Analysis in Progress!</h1>
+                <p class="text-xs uppercase tracking-[0.2em] text-gray-400 mb-6">thank you — final review</p>
+                <p class="text-gray-600 text-sm mb-8">Our team is now reviewing your profile against our active capital-raising programs in Washington.</p>
+                
+                <!-- summary card floating -->
+                <div class="summary-ghost p-4 mb-8 flex items-center gap-3">
+                    <i class="ph ph-file-text text-xl text-gray-400"></i>
+                    <div class="text-xs">
+                        <span class="text-gray-500">740+ · Credit Card Debt · homeowner</span><br>
+                        <span class="text-gray-400">$45k debt · $8.2k/mo income</span>
+                    </div>
+                </div>
+
+                <!-- trust vault message -->
+                <div class="flex items-center gap-3 text-xs text-gray-500 mb-6">
+                    <svg class="lock-icon" viewBox="0 0 24 24">
+                        <path d="M5 13h14v7H5z M7 10V7c0-2.8 2.2-5 5-5s5 2.2 5 5v3" stroke="currentColor" fill="none"/>
+                    </svg>
+                    <span>256-bit encryption · never shared</span>
+                </div>
+
+                <!-- final CTA -->
+                <button class="btn-primary relative group" id="submitBtn">
+                    <span>Submit my request</span>
+                    <i class="ph ph-arrow-right absolute right-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all"></i>
+                </button>
+                <p class="text-center text-[0.6rem] text-gray-300 mt-4">A Capital Specialist will reach out within 24h</p>
+            </div>
+        </div>
+
+        <!-- navigation footer (prev/next) -->
+        <div class="flex justify-between mt-10 pt-4 border-t border-black/5">
+            <button id="prevBtn" class="text-sm text-gray-400 hover:text-black px-4 py-2 tracking-widest uppercase disabled:opacity-20">← Back</button>
+            <button id="nextBtn" class="text-sm text-black border border-black px-6 py-2 hover:bg-black hover:text-white transition-all">Continue →</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            let currentStep = 1;
+            const totalSteps = 4;
+            const stepContainers = {
+                1: document.getElementById('step1'),
+                2: document.getElementById('step2'),
+                3: document.getElementById('step3'),
+                4: document.getElementById('step4')
+            };
+            const dots = {
+                1: document.getElementById('stepDot1'),
+                2: document.getElementById('stepDot2'),
+                3: document.getElementById('stepDot3'),
+                4: document.getElementById('stepDot4')
+            };
+            const progressFill = document.getElementById('progressFill');
+            const stepDisplay = document.getElementById('currentStepDisplay');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // selection states
+            let selectedScore = null;
+            let selectedGoal = null;
+            let homeOwner = true; // default yes
+
+            function updateStepUI() {
+                // hide all
+                Object.values(stepContainers).forEach(c => c.classList.remove('active-step'));
+                stepContainers[currentStep].classList.add('active-step');
+                // update progress bar width
+                progressFill.style.width = (currentStep / totalSteps) * 100 + '%';
+                stepDisplay.innerText = currentStep;
+                // dots
+                for(let i=1; i<=4; i++) {
+                    dots[i].classList.remove('active', 'completed');
+                    if(i < currentStep) dots[i].classList.add('completed');
+                    else if(i === currentStep) dots[i].classList.add('active');
+                }
+                // back button disabled on step1
+                prevBtn.disabled = currentStep === 1;
+            }
+
+            // radio card selection logic
+            document.querySelectorAll('.radio-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // clear siblings
+                    const parent = this.parentNode;
+                    parent.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // store data based on step
+                    if(currentStep === 1) {
+                        selectedScore = this.dataset.score;
+                        // animate bar
+                        let width = '0%';
+                        if(selectedScore === '740') width = '90%';
+                        else if(selectedScore === '680') width = '70%';
+                        else if(selectedScore === '620') width = '40%';
+                        else width = '15%';
+                        document.getElementById('scoreBar').style.width = width;
+                    } else if(currentStep === 2) {
+                        selectedGoal = this.dataset.goal;
+                    }
+                });
+            });
+
+            // toggle pill
+            document.getElementById('homeYes').addEventListener('click', function() {
+                this.classList.add('active');
+                document.getElementById('homeNo').classList.remove('active');
+                homeOwner = true;
+            });
+            document.getElementById('homeNo').addEventListener('click', function() {
+                this.classList.add('active');
+                document.getElementById('homeYes').classList.remove('active');
+                homeOwner = false;
+            });
+
+            // navigation
+            nextBtn.addEventListener('click', () => {
+                if(currentStep < totalSteps) {
+                    // tiny validation: step1 must select score, step2 goal
+                    if(currentStep === 1 && !document.querySelector('#step1 .radio-card.selected')) {
+                        alert('Please select your credit range');
+                        return;
+                    }
+                    if(currentStep === 2 && !document.querySelector('#step2 .radio-card.selected')) {
+                        alert('Please select a goal');
+                        return;
+                    }
+                    currentStep++;
+                    updateStepUI();
+                } else {
+                    // final submit simulation
+                    document.getElementById('submitBtn').innerHTML = 'Processing...';
+                    setTimeout(() => {
+                        alert('Form submitted (demo) — thank you');
+                    }, 300);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if(currentStep > 1) {
+                    currentStep--;
+                    updateStepUI();
+                }
+            });
+
+            // initial active step
+            updateStepUI();
+
+            // auto-select first in step 1 for demo (optional)
+            setTimeout(() => {
+                if(!selectedScore) {
+                    document.querySelector('#step1 .radio-card')?.classList.add('selected');
+                    selectedScore = '740';
+                    document.getElementById('scoreBar').style.width = '90%';
+                }
+            }, 200);
+        })();
+    </script>
+    <!-- small style for placeholder -->
+    <style>
+        .minimal-input:placeholder-shown ~ label { top: 0.8rem; font-size: 0.9rem; }
+        .minimal-input:not(:placeholder-shown) ~ label, .minimal-input:focus ~ label { top: -0.8rem; }
+        .dollar-prefix { padding-left: 1.2rem; }
+    </style>
+</body>
+</html>
