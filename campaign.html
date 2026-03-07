@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>365 · Binance | Campaigns</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter, Orbitron, Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- D3.js (not strictly needed for this page, but kept for consistency) -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* ---------- RESET & BASE – same as dashboard ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1E2329;
+            color: #FFFFFF;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ---------- GEOMETRIC BACKGROUND (identical to dashboard) ---------- */
+        .geometric-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #1E2329;
+            background-image: 
+                repeating-linear-gradient(60deg, 
+                    rgba(240, 185, 11, 0.13) 0px, 
+                    rgba(240, 185, 11, 0.13) 1px, 
+                    transparent 1px, 
+                    transparent 60px),
+                repeating-linear-gradient(-60deg, 
+                    rgba(240, 185, 11, 0.1) 0px, 
+                    rgba(240, 185, 11, 0.1) 1px, 
+                    transparent 1px, 
+                    transparent 60px),
+                repeating-linear-gradient(45deg, 
+                    rgba(220, 230, 240, 0.08) 0px, 
+                    rgba(220, 230, 240, 0.08) 1px, 
+                    transparent 1px, 
+                    transparent 80px),
+                repeating-linear-gradient(-45deg, 
+                    rgba(220, 230, 240, 0.06) 0px, 
+                    rgba(220, 230, 240, 0.06) 1px, 
+                    transparent 1px, 
+                    transparent 80px),
+                repeating-linear-gradient(0deg, 
+                    rgba(240, 185, 11, 0.07) 0px, 
+                    rgba(240, 185, 11, 0.07) 1px, 
+                    transparent 1px, 
+                    transparent 24px),
+                repeating-linear-gradient(90deg, 
+                    rgba(255, 255, 255, 0.05) 0px, 
+                    rgba(255, 255, 255, 0.05) 1px, 
+                    transparent 1px, 
+                    transparent 32px),
+                repeating-linear-gradient(45deg, 
+                    rgba(240, 185, 11, 0.04) 0px, 
+                    rgba(240, 185, 11, 0.04) 1px, 
+                    transparent 1px, 
+                    transparent 16px),
+                radial-gradient(circle at 15% 22%, rgba(240, 185, 11, 0.18) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 72% 45%, rgba(240, 185, 11, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 83% 68%, rgba(240, 185, 11, 0.16) 2px, transparent 2px),
+                radial-gradient(circle at 31% 82%, rgba(240, 185, 11, 0.13) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 58% 28%, rgba(240, 185, 11, 0.15) 2px, transparent 2px),
+                radial-gradient(circle at 91% 55%, rgba(255, 255, 255, 0.13) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 44% 15%, rgba(240, 185, 11, 0.11) 2px, transparent 2px),
+                radial-gradient(circle at 12% 67%, rgba(240, 185, 11, 0.14) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 76% 88%, rgba(255, 255, 255, 0.12) 2px, transparent 2px),
+                radial-gradient(circle at 33% 43%, rgba(240, 185, 11, 0.15) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 20% 30%, rgba(240, 185, 11, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(120, 130, 140, 0.06) 0%, transparent 65%),
+                radial-gradient(circle at 50% 50%, rgba(180, 180, 190, 0.04) 0%, transparent 70%);
+            
+            background-size: 
+                120px 120px, 120px 120px,
+                160px 160px, 160px 160px,
+                48px 48px,
+                64px 64px,
+                32px 32px,
+                400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px, 400px 400px,
+                100% 100%, 100% 100%, 100% 100%;
+            
+            background-repeat: 
+                repeat, repeat,
+                repeat, repeat,
+                repeat,
+                repeat,
+                repeat,
+                no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat,
+                no-repeat, no-repeat, no-repeat;
+            
+            background-position: 
+                0 0, 0 0,
+                0 0, 0 0,
+                0 0,
+                0 0,
+                0 0,
+                15% 22%, 72% 45%, 83% 68%, 31% 82%, 58% 28%, 91% 55%, 44% 15%, 12% 67%, 76% 88%, 33% 43%,
+                0 0, 0 0, 0 0;
+            
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+            opacity: 0.9;
+        }
+
+        .geometric-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBudW1PY3RhdmVzPSIxIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wMTUiIC8+PC9zdmc+');
+            background-repeat: repeat;
+            opacity: 0.2;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* ---------- ELECTRIC OVERLAY (from dashboard) ---------- */
+        .electric-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .light-ray {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent 0px,
+                transparent 40px,
+                rgba(240, 185, 11, 0.08) 40px,
+                rgba(255, 215, 0, 0.15) 41px,
+                transparent 41px,
+                transparent 80px
+            );
+            background-size: 200% 200%;
+            animation: flowRays 18s linear infinite;
+            opacity: 0.6;
+            mix-blend-mode: overlay;
+        }
+
+        .light-ray.secondary {
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent 0px,
+                transparent 60px,
+                rgba(240, 185, 11, 0.06) 60px,
+                rgba(240, 200, 80, 0.12) 61px,
+                transparent 61px,
+                transparent 120px
+            );
+            animation: flowRays 24s linear infinite reverse;
+            opacity: 0.5;
+        }
+
+        @keyframes flowRays {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(10%, 10%) rotate(2deg); }
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #F0B90B;
+            border-radius: 50%;
+            box-shadow: 0 0 8px 2px rgba(240, 185, 11, 0.6);
+            opacity: 0;
+            animation: sparkle 4s infinite ease-in-out;
+        }
+        .particle:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 30%; left: 70%; animation-delay: 1.2s; width: 3px; height: 3px; }
+        .particle:nth-child(3) { top: 55%; left: 45%; animation-delay: 2.5s; }
+        .particle:nth-child(4) { top: 75%; left: 15%; animation-delay: 0.7s; width: 4px; height: 4px; }
+        .particle:nth-child(5) { top: 85%; left: 80%; animation-delay: 1.8s; }
+        .particle:nth-child(6) { top: 45%; left: 90%; animation-delay: 3.2s; width: 3px; height: 3px; }
+        .particle:nth-child(7) { top: 10%; left: 55%; animation-delay: 2.1s; }
+        .particle:nth-child(8) { top: 65%; left: 30%; animation-delay: 0.3s; }
+        .particle:nth-child(9) { top: 22%; left: 85%; animation-delay: 1.5s; width: 4px; height: 4px; }
+        .particle:nth-child(10) { top: 92%; left: 25%; animation-delay: 2.8s; }
+        .particle:nth-child(11) { top: 40%; left: 12%; animation-delay: 0.9s; }
+        .particle:nth-child(12) { top: 68%; left: 68%; animation-delay: 3.5s; }
+
+        @keyframes sparkle {
+            0% { opacity: 0; transform: scale(0.5) translateY(0); }
+            20% { opacity: 1; transform: scale(1.2) translateY(-5px); }
+            40% { opacity: 0.8; transform: scale(1) translateY(5px); }
+            60% { opacity: 1; transform: scale(1.5) translateY(-3px); }
+            80% { opacity: 0.5; transform: scale(0.8) translateY(3px); }
+            100% { opacity: 0; transform: scale(0.2) translateY(0); }
+        }
+
+        /* ---------- TOP NAV (identical to dashboard) ---------- */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 2.5rem;
+            background: rgba(30, 35, 41, 0.96);
+            backdrop-filter: blur(14px) saturate(200%);
+            border-bottom: 1px solid rgba(240, 185, 11, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: border-color 0.2s;
+        }
+        .top-nav:hover {
+            border-bottom-color: rgba(240, 185, 11, 0.3);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+            border-bottom: 2px solid transparent;
+            font-size: 1rem;
+            color: #d1d5db;
+            text-decoration: none;
+            position: relative;
+            z-index: 10;
+        }
+        .nav-link i {
+            color: #F0B90B;
+            font-size: 1.2rem;
+            transition: transform 0.15s ease, filter 0.15s;
+        }
+        .nav-link:hover i {
+            transform: scale(1.12) translateY(-1px);
+            filter: drop-shadow(0 0 6px rgba(240, 185, 11, 0.4));
+        }
+        .nav-link.active {
+            color: white;
+            border-bottom: 2px solid #F0B90B;
+            font-weight: 600;
+        }
+        .nav-link.active i {
+            color: #F0B90B;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #F0B90B;
+            transition: width 0.2s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .nav-link.active::after {
+            display: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .theme-toggle { display: none; }
+        .logout-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #F0B90B;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+            background: rgba(240, 185, 11, 0.06);
+            border: 1px solid rgba(240, 185, 11, 0.2);
+            text-decoration: none;
+            z-index: 10;
+        }
+        .logout-link:hover {
+            background: rgba(240, 185, 11, 0.15);
+            border-color: rgba(240, 185, 11, 0.5);
+            transform: scale(1.02);
+        }
+        .logout-link i { color: #F0B90B; }
+
+        /* ---------- MAIN CONTENT – CAMPAIGN PAGE SPECIFIC ---------- */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 2.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Platform toggle — left corner, elegant */
+        .platform-toggle-container {
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .platform-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #b0b8c0;
+            font-weight: 500;
+        }
+        .platform-badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.55rem 1.4rem 0.55rem 1.2rem;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(240, 185, 11, 0.15);
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .platform-badge i, .platform-badge img {
+            width: 20px;
+            height: 20px;
+            font-size: 1.2rem;
+            color: #F0B90B;
+            object-fit: contain;
+        }
+        .platform-badge img {
+            filter: drop-shadow(0 2px 4px #F0B90B20);
+            border-radius: 4px;
+        }
+        .platform-badge:hover {
+            border-color: #F0B90B;
+            background: rgba(240, 185, 11, 0.12);
+            transform: translateY(-2px);
+            color: white;
+        }
+        .platform-badge.active {
+            background: #F0B90B;
+            border-color: #F0B90B;
+            color: #1E2329;
+            font-weight: 600;
+            box-shadow: 0 10px 18px -8px #F0B90B70;
+        }
+        .platform-badge.active i,
+        .platform-badge.active img {
+            color: #1E2329;
+            filter: brightness(0.2);
+        }
+
+        /* Data grid – 5 columns exactly: User, Target, IP, cookies, Updated Date */
+        .table-section {
+            border-radius: 28px;
+            padding: 1.5rem;
+            border-bottom: 3px solid #F0B90B;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(240, 185, 11, 0.1);
+            margin-bottom: 1.5rem;
+            transition: box-shadow 0.2s;
+        }
+        .table-section:hover {
+            box-shadow: 0 20px 30px -16px rgba(240, 185, 11, 0.2);
+        }
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .table-header h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+        }
+        .table-header i {
+            color: #F0B90B;
+            transition: transform 0.2s;
+            cursor: default;
+        }
+        .table-header i:hover { transform: scale(1.1); }
+
+        /* Table: 5 columns */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        th {
+            text-align: left;
+            padding: 1rem 0.5rem;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            color: #b0b8c0;
+            border-bottom: 1px solid rgba(240, 185, 11, 0.2);
+        }
+        td {
+            padding: 0.8rem 0.5rem;
+            color: #d0d8e0;
+            border-bottom: 1px solid rgba(240, 185, 11, 0.08);
+        }
+        .no-results {
+            text-align: center;
+            padding: 3rem 0;
+            font-size: 0.95rem;
+            color: #9aa4b0;
+        }
+        .no-results i { color: #F0B90B; margin-right: 0.5rem; }
+
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .pagination .page {
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            background: rgba(240, 185, 11, 0.08);
+            border: 1px solid rgba(240, 185, 11, 0.2);
+            color: #F0B90B;
+        }
+        .pagination i {
+            color: #F0B90B;
+            opacity: 0.6;
+            transition: opacity 0.2s, transform 0.2s;
+            cursor: default;
+        }
+        .pagination i:hover { opacity: 1; transform: scale(1.1); }
+
+        /* small modal (reuse) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #1E2329;
+            backdrop-filter: blur(16px);
+            border-radius: 40px;
+            padding: 2.5rem;
+            width: 500px;
+            max-width: 90%;
+            border: 1px solid rgba(240,185,11,0.3);
+            border-bottom: 3px solid #F0B90B;
+            color: white;
+        }
+        .modal-content h2 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .modal-content h2 i { color: #F0B90B; }
+        .modal-field { margin-bottom: 1.2rem; }
+        .modal-field label {
+            display: block;
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 0.3rem;
+        }
+        .modal-field input, .modal-field textarea {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            color: white;
+            transition: border-color 0.2s;
+        }
+        .modal-field input:focus, .modal-field textarea:focus {
+            outline: none;
+            border-color: #F0B90B;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+        .modal-btn {
+            padding: 0.7rem 1.8rem;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .modal-btn.primary { background: #F0B90B; color: #1E2329; }
+        .modal-btn.secondary { background: transparent; border: 1px solid #555; color: #ccc; }
+
+        @media (max-width: 800px) {
+            .top-nav { padding: 0.8rem 1rem; }
+            .nav-left { gap: 1rem; }
+            .platform-badge-group { gap: 0.4rem; }
+            .platform-badge { padding: 0.5rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="geometric-bg"></div>
+    <div class="electric-overlay">
+        <div class="light-ray"></div>
+        <div class="light-ray secondary"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <!-- TOP NAV (identical, but set Campaigns active) -->
+    <div class="top-nav">
+        <div class="nav-left">
+            <div class="nav-link" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</div>
+            <div class="nav-link" data-page="visits"><i class="fas fa-eye"></i> Visits</div>
+            <div class="nav-link active" data-page="campaigns"><i class="fas fa-bullhorn"></i> Campaigns</div>
+            <a href="https://greatness-365.vercel.app/links.html" class="nav-link" target="_blank" rel="noopener"><i class="fas fa-link"></i> Links</a>
+            <div class="nav-link" data-page="guides"><i class="fas fa-compass"></i> Guides</div>
+        </div>
+        <div class="nav-right">
+            <div class="theme-toggle"></div>
+            <div class="logout-link"><i class="fas fa-sign-out-alt"></i> LogOut</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Platform toggle – left corner with brand images (Font Awesome as fallback, but we also import images) -->
+        <div class="platform-toggle-container">
+            <span class="platform-label"><i class="fas fa-toggle-on" style="color: #F0B90B; margin-right: 6px;"></i> PLATFORM</span>
+            <div class="platform-badge-group" id="platformGroup">
+                <!-- Gmail -->
+                <div class="platform-badge" data-platform="gmail">
+                    <i class="fab fa-google" style="color: #F0B90B;"></i> Gmail
+                </div>
+                <!-- Yahoo (using envelope as fallback; we'll use FontAwesome) -->
+                <div class="platform-badge" data-platform="yahoo">
+                    <i class="fas fa-envelope" style="color: #F0B90B;"></i> Yahoo
+                </div>
+                <!-- AOL -->
+                <div class="platform-badge" data-platform="aol">
+                    <i class="fas fa-at" style="color: #F0B90B;"></i> AOL
+                </div>
+                <!-- Microsoft 365 (using windows) -->
+                <div class="platform-badge" data-platform="microsoft365">
+                    <i class="fab fa-microsoft" style="color: #F0B90B;"></i> Microsoft 365
+                </div>
+                <!-- GoDaddy (using globe) -->
+                <div class="platform-badge" data-platform="godaddy">
+                    <i class="fas fa-globe" style="color: #F0B90B;"></i> GoDaddy
+                </div>
+                <!-- Outlook -->
+                <div class="platform-badge" data-platform="outlook">
+                    <i class="fab fa-windows" style="color: #F0B90B;"></i> Outlook
+                </div>
+            </div>
+        </div>
+
+        <!-- Data grid: 5 columns exactly: User, Target, IP, cookies, Updated Date -->
+        <div class="table-section">
+            <div class="table-header">
+                <h3><i class="fas fa-database"></i> <span id="gridTitle">Gmail</span> · campaign data</h3>
+                <i class="fas fa-download" title="Export (demo)"></i>
+            </div>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>User</th><th>Target</th><th>IP</th><th>Cookies</th><th>Updated Date</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- filled by js -->
+                </tbody>
+            </table>
+            <div class="pagination">
+                <i class="fas fa-chevron-left"></i>
+                <span class="page">1/3</span>
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- small modal (unused but present for consistency) -->
+    <div class="modal-overlay" id="infoModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-info-circle"></i> Campaign details</h2>
+            <div class="modal-field"><label>Entry</label><input value="Demo"></div>
+            <div class="modal-actions"><button class="modal-btn primary" id="closeInfoModal">OK</button></div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Active nav switching for internal links
+            const navLinks = document.querySelectorAll('.nav-link:not([href])');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // ---------- PLATFORM TOGGLE & DYNAMIC DATA GRID ----------
+            const platformBadges = document.querySelectorAll('.platform-badge');
+            const gridTitle = document.getElementById('gridTitle');
+            const tableBody = document.getElementById('tableBody');
+
+            // Sample data pools per platform (User, Target, IP, Cookies, Updated Date)
+            const dataPools = {
+                gmail: [
+                    ['alice.wonder', 'newsletter@acme.com', '192.168.1.45', '247', '2025-03-07'],
+                    ['bob.smith', 'promo@startup.io', '10.0.0.23', '189', '2025-03-06'],
+                    ['carol.lin', 'offer@shop.co', '172.16.0.8', '412', '2025-03-07'],
+                    ['david.park', 'info@biz.org', '192.168.0.112', '56', '2025-03-05'],
+                ],
+                yahoo: [
+                    ['emily.y', 'partner@global.net', '203.0.113.42', '302', '2025-03-07'],
+                    ['james.cox', 'hello@yahoo.com', '198.51.100.77', '128', '2025-03-06'],
+                    ['linda.t', 'support@service.com', '192.0.2.156', '89', '2025-03-07'],
+                ],
+                aol: [
+                    ['kevin.aol', 'contact@aol.com', '172.31.0.45', '678', '2025-03-04'],
+                    ['nancy.drew', 'sales@oldmail.net', '10.0.1.200', '211', '2025-03-07'],
+                ],
+                microsoft365: [
+                    ['admin@365', 'users@microsoft.com', '13.80.124.35', '1024', '2025-03-07'],
+                    ['teams.bot', 'calendar@outlook.com', '40.76.4.15', '890', '2025-03-06'],
+                    ['sharepoint.sync', 'files@sharepoint.com', '20.53.120.9', '1502', '2025-03-07'],
+                    ['onedrive.biz', 'storage@office.com', '52.168.77.2', '430', '2025-03-05'],
+                ],
+                godaddy: [
+                    ['hosting1', 'domain@contact.com', '160.153.0.42', '78', '2025-03-06'],
+                    ['email-marketing', 'campaign@godaddy.com', '97.74.80.11', '215', '2025-03-07'],
+                ],
+                outlook: [
+                    ['outlook_user', 'inbox@outlook.com', '52.96.48.2', '550', '2025-03-07'],
+                    ['hotmail.legacy', 'old@hotmail.com', '40.92.0.10', '302', '2025-03-06'],
+                    ['live.mail', 'contact@live.com', '204.79.197.200', '174', '2025-03-07'],
+                ]
+            };
+
+            // default active: Gmail
+            let currentPlatform = 'gmail';
+
+            function renderTable(platform) {
+                const data = dataPools[platform] || dataPools.gmail;
+                let html = '';
+                data.forEach(row => {
+                    html += `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td><td>${row[4]}</td></tr>`;
+                });
+                // if no rows (should not happen), show placeholder
+                if (data.length === 0) {
+                    html = `<tr><td colspan="5" class="no-results"><i class="fas fa-search"></i> No entries for this platform</td></tr>`;
+                }
+                tableBody.innerHTML = html;
+
+                // update title
+                let platformName = platform.charAt(0).toUpperCase() + platform.slice(1);
+                if (platform === 'microsoft365') platformName = 'Microsoft 365';
+                gridTitle.textContent = platformName;
+            }
+
+            // add active class to clicked badge, remove from others, re-render
+            platformBadges.forEach(badge => {
+                badge.addEventListener('click', function() {
+                    platformBadges.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const platform = this.dataset.platform;
+                    currentPlatform = platform;
+                    renderTable(platform);
+                });
+            });
+
+            // initial: set Gmail active and render
+            const defaultBadge = document.querySelector('.platform-badge[data-platform="gmail"]');
+            if (defaultBadge) defaultBadge.classList.add('active');
+            renderTable('gmail');
+
+            // Logout demo
+            document.querySelector('.logout-link').addEventListener('click', () => {
+                alert('Logged out (demo).');
+            });
+
+            // simple modal close for demo (infoModal not used directly)
+            document.getElementById('closeInfoModal')?.addEventListener('click', function() {
+                document.getElementById('infoModal').style.display = 'none';
+            });
+            window.addEventListener('click', (e) => {
+                const modal = document.getElementById('infoModal');
+                if (e.target === modal) modal.style.display = 'none';
+            });
+        })();
+    </script>
+</body>
+</html>
