@@ -714,16 +714,21 @@
         <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
     </div>
 
-    <!-- TOP NAVIGATION – Dashboard, Visits, Campaigns, Guides, Links -->
+    <!-- TOP NAVIGATION – with updated names and hrefs: Overview, Visits, Campaigns, Telegram, Links, Guides -->
     <div class="top-nav">
         <div class="nav-left">
-            <div class="nav-link active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</div>
-            <div class="nav-link" data-page="visits"><i class="fas fa-eye"></i> Visits</div>
-            <div class="nav-link" data-page="campaigns"><i class="fas fa-bullhorn"></i> Campaigns</div>
-            <!-- Links pointing to greatness-365.vercel.app/links.html -->
-            <a href="https://greatness-365.vercel.app/links.html" class="nav-link" target="_blank" rel="noopener"><i class="fas fa-link"></i> Links</a>
+            <!-- Overview (renamed from Dashboard) -->
+            <a href="/" class="nav-link active" data-page="overview"><i class="fas fa-chart-pie"></i> Overview</a>
+            <!-- Visits -->
+            <a href="/visits.html" class="nav-link" data-page="visits"><i class="fas fa-eye"></i> Visits</a>
+            <!-- Campaigns (pointing to /campaign.html) -->
+            <a href="/campaign.html" class="nav-link" data-page="campaigns"><i class="fas fa-bullhorn"></i> Campaigns</a>
+            <!-- Telegram (new, points to /Telegram.html) -->
+            <a href="/Telegram.html" class="nav-link" data-page="telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+            <!-- Links (external but now set to /links.html, consistent format) -->
+            <a href="/links.html" class="nav-link" data-page="links" target="_blank" rel="noopener"><i class="fas fa-link"></i> Links</a>
             <!-- Guides (formerly Settings) -->
-            <div class="nav-link" data-page="guides"><i class="fas fa-compass"></i> Guides</div>
+            <a href="/guides.html" class="nav-link" data-page="guides"><i class="fas fa-compass"></i> Guides</a>
         </div>
         <div class="nav-right">
             <div class="theme-toggle"></div> <!-- hidden -->
@@ -810,18 +815,59 @@
 
     <script>
         (function() {
-            // No theme toggle – permanent dark mode
+            // Permanent dark mode – no theme toggle
 
-            // Active nav switching (local pages, not the external Links anchor)
-            const navLinks = document.querySelectorAll('.nav-link:not([href])');
+            // Active nav switching (for same-origin links, we keep the active class on click,
+            // but we also want to reflect the current page on load.
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Function to set active based on href matching current path
+            function setActiveFromPath() {
+                const currentPath = window.location.pathname;
+                navLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    // If it's the root "/" and current path is also root, or if href matches current path
+                    if (href === currentPath || (currentPath === '/' && href === '/')) {
+                        link.classList.add('active');
+                    } else if (href && currentPath.includes(href) && href !== '/') {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            // Call on load
+            setActiveFromPath();
+
+            // Also handle clicks on nav links (single page feel)
             navLinks.forEach(link => {
-                link.addEventListener('click', function() {
+                link.addEventListener('click', function(e) {
+                    // If it's an external link (target _blank) we don't prevent default
+                    if (link.target === '_blank') return;
+                    
+                    e.preventDefault(); // for demo, we simulate navigation
+                    const href = link.getAttribute('href');
+                    
+                    // Update active class
                     navLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
+                    link.classList.add('active');
+                    
+                    // Simulate path change for demo (you could actually navigate)
+                    // In a real deployment, you'd let the browser follow the href.
+                    // For this demo, we keep it in place and just update UI.
+                    if (href && href !== '#') {
+                        // For demo purposes we just show an alert that navigation would occur
+                        // but to keep the map and content visible we stay.
+                        // You can comment this out or remove it for real deployment.
+                        console.log(`Navigating to ${href} (demo – simulated)`);
+                        // Uncomment for actual redirect if needed:
+                        // window.location.href = href;
+                    }
                 });
             });
 
-            // D3 WORLD MAP – slightly taller (260px)
+            // D3 WORLD MAP – same as before
             const width = document.getElementById('world-map').clientWidth;
             const height = 260;
 
